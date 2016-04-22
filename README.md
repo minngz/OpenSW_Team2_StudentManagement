@@ -1,5 +1,5 @@
 # StudentManagment-C-
-学生管理系统(c语言版)
+学生管理系统(c语言版)<br>
 大一C语言实验作业。
 实现如下功能：
     1.Input record
