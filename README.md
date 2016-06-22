@@ -15,3 +15,5 @@
     11.List record<br>
     12.Write to a file<br>
     13.Read from a file<br>
+## licence
+[MIT](/LICENCE)
