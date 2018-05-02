@@ -37,10 +37,8 @@ void SystemSet();
 //系统设置
 void SystemSet()
 {
-    system("title  学生管理系统6.0 --by软件1501刘阳");//设置标题
-   // system("mode con cols=40 lines=35");//设置窗口大小
-    //system("color F0");
-}
+    system("title  Student Management");
+ }
 //读取选项。
 int ScanfSet()
 {
@@ -48,6 +46,7 @@ int ScanfSet()
     scanf("%d",&n);
     return n;
 }
+
 //用户界面
 void userInterFace()
 {
@@ -67,6 +66,16 @@ void userInterFace()
     printf("0.Exit\n");
     printf("please enter your choice:\n");
 }
+
+void PrintCourseMenu()
+{
+	printf("   [ Course ]  \n\n");;
+	printf("1. Register \n");
+	printf("2. Modifiy \n");
+	printf("3. Delete \n");
+	printf("4. Print \n");
+}
+
 //读取数据
 void readDate(STU *student,int *studentNumber,int *subjectNumber)
 {

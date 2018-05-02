@@ -3,9 +3,13 @@
 #include"student.h"
 int main()
 {
-    int studentNumber=0,subjectNumber=0;
+	int studentNumber = 0;
+	int subjectNumber = 0;
     STU student[100];
     SystemSet();
+
+
+	/*
     userInterFace();
     while(1)
     {
@@ -79,10 +83,35 @@ int main()
             returnUserFace();
             break;
         }
-    }
+    }*/
     return 0;
 }
 
+void CourseMenu()
+{
+	int menuInput;
+
+	PrintCourseMenu();
+	scanf("%d", &menuInput);
+
+	switch (menuInput)
+	{
+		case 1:			
+			break;
+
+		case 2:
+			break;
+
+		case 3:
+			break;
+
+		case 4:
+			break;
+
+		default:
+		break;
+	}
+}
 
 
 
