@@ -4,8 +4,7 @@
 int main()
 {
     int studentNumber=0,subjectNumber=0;
-    const int maxStudent = 30;
-    STU student[maxStudent];
+    STU student[100];
     SystemSet();
     userInterFace();
     while(1)

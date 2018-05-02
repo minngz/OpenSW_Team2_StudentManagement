@@ -137,13 +137,13 @@ int orderBig(const void *a,const void *b)
 {
     STU *p1=(STU*)a;
     STU *p2=(STU*)b;
-    return (p1->sumScore)-(p2->sumScore);
+    return (int)((p1->sumScore)-(p2->sumScore));
 }
 int orderSmall(const void *a,const void *b)
 {
     STU *p1=(STU*)a;
     STU *p2=(STU*)b;
-    return (p2->sumScore)-(p1->sumScore);
+    return (int)((p2->sumScore)-(p1->sumScore));
 }
 int orderNumber(const void *a,const void *b)
 {
