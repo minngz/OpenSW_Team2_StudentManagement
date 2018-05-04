@@ -294,6 +294,47 @@ void WriteStudentFile()
 
 }
 
+void NoticeMenu()
+{
+	int menuInput;
+
+	PrintNoticeMenu();
+	scanf("%d", &menuInput);
+
+	switch (menuInput)
+	{
+	case 1:
+		RegisterNotice();
+		break;
+
+	case 2:
+		ModifyNotice();
+		break;
+
+	case 3:
+		DeleteNotice();
+		break;
+
+	default:
+		printf("Wrong Input\n");
+		break;
+	}
+}
+
+void RegisterNotice()
+{
+
+}
+
+void ModifyNotice()
+{
+
+}
+
+void DeleteNotice()
+{
+
+}
 /*
 void PrintNoticeMenu()
 {
