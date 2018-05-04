@@ -67,24 +67,6 @@ void userInterFace()
     printf("please enter your choice:\n");
 }
 
-void PrintCourseMenu()
-{
-	printf("   [ Course ]  \n\n");;
-	printf("1. Register \n");
-	printf("2. Modifiy \n");
-	printf("3. Delete \n");
-	printf("4. Print \n");
-}
-
-void PrintScoreMenu()
-{
-	printf("   [ Score ]  \n\n");;
-	printf("1. Register \n");
-	printf("2. Modifiy \n");
-	printf("3. Delete \n");
-	printf("4. Print \n");
-	printf("5. FileWrite \n");
-}
 
 //¶ÁÈ¡Êý¾Ý
 void readDate(STU *student,int *studentNumber,int *subjectNumber)
@@ -408,5 +390,32 @@ void ReadFile(STU *student,int *studentNumber,int *subjectNumber)
 //        }
 //}
 
+void PrintCourseMenu()
+{
+	printf("   [ Course ]  \n\n");;
+	printf("1. Register \n");
+	printf("2. Modifiy \n");
+	printf("3. Delete \n");
+	printf("4. Print \n");
+}
+
+void PrintScoreMenu()
+{
+	printf("   [ Score ]  \n\n");;
+	printf("1. Register \n");
+	printf("2. Modifiy \n");
+	printf("3. Delete \n");
+	printf("4. Print \n");
+	printf("5. FileWrite \n");
+}
+
+void PrintAssignmentMenu()
+{
+	printf("   [ Assignment ]  \n\n");;
+	printf(" 1. Register \n");
+	printf(" 2. Modifiy \n");
+	printf(" 3. Delete \n");
+	printf(" 4. Print \n");
+}
 
 #endif // STUDENT_H_INCLUDED

@@ -124,24 +124,94 @@ void ScoreMenu()
 	switch (menuInput)
 	{
 	case 1:
+		RegisterScore();
 		break;
 
 	case 2:
+		ModifyScore();
 		break;
 
 	case 3:
+		DeleteScore();
 		break;
 
 	case 4:
-		break;
-
-	case 5:
+		PrintScore();
 		break;
 
 	default:
+		printf("Wrong Input\n");
 		break;
 	}
 }
 
+void RegisterScore()
+{
 
+}
 
+void ModifyScore()
+{
+
+}
+
+void DeleteScore()
+{
+
+}
+
+void PrintScore()
+{
+
+}
+
+void AssignmentMenu()
+{
+	int menuInput;
+
+	PrintAssignmentMenu();
+	scanf("%d", &menuInput);
+
+	switch (menuInput)
+	{
+	case 1:
+		RegisterAssignment();
+		break;
+
+	case 2:
+		ModifyAssignment();
+		break;
+
+	case 3:
+		DeleteAssignment();
+		break;
+
+	case 4:
+		PrintAssignment();
+		break;
+
+	default:
+		printf("Wrong Input\n");
+		break;
+	}
+}
+
+void RegisterAssignment()
+{
+
+}
+
+void ModifyAssignment()
+{
+
+}
+
+void DeleteAssignment()
+{
+
+}
+
+void PrintAssignment()
+{
+
+}
