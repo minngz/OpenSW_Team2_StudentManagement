@@ -8,7 +8,7 @@ int main()
     STU student[100];
     SystemSet();
 
-
+	CourseMenu();
 	/*
     userInterFace();
     while(1)
@@ -109,6 +109,36 @@ void CourseMenu()
 			break;
 
 		default:
+			printf("Wrong Input\n");
+		break;
+	}
+}
+
+void ScoreMenu()
+{
+	int menuInput;
+
+	PrintCourseMenu();
+	scanf("%d", &menuInput);
+
+	switch (menuInput)
+	{
+	case 1:
+		break;
+
+	case 2:
+		break;
+
+	case 3:
+		break;
+
+	case 4:
+		break;
+
+	case 5:
+		break;
+
+	default:
 		break;
 	}
 }

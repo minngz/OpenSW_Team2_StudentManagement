@@ -76,6 +76,16 @@ void PrintCourseMenu()
 	printf("4. Print \n");
 }
 
+void PrintScoreMenu()
+{
+	printf("   [ Score ]  \n\n");;
+	printf("1. Register \n");
+	printf("2. Modifiy \n");
+	printf("3. Delete \n");
+	printf("4. Print \n");
+	printf("5. FileWrite \n");
+}
+
 //¶ÁÈ¡Êý¾Ý
 void readDate(STU *student,int *studentNumber,int *subjectNumber)
 {
