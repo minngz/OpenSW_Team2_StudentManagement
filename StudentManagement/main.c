@@ -138,6 +138,10 @@ void ScoreMenu()
 	case 4:
 		PrintScore();
 		break;
+	
+	case 5:
+		WriteScoreFile();
+		break;
 
 	default:
 		printf("Wrong Input\n");
@@ -161,6 +165,11 @@ void DeleteScore()
 }
 
 void PrintScore()
+{
+
+}
+
+void WriteScoreFile()
 {
 
 }
@@ -215,3 +224,81 @@ void PrintAssignment()
 {
 
 }
+
+void StudentMenu()
+{
+	int menuInput;
+
+	PrintStudentMenu();
+	scanf("%d", &menuInput);
+
+	switch (menuInput)
+	{
+	case 1:
+		RegisterStudent();
+		break;
+
+	case 2:
+		ModifyStudent();
+		break;
+
+	case 3:
+		DeleteStudent();
+		break;
+
+	case 4:
+		PrintStudent();
+		break;
+
+	case 5:
+		ReadStudentFile();
+		break;
+
+	case 6:
+		WriteStudentFile();
+		break;
+
+	default:
+		printf("Wrong Input\n");
+		break;
+	}
+}
+
+void RegisterStudent()
+{
+
+}
+
+void ModifyStudent()
+{
+
+}
+
+void DeleteStudent()
+{
+
+}
+
+void PrintStudent()
+{
+
+}
+
+void ReadStudentFile()
+{
+
+}
+
+void WriteStudentFile()
+{
+
+}
+
+/*
+void PrintNoticeMenu()
+{
+printf("   [ Notice ]  \n\n");;
+printf("1. Register \n");
+printf("2. Modifiy \n");
+printf("3. Delete \n");
+}*/

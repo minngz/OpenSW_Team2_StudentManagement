@@ -418,4 +418,23 @@ void PrintAssignmentMenu()
 	printf(" 4. Print \n");
 }
 
+void PrintStudentMenu()
+{
+	printf("   [ Student ]  \n\n");;
+	printf("1. Register \n");
+	printf("2. Modifiy \n");
+	printf("3. Delete \n");
+	printf("4. Print \n");
+	printf("5. FileRead \n");
+	printf("6. FileWrite \n");
+}
+
+void PrintNoticeMenu()
+{
+	printf("   [ Notice ]  \n\n");;
+	printf("1. Register \n");
+	printf("2. Modifiy \n");
+	printf("3. Delete \n");
+}
+
 #endif // STUDENT_H_INCLUDED
