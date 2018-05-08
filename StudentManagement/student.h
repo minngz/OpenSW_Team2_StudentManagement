@@ -349,58 +349,69 @@ void sumAndAveStudentSore2(STU *student,int *studentNumber,int *subjectNumber)
 //写文件操作
 void WriteFile(STU *student,int *studentNumber,int *subjectNumber)
 {
-    FILE *p;
+    FILE *file;
     int i,j;//控制读取的学生数和科目数
-    if((p=fopen("student.txt","w"))==NULL)
+
+	file = fopen("student.txt", "w");
+
+    if(file==NULL)
     {
-        printf("打开文件失败\n");
+        printf("Cannot open the file..\n");
         exit(0);
     }
     else
     {
         //fwrite(student,sizeof(STU),*studentNumber,p); //按模块存
-        fprintf(p,"%d %d\n",*studentNumber,*subjectNumber);
+        fprintf(file,"%d %d\n",*studentNumber,*subjectNumber);
+
         for(i=0; i<*studentNumber; i++)
         {
-            fprintf(p,"%-12s%-10s ",student[i].number,student[i].name);
+            fprintf(file,"%-12s%-10s ",student[i].number,student[i].name);
+
             for(j=0; j<*subjectNumber; j++)
             {
-                fprintf(p,"%-8.2f",student[i].score[j]);
+                fprintf(file,"%-8.2f",student[i].score[j]);
             }
-            fprintf(p," %-8.2f %-8.2f",student[i].sumScore,student[i].sumScore/(*subjectNumber));
-            fprintf(p,"\n");
+            fprintf(file," %-8.2f %-8.2f",student[i].sumScore,student[i].sumScore/(*subjectNumber));
+            fprintf(file,"\n");
         }
     }
-    fclose(p);
-    printf("写入成功\n");
+    fclose(file);
+    printf("Successful File write!\n");
     returnUserFace();
 }
 //读取文件1
 void ReadFile(STU *student,int *studentNumber,int *subjectNumber)
 {
-    FILE *p;
+    FILE *file;
     int i,j;//控制读取的学生数和科目数
-    if((p=fopen("student.txt","r"))==NULL)
+
+	file = fopen("student.txt", "r");
+
+    if(file==NULL)
     {
-        printf("打开文件失败\n");
+        printf("Cannot open the file..\n");
         exit(0);
     }
     else
     {
         //fread(student,sizeof(STU),*studentNumber,p);//按模块区取
-        fscanf(p,"%d%d",studentNumber,subjectNumber);
+        fscanf(file,"%d%d",studentNumber,subjectNumber);
+		fscanf(file, "\n");
+
         for(i=0; i<*studentNumber; i++)
         {
-            fscanf(p,"%s%s",student[i].number,student[i].name);
+            fscanf(file,"%s%s",student[i].number,student[i].name);
+
             for(j=0; j<*subjectNumber; j++)
             {
-                fscanf(p,"%f",&student[i].score[j]);
+                fscanf(file,"%f",&student[i].score[j]);
             }
-            fscanf(p,"%f%f",&student[i].sumScore,&student[i].avescore);
-            fscanf(p,"\n");
+            fscanf(file,"%f%f",&student[i].sumScore,&student[i].avescore);
+            fscanf(file,"\n");
         }
     }
-    fclose(p);
+    fclose(file);
 
 
 
