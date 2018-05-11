@@ -4,33 +4,42 @@
 #include <stdlib.h>
 #include<stdio.h>
 #include<string.h>
+
 typedef struct student
 {
-    char number[15];
+    char id[10];
     char name[60];
-    float score[10],sumScore,avescore;
-} STU;
+    double examScore[10];
+	double assignmentScore[10];
+}STUDENT;
+
+typedef struct course
+{
+	char name[60];
+	STUDENT student[100];
+	char notice[10][60];
+	char assignment[10][60];
+}COURSE;
 
 //函数声明部分
-void userInterFace();
-void readDate(STU *student,int *studentNumber,int *subjectNumber);
+void readDate(STUDENT *student,int *studentNumber,int *subjectNumber);
 void returnUserFace();
-void sumAndAveSubjectSore(STU *student,int *studenNumber,int *subjectNumber);
-void sumAndAveStudentSore(STU *student,int *studenNumber,int *subjectNumber);
-int orderBig(const void *a,const void *b);
-int orderSmall(const void *a,const void *b);
-void Print(STU *student,int *studenNumber,int *subjectNumber);
+void sumAndAveSubjectSore(STUDENT *student,int *studenNumber,int *subjectNumber);
+void sumAndAveStudentSore(STUDENT *student,int *studenNumber,int *subjectNumber);
+//int orderBig(const void *a,const void *b);
+//int orderSmall(const void *a,const void *b);
+void Print(STUDENT *student,int *studenNumber,int *subjectNumber);
 int orderNumber(const void *a,const void *b);
 int orderName(const void *a,const void *b);
-void nameSearch(STU *student,int *studentNumber,int *subjectNumber);
-void numberSearch(STU *student,int *studentNumber,int *subjectNumber);
-void SortScore(STU *student,int *studentNumber,int *subjectNumber);
-void Print2(STU *student,int *studentNumber,int *subjectNumber);
-void sumAndAveStudentSore2(STU *student,int *studenNumber,int *subjectNumber);
+void nameSearch(STUDENT *student,int *studentNumber,int *subjectNumber);
+void numberSearch(STUDENT *student,int *studentNumber,int *subjectNumber);
+void SortScore(STUDENT *student,int *studentNumber,int *subjectNumber);
+void Print2(STUDENT *student,int *studentNumber,int *subjectNumber);
+void sumAndAveStudentSore2(STUDENT *student,int *studenNumber,int *subjectNumber);
 void SystemSet();
 int ScanfSet();
-void WriteFile(STU *student,int *studentNumber,int *subjectNumber);
-void ReadFile(STU *student,int *studentNumber,int *subjectNumber);
+void WriteFile(STUDENT *student,int *studentNumber,int *subjectNumber);
+void ReadFile(STUDENT *student,int *studentNumber,int *subjectNumber);
 void SystemSet();
 void PrintCourseMenu();
 void PrintManagementMenu();
@@ -80,29 +89,8 @@ int ScanfSet()
     return n;
 }
 
-//用户界面
-void userInterFace()
-{
-    printf("1.Input record\n");
-    printf("2.Caculate total and average score of course\n");
-    printf("3.Caculate total and average score of student\n");
-    printf("4.Sort in descending order by score of every student\n");
-    printf("5.Sort in ascending order by score of every student\n");
-    printf("6.Sort in ascending order by order\n");
-    printf("7.Sort in dictionary order by name\n");
-    printf("8.Search by number\n");
-    printf("9.Search by name\n");
-    printf("10.Statistic analysis for every course\n");
-    printf("11.List record\n");
-    printf("12.Write to a file\n");
-    printf("13.Read from a file\n");
-    printf("0.Exit\n");
-    printf("please enter your choice:\n");
-}
-
-
 //读取数据
-void readDate(STU *student,int *studentNumber,int *subjectNumber)
+void readDate(STUDENT *student,int *studentNumber,int *subjectNumber)
 {
     int i,j;//控制读取的学生数和科目数
     //FILE *p = freopen("test.txt","r",stdin);
@@ -114,99 +102,103 @@ void readDate(STU *student,int *studentNumber,int *subjectNumber)
     for(i=0; i<*studentNumber; i++)
     {
         printf("请输入学号、名字、分数 中间以空格隔开\n");
-        scanf("%s%s",student[i].number,student[i].name);
+        scanf("%s%s",student[i].id,student[i].name);
         for(j=0; j<*subjectNumber; j++)
         {
-            scanf("%f",&student[i].score[j]);
+            scanf("%lf",&student[i].examScore[j]);
         }
     }
     //fclose(p);
     returnUserFace();
-
 }
+
 //返回用户界面
 void returnUserFace()
 {
     while(getchar()!='\n');
     system("pause");
     system("cls");
-    userInterFace();
 }
-void sumAndAveSubjectSore(STU *student,int *studenNumber,int *subjectNumber)
+
+void sumAndAveSubjectSore(STUDENT *student,int *studenNumber,int *subjectNumber)
 {
     int i,j;
-    float sum;
+    double sum;
     for(i=0; i<*subjectNumber; i++)
     {
         sum=0;
         for(j=0; j<*studenNumber; j++)
         {
-            sum+=student[j].score[i];
+            sum+=student[j].examScore[i];
         }
-        printf("学科%d 的总分是 %-8.2f ",i+1,1.0*sum);
-        printf("平均分是 %-8.2f\n",1.0*sum/(*studenNumber));
+        printf("学科%d 的总分是 %-8.2lf ",i+1,1.0*sum);
+        printf("平均分是 %-8.2lf\n",1.0*sum/(*studenNumber));
     }
     returnUserFace();
 }
 
-void sumAndAveStudentSore(STU *student,int *studenNumber,int *subjectNumber)
+void sumAndAveStudentSore(STUDENT *student, int *studenNumber, int *subjectNumber)
 {
-    int i,j;
-    float sum=0;
-    for(i=0; i<*studenNumber; i++)
-    {
-        sum=0;
-        for(j=0; j<*subjectNumber; j++)
-        {
-            sum+=student[i].score[j];
-        }
-        student[i].sumScore=sum;
-        printf("%-12s%-10s ",student[i].number,student[i].name);
-        printf("总分是 %-8.2f 平均分是 %-8.2f\n",1.0*sum,1.0*sum/(*subjectNumber));
-    }
-    returnUserFace();
+	int i, j;
+	double sum = 0;
+	for (i = 0; i < *studenNumber; i++)
+	{
+		sum = 0;
+		for (j = 0; j < *subjectNumber; j++)
+		{
+			sum += student[i].examScore[j];
+		}
 
+		printf("id : %-12s name : %-10s ", student[i].id, student[i].name);
+		printf("Sum : %-8.2lf  Avg : %-8.2lf\n", 1.0*sum, 1.0*sum / (*subjectNumber));
+	}
+	returnUserFace();
 }
+
+/*
 int orderBig(const void *a,const void *b)
 {
-    STU *p1=(STU*)a;
-    STU *p2=(STU*)b;
+    STUDENT *p1=(STUDENT*)a;
+    STUDENT *p2=(STUDENT*)b;
+
     return (int)((p1->sumScore)-(p2->sumScore));
 }
 int orderSmall(const void *a,const void *b)
 {
-    STU *p1=(STU*)a;
-    STU *p2=(STU*)b;
+    STUDENT *p1=(STUDENT*)a;
+    STUDENT *p2=(STUDENT*)b;
     return (int)((p2->sumScore)-(p1->sumScore));
 }
+*/
+
 int orderNumber(const void *a,const void *b)
 {
-    STU *p1=(STU*)a;
-    STU *p2=(STU*)b;
-    return (p2->number)-(p1->number);
+    STUDENT *p1=(STUDENT*)a;
+    STUDENT *p2=(STUDENT*)b;
+    return (p2->id)-(p1->id);
 }
 int orderName(const void *a,const void *b)
 {
-    STU *p1=(STU*)a;
-    STU *p2=(STU*)b;
+    STUDENT *p1=(STUDENT*)a;
+    STUDENT *p2=(STUDENT*)b;
     return strcmp((p1->name),(p2->name));
 }
-void Print(STU *student,int *studentNumber,int *subjectNumber)
+void Print(STUDENT *student,int *studentNumber,int *subjectNumber)
 {
     int i,j;//控制读取的学生数和科目数
     for(i=0; i<*studentNumber; i++)
     {
-        printf("%-12s%-10s ",student[i].number,student[i].name);
+        printf("%-12s%-10s ",student[i].id,student[i].name);
         for(j=0; j<*subjectNumber; j++)
         {
-            printf("%-8.2f ",student[i].score[j]);
+            printf("%-8.2f ",student[i].examScore[j]);
         }
         printf("\n");
     }
     returnUserFace();
 }
 //按名字查找
-void nameSearch(STU *student,int *studentNumber,int *subjectNumber)
+void nameSearch(STUDENT *student,int *studentNumber,int *subjectNumber)
 {
     int i=0,j,k=0;
     char c;
@@ -220,9 +212,9 @@ E:
     {
         if(strcmp(name,student[i].name)==0)
         {
-            printf("%-12s%-10s",student[i].number,student[i].name);
+            printf("%-12s%-10s",student[i].id,student[i].name);
             for(j=0; j<*subjectNumber; j++)
-                printf("%-8.2f",student[i].score[j]);
+                printf("%-8.2f",student[i].examScore[j]);
             k=1;
         }
 
@@ -248,7 +240,7 @@ E1:
 
 }
 //按学号查找
-void numberSearch(STU *student,int *studentNumber,int *subjectNumber)
+void numberSearch(STUDENT *student,int *studentNumber,int *subjectNumber)
 {
     int i=0,j,k=0;
     char c,number[10];
@@ -259,11 +251,11 @@ E:
     scanf("%s",number);
     for(i=0; i<*studentNumber; i++)
     {
-        if(strcmp(student[i].number,number)==0)
+        if(strcmp(student[i].id,number)==0)
         {
-            printf("%-12s%-10s ",student[i].number,student[i].name);
+            printf("%-12s%-10s ",student[i].id,student[i].name);
             for(j=0; j<*subjectNumber; j++)
-                printf("%-8.2f",student[i].score[j]);
+                printf("%-8.2f",student[i].examScore[j]);
             k=1;
         }
 
@@ -289,7 +281,7 @@ E1:
 }
 int Excellente=0,Fine=0,Medium=0,Pass=0,Fail=0;
 //分类成绩
-void SortScore(STU *student,int *studentNumber,int *subjectNumber)
+void SortScore(STUDENT *student,int *studentNumber,int *subjectNumber)
 {
     Excellente=0,Fine=0,Medium=0,Pass=0,Fail=0;
     int i,j;
@@ -297,10 +289,10 @@ void SortScore(STU *student,int *studentNumber,int *subjectNumber)
     {
         for(j=0; j<*studentNumber; ++j)
         {
-            if(student[j].score[i]>=90) Excellente++;
-            else if(student[j].score[i]>=80) Fine++;
-            else if(student[j].score[i]>=70) Medium++;
-            else if(student[j].score[i]>=60) Pass++;
+            if(student[j].examScore[i]>=90) Excellente++;
+            else if(student[j].examScore[i]>=80) Fine++;
+            else if(student[j].examScore[i]>=70) Medium++;
+            else if(student[j].examScore[i]>=60) Pass++;
             else Fail++;
         }
         printf("科目 %d\n",i+1);
@@ -314,23 +306,23 @@ void SortScore(STU *student,int *studentNumber,int *subjectNumber)
     returnUserFace();
 }
 //打印没门成绩和总分平均分
-void Print2(STU *student,int *studentNumber,int *subjectNumber)
+void Print2(STUDENT *student,int *studentNumber,int *subjectNumber)
 {
     int i,j;//控制读取的学生数和科目数
     for(i=0; i<*studentNumber; i++)
     {
-        printf("%-12s%-10s分数是 ",student[i].number,student[i].name);
+        printf("%-12s%-10s分数是 ",student[i].id,student[i].name);
         for(j=0; j<*subjectNumber; j++)
         {
-            printf("%-8.2f",student[i].score[j]);
+            printf("%-8.2f",student[i].examScore[j]);
         }
-        printf("总分是 %-8.2f平均分是 %-8.2f",student[i].sumScore,student[i].sumScore/(*subjectNumber));
+   //     printf("总分是 %-8.2f平均分是 %-8.2f",student[i].sumScore,student[i].sumScore/(*subjectNumber));
         printf("\n");
     }
     returnUserFace();
 }
 //单独计算总分
-void sumAndAveStudentSore2(STU *student,int *studentNumber,int *subjectNumber)
+void sumAndAveStudentSore2(STUDENT *student,int *studentNumber,int *subjectNumber)
 {
     int i,j;
     float sum=0;
@@ -339,15 +331,14 @@ void sumAndAveStudentSore2(STU *student,int *studentNumber,int *subjectNumber)
         sum=0;
         for(j=0; j<*subjectNumber; j++)
         {
-            sum+=student[i].score[j];
+            sum+=student[i].examScore[j];
         }
-        student[i].sumScore=sum;
-
+        //student[i].sumScore=sum;
     }
 
 }
 //写文件操作
-void WriteFile(STU *student,int *studentNumber,int *subjectNumber)
+void WriteFile(STUDENT *student,int *studentNumber,int *subjectNumber)
 {
     FILE *p;
     int i,j;//控制读取的学生数和科目数
@@ -358,16 +349,15 @@ void WriteFile(STU *student,int *studentNumber,int *subjectNumber)
     }
     else
     {
-        //fwrite(student,sizeof(STU),*studentNumber,p); //按模块存
+        //fwrite(student,sizeof(STUDENT),*studentNumber,p); //按模块存
         fprintf(p,"%d %d\n",*studentNumber,*subjectNumber);
         for(i=0; i<*studentNumber; i++)
         {
-            fprintf(p,"%-12s%-10s ",student[i].number,student[i].name);
+            fprintf(p,"%-12s%-10s ",student[i].id,student[i].name);
             for(j=0; j<*subjectNumber; j++)
             {
-                fprintf(p,"%-8.2f",student[i].score[j]);
+                fprintf(p,"%-8.2f",student[i].examScore[j]);
             }
-            fprintf(p," %-8.2f %-8.2f",student[i].sumScore,student[i].sumScore/(*subjectNumber));
             fprintf(p,"\n");
         }
     }
@@ -376,7 +366,7 @@ void WriteFile(STU *student,int *studentNumber,int *subjectNumber)
     returnUserFace();
 }
 //读取文件1
-void ReadFile(STU *student,int *studentNumber,int *subjectNumber)
+void ReadFile(STUDENT *student,int *studentNumber,int *subjectNumber)
 {
     FILE *p;
     int i,j;//控制读取的学生数和科目数
@@ -387,16 +377,15 @@ void ReadFile(STU *student,int *studentNumber,int *subjectNumber)
     }
     else
     {
-        //fread(student,sizeof(STU),*studentNumber,p);//按模块区取
+        //fread(student,sizeof(STUDENT),*studentNumber,p);//按模块区取
         fscanf(p,"%d%d",studentNumber,subjectNumber);
         for(i=0; i<*studentNumber; i++)
         {
-            fscanf(p,"%s%s",student[i].number,student[i].name);
+            fscanf(p,"%s%s",student[i].id,student[i].name);
             for(j=0; j<*subjectNumber; j++)
             {
-                fscanf(p,"%f",&student[i].score[j]);
+                fscanf(p,"%f",&student[i].examScore[j]);
             }
-            fscanf(p,"%f%f",&student[i].sumScore,&student[i].avescore);
             fscanf(p,"\n");
         }
     }
@@ -408,7 +397,7 @@ void ReadFile(STU *student,int *studentNumber,int *subjectNumber)
 
 
 //读取文件2
-//void ReadFile(STU *student,int *studentNumber,int *subjectNumber)
+//void ReadFile(STUDENT *student,int *studentNumber,int *subjectNumber)
 //{
 //    int i,j;//控制读取的学生数和科目数
 //    scanf("%d%d",studentNumber,subjectNumber);
@@ -417,7 +406,7 @@ void ReadFile(STU *student,int *studentNumber,int *subjectNumber)
 //            scanf("%s%s",student[i].number,student[i].name);
 //            for(j=0; j<*subjectNumber; j++)
 //            {
-//                scanf("%f",&student[i].score[j]);
+//                scanf("%f",&student[i].examScore[j]);
 //            }
 //            scanf("%f%f",&student[i].sumScore,&student[i].avescore);
 //        }
@@ -426,6 +415,7 @@ void ReadFile(STU *student,int *studentNumber,int *subjectNumber)
 
 void PrintCourseMenu()
 {
+	system("cls");
 	printf("   [ Course ]  \n\n");;
 	printf("1. Register \n");
 	printf("2. Modifiy \n");
@@ -435,6 +425,7 @@ void PrintCourseMenu()
 
 void PrintManagementMenu()
 {
+	system("cls");
 	printf("     [ Management ]  \n\n");
 	printf("1.   Score    Management \n");
 	printf("2. Assignment Management \n");
@@ -444,6 +435,7 @@ void PrintManagementMenu()
 
 void PrintScoreMenu()
 {
+	system("cls");
 	printf("   [ Score ]  \n\n");;
 	printf("1. Register \n");
 	printf("2. Modifiy \n");
@@ -454,6 +446,7 @@ void PrintScoreMenu()
 
 void PrintAssignmentMenu()
 {
+	system("cls");
 	printf("   [ Assignment ]  \n\n");;
 	printf(" 1. Register \n");
 	printf(" 2. Modifiy \n");
@@ -463,6 +456,7 @@ void PrintAssignmentMenu()
 
 void PrintStudentMenu()
 {
+	system("cls");
 	printf("   [ Student ]  \n\n");;
 	printf("1. Register \n");
 	printf("2. Modifiy \n");
@@ -474,6 +468,7 @@ void PrintStudentMenu()
 
 void PrintNoticeMenu()
 {
+	system("cls");
 	printf("   [ Notice ]  \n\n");;
 	printf("1. Register \n");
 	printf("2. Modifiy \n");
