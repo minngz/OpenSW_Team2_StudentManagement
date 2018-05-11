@@ -9,7 +9,8 @@ typedef struct student
 {
     char id[10];
     char name[60];
-    double score[10];
+    double examScore[10];
+	double assignmentScore[10];
 }STUDENT;
 
 typedef struct course
@@ -17,6 +18,7 @@ typedef struct course
 	char name[60];
 	STUDENT student[100];
 	char notice[10][60];
+	char assignment[10][60];
 }COURSE;
 
 //函数声明部分
@@ -103,7 +105,7 @@ void readDate(STUDENT *student,int *studentNumber,int *subjectNumber)
         scanf("%s%s",student[i].id,student[i].name);
         for(j=0; j<*subjectNumber; j++)
         {
-            scanf("%lf",&student[i].score[j]);
+            scanf("%lf",&student[i].examScore[j]);
         }
     }
     //fclose(p);
@@ -121,16 +123,16 @@ void returnUserFace()
 void sumAndAveSubjectSore(STUDENT *student,int *studenNumber,int *subjectNumber)
 {
     int i,j;
-    float sum;
+    double sum;
     for(i=0; i<*subjectNumber; i++)
     {
         sum=0;
         for(j=0; j<*studenNumber; j++)
         {
-            sum+=student[j].score[i];
+            sum+=student[j].examScore[i];
         }
-        printf("学科%d 的总分是 %-8.2f ",i+1,1.0*sum);
-        printf("平均分是 %-8.2f\n",1.0*sum/(*studenNumber));
+        printf("学科%d 的总分是 %-8.2lf ",i+1,1.0*sum);
+        printf("平均分是 %-8.2lf\n",1.0*sum/(*studenNumber));
     }
     returnUserFace();
 }
@@ -138,17 +140,17 @@ void sumAndAveSubjectSore(STUDENT *student,int *studenNumber,int *subjectNumber)
 void sumAndAveStudentSore(STUDENT *student, int *studenNumber, int *subjectNumber)
 {
 	int i, j;
-	float sum = 0;
+	double sum = 0;
 	for (i = 0; i < *studenNumber; i++)
 	{
 		sum = 0;
 		for (j = 0; j < *subjectNumber; j++)
 		{
-			sum += student[i].score[j];
+			sum += student[i].examScore[j];
 		}
 
 		printf("id : %-12s name : %-10s ", student[i].id, student[i].name);
-		printf("Sum : %-8.2f  Avg : %-8.2f\n", 1.0*sum, 1.0*sum / (*subjectNumber));
+		printf("Sum : %-8.2lf  Avg : %-8.2lf\n", 1.0*sum, 1.0*sum / (*subjectNumber));
 	}
 	returnUserFace();
 }
@@ -189,7 +191,7 @@ void Print(STUDENT *student,int *studentNumber,int *subjectNumber)
         printf("%-12s%-10s ",student[i].id,student[i].name);
         for(j=0; j<*subjectNumber; j++)
         {
-            printf("%-8.2f ",student[i].score[j]);
+            printf("%-8.2f ",student[i].examScore[j]);
         }
         printf("\n");
     }
@@ -212,7 +214,7 @@ E:
         {
             printf("%-12s%-10s",student[i].id,student[i].name);
             for(j=0; j<*subjectNumber; j++)
-                printf("%-8.2f",student[i].score[j]);
+                printf("%-8.2f",student[i].examScore[j]);
             k=1;
         }
 
@@ -253,7 +255,7 @@ E:
         {
             printf("%-12s%-10s ",student[i].id,student[i].name);
             for(j=0; j<*subjectNumber; j++)
-                printf("%-8.2f",student[i].score[j]);
+                printf("%-8.2f",student[i].examScore[j]);
             k=1;
         }
 
@@ -287,10 +289,10 @@ void SortScore(STUDENT *student,int *studentNumber,int *subjectNumber)
     {
         for(j=0; j<*studentNumber; ++j)
         {
-            if(student[j].score[i]>=90) Excellente++;
-            else if(student[j].score[i]>=80) Fine++;
-            else if(student[j].score[i]>=70) Medium++;
-            else if(student[j].score[i]>=60) Pass++;
+            if(student[j].examScore[i]>=90) Excellente++;
+            else if(student[j].examScore[i]>=80) Fine++;
+            else if(student[j].examScore[i]>=70) Medium++;
+            else if(student[j].examScore[i]>=60) Pass++;
             else Fail++;
         }
         printf("科目 %d\n",i+1);
@@ -312,7 +314,7 @@ void Print2(STUDENT *student,int *studentNumber,int *subjectNumber)
         printf("%-12s%-10s分数是 ",student[i].id,student[i].name);
         for(j=0; j<*subjectNumber; j++)
         {
-            printf("%-8.2f",student[i].score[j]);
+            printf("%-8.2f",student[i].examScore[j]);
         }
    //     printf("总分是 %-8.2f平均分是 %-8.2f",student[i].sumScore,student[i].sumScore/(*subjectNumber));
         printf("\n");
@@ -329,7 +331,7 @@ void sumAndAveStudentSore2(STUDENT *student,int *studentNumber,int *subjectNumbe
         sum=0;
         for(j=0; j<*subjectNumber; j++)
         {
-            sum+=student[i].score[j];
+            sum+=student[i].examScore[j];
         }
         //student[i].sumScore=sum;
     }
@@ -354,7 +356,7 @@ void WriteFile(STUDENT *student,int *studentNumber,int *subjectNumber)
             fprintf(p,"%-12s%-10s ",student[i].id,student[i].name);
             for(j=0; j<*subjectNumber; j++)
             {
-                fprintf(p,"%-8.2f",student[i].score[j]);
+                fprintf(p,"%-8.2f",student[i].examScore[j]);
             }
             fprintf(p,"\n");
         }
@@ -382,7 +384,7 @@ void ReadFile(STUDENT *student,int *studentNumber,int *subjectNumber)
             fscanf(p,"%s%s",student[i].id,student[i].name);
             for(j=0; j<*subjectNumber; j++)
             {
-                fscanf(p,"%f",&student[i].score[j]);
+                fscanf(p,"%f",&student[i].examScore[j]);
             }
             fscanf(p,"\n");
         }
@@ -404,7 +406,7 @@ void ReadFile(STUDENT *student,int *studentNumber,int *subjectNumber)
 //            scanf("%s%s",student[i].number,student[i].name);
 //            for(j=0; j<*subjectNumber; j++)
 //            {
-//                scanf("%f",&student[i].score[j]);
+//                scanf("%f",&student[i].examScore[j]);
 //            }
 //            scanf("%f%f",&student[i].sumScore,&student[i].avescore);
 //        }
