@@ -436,7 +436,7 @@ void ReadFile(STUDENT *student, int *studentNum, int *subjectNum)
 void PrintCourseMenu()
 {
 	system("cls");
-	printf("\n      [ Course ]  \n\n");;
+	printf("\n      [ Course ]  \n\n");
 	printf(" 1.     Register \n");
 	printf(" 2.     Modifiy \n");
 	printf(" 3      Delete \n");
@@ -458,7 +458,7 @@ void PrintManagementMenu()
 void PrintScoreMenu()
 {
 	system("cls");
-	printf("\n        [ Score ]  \n\n");;
+	printf("\n        [ Score ]  \n\n");
 	printf(" 1.     Register \n");
 	printf(" 2.     Modifiy \n");
 	printf(" 3.     Delete \n");
@@ -470,7 +470,7 @@ void PrintScoreMenu()
 void PrintAssignmentMenu()
 {
 	system("cls");
-	printf("\n      [ Assignment ]  \n\n");;
+	printf("\n      [ Assignment ]  \n\n");
 	printf(" 1.    Register \n");
 	printf(" 2.    Modifiy \n");
 	printf(" 3.     Delete \n");
@@ -481,7 +481,7 @@ void PrintAssignmentMenu()
 void PrintStudentMenu()
 {
 	system("cls");
-	printf("\n      [ Student ]  \n\n");;
+	printf("\n      [ Student ]  \n\n");
 	printf(" 1.    Register \n");
 	printf(" 2.    Modifiy \n");
 	printf(" 3.    Delete \n");
@@ -494,11 +494,24 @@ void PrintStudentMenu()
 void PrintNoticeMenu()
 {
 	system("cls");
-	printf("\n        [ Notice ]  \n\n");;
+	printf("\n        [ Notice ]  \n\n");
 	printf(" 1.    Register \n");
 	printf(" 2.    Modifiy \n");
 	printf(" 3.     Delete \n");
 	printf("ESC.     Back \n\n");
+}
+
+void PrintCourseList(COURSE **course, int *subjectNumber)
+{
+	int i;
+
+	system("cls");
+	printf("\n        [ Course Select ]   \n\n");
+
+	for (i = 0; i < *subjectNumber; i++)
+	{
+		printf(" %d.   %15s\n", i, (*course)[i].name);
+	}
 }
 
 void CourseMenu(COURSE **course, int *subjectNumber)
@@ -525,7 +538,7 @@ void CourseMenu(COURSE **course, int *subjectNumber)
 			break;
 
 		case '4':
-			ManagementMenu(course, subjectNumber);
+			SelectCourse(course, subjectNumber);
 			break;
 		case '5':
 			exit(1);
@@ -535,6 +548,17 @@ void CourseMenu(COURSE **course, int *subjectNumber)
 			break;
 		}
 	}
+}
+
+void SelectCourse(COURSE **course, int *subjectNumber)
+{
+	int index;
+
+	PrintCourseList(course, subjectNumber);
+	scanf("%d", &index);
+
+	ManagementMenu(&((*course)[index]));
+
 }
 
 void RegisterCourse(COURSE **course, int *subjectNumber)
@@ -570,7 +594,7 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	Sleep(3000);
 }
 
-void ModifyCourse(COURSE** course)
+void ModifyCourse(COURSE **course)
 {
 
 }
@@ -580,7 +604,7 @@ void DeleteCourse(COURSE **course, int *subjectNumber)
 
 }
 
-void ManagementMenu(COURSE **course, int *subjectNumber)
+void ManagementMenu(COURSE *course)
 {
 	char menuInput;
 
@@ -592,19 +616,19 @@ void ManagementMenu(COURSE **course, int *subjectNumber)
 		switch (menuInput)
 		{
 		 case '1':
-			ScoreMenu();
+			ScoreMenu(course);
 			break;
 
 		case '2':
-			AssignmentMenu();
+			AssignmentMenu(course);
 			break;
 
 		case '3':
-			StudentMenu();
+			StudentMenu(course);
 			break;
 
 		case '4':
-			NoticeMenu();
+			NoticeMenu(course);
 			break;
 
 		case ESC:
@@ -616,7 +640,7 @@ void ManagementMenu(COURSE **course, int *subjectNumber)
 	}
 }
 
-void ScoreMenu()
+void ScoreMenu(COURSE *course)
 {
 	char menuInput;
 
@@ -681,7 +705,7 @@ void WriteScoreFile()
 
 }
 
-void AssignmentMenu()
+void AssignmentMenu(COURSE *course)
 {
 	char menuInput;
 
@@ -737,7 +761,7 @@ void PrintAssignment()
 
 }
 
-void StudentMenu()
+void StudentMenu(COURSE *course)
 {
 	char menuInput;
 
@@ -811,7 +835,7 @@ void WriteStudentFile()
 
 }
 
-void NoticeMenu()
+void NoticeMenu(COURSE *course)
 {
 	char menuInput;
 
