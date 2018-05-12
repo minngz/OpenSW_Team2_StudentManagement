@@ -20,6 +20,7 @@ typedef struct course
 	STUDENT student[100];
 	char notice[10][50];
 	char assignment[5][50];
+	int studentNumber;
 }COURSE;
 
 //函数声明部分

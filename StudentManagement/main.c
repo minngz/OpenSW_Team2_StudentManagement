@@ -4,7 +4,6 @@
 
 int main()
 {
-	int studentNumber = 0;
 	int subjectNumber = 0;
 
 	COURSE *course;

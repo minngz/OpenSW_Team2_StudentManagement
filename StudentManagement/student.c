@@ -548,6 +548,7 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	if (*subjectNumber == 0)
 	{
 		*course = (COURSE*)malloc(sizeof(COURSE));
+		(*course)->studentNumber = 0;
 	}
 	else
 	{
@@ -557,9 +558,10 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 		{
 			temp[i] = (*course)[i];
 		}
-
+		
 		free(*course);
 		*course = temp;
+		(*course)[*subjectNumber].studentNumber=0;
 	}
 
 	strcpy((*course)[*subjectNumber].name, courseName);
