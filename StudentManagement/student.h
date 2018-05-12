@@ -337,80 +337,173 @@ void sumAndAveStudentSore2(STUDENT *student,int *studentNumber,int *subjectNumbe
     }
 
 }
-//写文件操作
-void WriteFile(STUDENT *student,int *studentNumber,int *subjectNumber)
+
+void WriteFile(STUDENT *student, int *studentNum, int *subjectNum)
 {
-    FILE *p;
-    int i,j;//控制读取的学生数和科目数
-    if((p=fopen("student.txt","w"))==NULL)
-    {
-        printf("打开文件失败\n");
-        exit(0);
-    }
-    else
-    {
-        //fwrite(student,sizeof(STUDENT),*studentNumber,p); //按模块存
-        fprintf(p,"%d %d\n",*studentNumber,*subjectNumber);
-        for(i=0; i<*studentNumber; i++)
-        {
-            fprintf(p,"%-12s%-10s ",student[i].id,student[i].name);
-            for(j=0; j<*subjectNumber; j++)
-            {
-                fprintf(p,"%-8.2f",student[i].examScore[j]);
-            }
-            fprintf(p,"\n");
-        }
-    }
-    fclose(p);
-    printf("写入成功\n");
-    returnUserFace();
+	/*
+	∴ Function Name
+	- WriteFile
+
+	∴ Parameter ([type] name)
+	- [STU*] student       : Array of STU which contains student's information
+	ex) name, student ID, array of score, total score, average score
+	- [int*] studentNumber : Total number of students
+	- [int*] subjectNumber : Total number of subjects
+
+	∴ File
+	- student.txt
+	: WriteFile function uses file which name is "student.txt".
+	So if you have "student.txt" and it contains important information, you should change your file name to another.
+
+	∴ Description
+	- 1) WriteFile function open or create the file which name is "student.txt".
+
+	2-1) If the file exists,
+	it writes the total number of students(studentNum) and subject(subjectNum) in the first row.
+	Then, it writes information of student(student array) one row by one.
+	The information contains student number, name, score, total score and average score.
+
+	2-2) If the file doens't exist,
+	Print the "Cannot open the file" on console windows and exit program.
+
+	3) Finally, it closes the file and print "Successful File write!"
+	*/
+
+	FILE *file;        // file variables to open, write, and close the txt file
+	int i, j;           // int variables for "for statement"
+
+	file = fopen("student.txt", "w"); // open "student.txt" file by "write" mode. 
+									  // if it doesn't exist, it makes new "student.txt" file.
+
+	if (file == NULL)
+	{
+		printf("Cannot open the file\n");
+		exit(0);
+	} // "student.txt" doesnt' exist
+	else
+	{
+		/*
+		There is two way to write information on file.
+		1) If you want to write information by printf format, you can use 'fprintf'
+		2) If not, you can use 'fwrite' which write all of information in buffer.
+		*/
+
+		// Write total number of student and subject on the first row.
+		fprintf(file, "%d %d\n", *studentNum, *subjectNum);  // 1) fprintf
+															 //fwrite(student,sizeof(STU),*studentNumber,p);   // 2) fwrite
+
+															 // Write all information of student array on the next row.
+		for (i = 0; i<*studentNum; i++)
+		{
+			fprintf(file, "%-12s%-10s ", student[i].id, student[i].name);
+
+			for (j = 0; j<*subjectNum; j++)
+			{
+				fprintf(file, "%-8.2f", student[i].examScore[j]);
+			}
+			fprintf(file, "\n");
+		}
+	} // "student.txt" exist
+
+	fclose(file);   // close the file
+	printf("Successful File write!");
+	returnUserFace();
 }
-//读取文件1
-void ReadFile(STUDENT *student,int *studentNumber,int *subjectNumber)
+
+
+
+void ReadFile(STUDENT *student, int *studentNum, int *subjectNum)
 {
-    FILE *p;
-    int i,j;//控制读取的学生数和科目数
-    if((p=fopen("student.txt","r"))==NULL)
-    {
-        printf("打开文件失败\n");
-        exit(0);
-    }
-    else
-    {
-        //fread(student,sizeof(STUDENT),*studentNumber,p);//按模块区取
-        fscanf(p,"%d%d",studentNumber,subjectNumber);
-        for(i=0; i<*studentNumber; i++)
-        {
-            fscanf(p,"%s%s",student[i].id,student[i].name);
-            for(j=0; j<*subjectNumber; j++)
-            {
-                fscanf(p,"%f",&student[i].examScore[j]);
-            }
-            fscanf(p,"\n");
-        }
-    }
-    fclose(p);
+	/*
+	∴ Function Name
+	- ReadFile
+
+	∴ Parameter ([type] name)
+	- [STU*] student       : Array of STU which contains student's information
+	ex) name, student ID, array of score, total score, average score
+	- [int*] studentNumber : Total number of students
+	- [int*] subjectNumber : Total number of subjects
+
+	∴ File
+	- student.txt
+	: ReadFile function uses file which name is "student.txt".
+	So if you want to read information from your file, you should change your file name to "student.txt"
+	and the information format should be like this.
+
+	---------------------------------------------------------------------------------------------------------------
+	11 5
+	13011040    Jongwon    63.00   63.00   100.00  10.00   36.00    272.00   54.40
+	13011041    Minji      63.00   63.00   100.00  10.00   36.00    272.00   54.40
+	13011042    Younghov   71.00   56.00   41.00   26.00   71.00    265.00   53.00
+	13011043    Haein      66.00   56.00   46.00   36.00   66.00    270.00   54.00
+	13011044    Seokho     78.00   56.00   63.00   63.00   78.00    338.00   67.60
+	13011045    Dohyun     75.00   84.00   56.00   56.00   75.00    346.00   69.20
+	13011046    Taegyun    91.00   80.00   56.00   49.00   91.00    367.00   73.40
+	13011047    Jangwon    78.00   54.00   63.00   42.00   78.00    315.00   63.00
+	13011048    Jaehyuk    64.00   84.00   56.00   84.00   64.00    352.00   70.40
+	13011049    Moonsoo    84.00   80.00   77.00   80.00   84.00    405.00   81.00
+	13011050    Myungho    80.00   54.00   41.00   54.00   80.00    309.00   61.80
+	---------------------------------------------------------------------------------------------------------------
+
+	Total number of students(11) and subjects(5) should be on the first row.
+	Then, student_number(13011045) name(Jongwon) subject1_score(63.00) subject2_score(63.00) ... subject5_score(36)
+	total_score(272.00) average_score(54.40) should be placed on one row by one student.
 
 
+	∴ Description
+	- 1) ReadFile function open the file which name is "student.txt".
 
+	2-1) If the file exists,
+	it reads the total number of students(studentNum) and subject(subjectNum) in the first row.
+	Then, it reads information of student(student array) one row by one.
+	The information contains student number, name, score, total score and average score.
+
+	2-2) If the file doens't exist,
+	Print the "Cannot open the file" on console windows and exit program.
+
+	3) Finally, closes the file.
+	*/
+
+
+	int i, j;           // int variables for "for statement"
+
+	FILE *file;         // file variables to open, write, and close the txt file
+	file = fopen("student.txt", "r"); // open "student.txt" file by "read" mode. 
+
+	if (file == NULL)
+	{
+		printf("Cannot open the file\n");
+		exit(0);
+	} // "student.txt" doesnt' exist
+	else
+	{
+		/*
+		There is two way to read information on file.
+		1) If you want to read information by scanf format, you can use 'fscanf'
+		2) If not, you can use 'fread' which read bytes of file at once.
+		*/
+
+		// Read total number of student and subject on the first row.
+		fscanf(file, "%d%d", studentNum, subjectNum);     // 1) fscanf
+		fscanf(file, "\n");
+		//fread(student,sizeof(STU),*studentNumber,p);    // 2) fread
+
+		// Read all information of student array on the next row.
+		for (i = 0; i<*studentNum; i++)
+		{
+			fscanf(file, "%s%s", student[i].id, student[i].name);
+
+			for (j = 0; j<*subjectNum; j++)
+			{
+				fscanf(file, "%f", &student[i].examScore[j]);
+			}
+
+			fscanf(file, "\n");
+		}
+	} // "student.txt" exist
+
+	fclose(file);  // close the file
 }
-
-
-//读取文件2
-//void ReadFile(STUDENT *student,int *studentNumber,int *subjectNumber)
-//{
-//    int i,j;//控制读取的学生数和科目数
-//    scanf("%d%d",studentNumber,subjectNumber);
-//        for(i=0; i<*studentNumber; i++)
-//        {
-//            scanf("%s%s",student[i].number,student[i].name);
-//            for(j=0; j<*subjectNumber; j++)
-//            {
-//                scanf("%f",&student[i].examScore[j]);
-//            }
-//            scanf("%f%f",&student[i].sumScore,&student[i].avescore);
-//        }
-//}
 
 
 void PrintCourseMenu()
