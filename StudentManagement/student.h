@@ -1,5 +1,6 @@
 #ifndef STUDENT_H_INCLUDED
 #define STUDENT_H_INCLUDED
+#define ESC 27
 
 #include <stdlib.h>
 #include<stdio.h>
@@ -50,7 +51,6 @@ void PrintNoticeMenu();
 void RegisterCourse();
 void ModifyCourse();
 void DeleteCourse();
-void ManageCourse();
 void ManagementMenu();
 void ScoreMenu();
 void RegisterScore();
@@ -416,88 +416,94 @@ void ReadFile(STUDENT *student,int *studentNumber,int *subjectNumber)
 void PrintCourseMenu()
 {
 	system("cls");
-	printf("   [ Course ]  \n\n");;
-	printf("1. Register \n");
-	printf("2. Modifiy \n");
-	printf("3. Delete \n");
-	printf("4. Manage \n");
+	printf("\n       [ Course ]  \n\n");;
+	printf("1.     Register \n");
+	printf("2.     Modifiy \n");
+	printf("3      Delete \n");
+	printf("4.     Manage \n");
+	printf("ESC.    Back \n\n");
 }
 
 void PrintManagementMenu()
 {
 	system("cls");
-	printf("     [ Management ]  \n\n");
-	printf("1.   Score    Management \n");
-	printf("2. Assignment Management \n");
-	printf("3.   Student  Management \n");
-	printf("4.   Notice   Management \n");
+	printf("\n           [ Management ]  \n\n");
+	printf(" 1.     Score    Management \n");
+	printf(" 2.   Assignment Management \n");
+	printf(" 3.     Student  Management \n");
+	printf(" 4.     Notice   Management \n");
+	printf("ESC.           Back \n\n");
 }
 
 void PrintScoreMenu()
 {
 	system("cls");
-	printf("   [ Score ]  \n\n");;
-	printf("1. Register \n");
-	printf("2. Modifiy \n");
-	printf("3. Delete \n");
-	printf("4. Print \n");
-	printf("5. FileWrite \n");
+	printf("\n        [ Score ]  \n\n");;
+	printf(" 1.     Register \n");
+	printf(" 2.     Modifiy \n");
+	printf(" 3.     Delete \n");
+	printf(" 4.      Print \n");
+	printf(" 5.    FileWrite \n");
+	printf("ESC.     Back \n\n");
 }
 
 void PrintAssignmentMenu()
 {
 	system("cls");
-	printf("   [ Assignment ]  \n\n");;
-	printf(" 1. Register \n");
-	printf(" 2. Modifiy \n");
-	printf(" 3. Delete \n");
-	printf(" 4. Print \n");
+	printf("\n      [ Assignment ]  \n\n");;
+	printf(" 1.    Register \n");
+	printf(" 2.    Modifiy \n");
+	printf(" 3.     Delete \n");
+	printf(" 4.     Print \n");
+	printf("ESC.     Back \n\n");
 }
 
 void PrintStudentMenu()
 {
 	system("cls");
-	printf("   [ Student ]  \n\n");;
-	printf("1. Register \n");
-	printf("2. Modifiy \n");
-	printf("3. Delete \n");
-	printf("4. Print \n");
-	printf("5. FileRead \n");
-	printf("6. FileWrite \n");
+	printf("\n      [ Student ]  \n\n");;
+	printf(" 1.    Register \n");
+	printf(" 2.    Modifiy \n");
+	printf(" 3.    Delete \n");
+	printf(" 4.     Print \n");
+	printf(" 5.   FileRead \n");
+	printf(" 6.   FileWrite \n");
+	printf("ESC.    Back \n\n");
 }
 
 void PrintNoticeMenu()
 {
 	system("cls");
-	printf("   [ Notice ]  \n\n");;
-	printf("1. Register \n");
-	printf("2. Modifiy \n");
-	printf("3. Delete \n");
+	printf("\n        [ Notice ]  \n\n");;
+	printf(" 1.    Register \n");
+	printf(" 2.    Modifiy \n");
+	printf(" 3.     Delete \n");
+	printf("ESC.     Back \n\n");
 }
 
 void CourseMenu()
 {
-	int menuInput;
+	char menuInput;
 
 	PrintCourseMenu();
-	scanf("%d", &menuInput);
+	menuInput = getch();
 
 	switch (menuInput)
 	{
-	case 1:
+	case '1':
 		RegisterCourse();
 		break;
 
-	case 2:
+	case '2':
 		ModifyCourse();
 		break;
 
-	case 3:
+	case '3':
 		DeleteCourse();
 		break;
 
-	case 4:
-		ManageCourse();
+	case '4':
+		ManagementMenu();
 		break;
 
 	default:
@@ -521,34 +527,33 @@ void DeleteCourse()
 
 }
 
-void ManageCourse()
-{
-	ManagementMenu();
-}
-
 void ManagementMenu()
 {
-	int menuInput;
+	char menuInput;
 
 	PrintManagementMenu();
-	scanf("%d", &menuInput);
-
+	menuInput = getch();
+	
 	switch (menuInput)
 	{
-	case 1:
+	case '1':
 		ScoreMenu();
 		break;
 
-	case 2:
+	case '2':
 		AssignmentMenu();
 		break;
 
-	case 3:
+	case '3':
 		StudentMenu();
 		break;
 
-	case 4:
+	case '4':
 		NoticeMenu();
+		break;
+
+	case ESC:
+		CourseMenu();
 		break;
 
 	default:
@@ -559,31 +564,35 @@ void ManagementMenu()
 
 void ScoreMenu()
 {
-	int menuInput;
+	char menuInput;
 
 	PrintCourseMenu();
-	scanf("%d", &menuInput);
+	menuInput = getch();
 
 	switch (menuInput)
 	{
-	case 1:
+	case '1':
 		RegisterScore();
 		break;
 
-	case 2:
+	case '2':
 		ModifyScore();
 		break;
 
-	case 3:
+	case '3':
 		DeleteScore();
 		break;
 
-	case 4:
+	case '4':
 		PrintScore();
 		break;
 
-	case 5:
+	case '5':
 		WriteScoreFile();
+		break;
+
+	case ESC:
+		ManagementMenu();
 		break;
 
 	default:
@@ -619,27 +628,31 @@ void WriteScoreFile()
 
 void AssignmentMenu()
 {
-	int menuInput;
+	char menuInput;
 
 	PrintAssignmentMenu();
-	scanf("%d", &menuInput);
+	menuInput = getch();
 
 	switch (menuInput)
 	{
-	case 1:
+	case '1':
 		RegisterAssignment();
 		break;
 
-	case 2:
+	case '2':
 		ModifyAssignment();
 		break;
 
-	case 3:
+	case '3':
 		DeleteAssignment();
 		break;
 
-	case 4:
+	case '4':
 		PrintAssignment();
+		break;
+
+	case ESC:
+		ManagementMenu();
 		break;
 
 	default:
@@ -670,35 +683,39 @@ void PrintAssignment()
 
 void StudentMenu()
 {
-	int menuInput;
+	char menuInput;
 
 	PrintStudentMenu();
-	scanf("%d", &menuInput);
+	menuInput = getch();
 
 	switch (menuInput)
 	{
-	case 1:
+	case '1':
 		RegisterStudent();
 		break;
 
-	case 2:
+	case '2':
 		ModifyStudent();
 		break;
 
-	case 3:
+	case '3':
 		DeleteStudent();
 		break;
 
-	case 4:
+	case '4':
 		PrintStudent();
 		break;
 
-	case 5:
+	case '5':
 		ReadStudentFile();
 		break;
 
-	case 6:
+	case '6':
 		WriteStudentFile();
+		break;
+
+	case ESC:
+		ManagementMenu();
 		break;
 
 	default:
@@ -739,23 +756,27 @@ void WriteStudentFile()
 
 void NoticeMenu()
 {
-	int menuInput;
+	char menuInput;
 
 	PrintNoticeMenu();
-	scanf("%d", &menuInput);
+	menuInput = getch();
 
 	switch (menuInput)
 	{
-	case 1:
+	case '1':
 		RegisterNotice();
 		break;
 
-	case 2:
+	case '2':
 		ModifyNotice();
 		break;
 
-	case 3:
+	case '3':
 		DeleteNotice();
+		break;
+
+	case ESC :
+		ManagementMenu();
 		break;
 
 	default:
