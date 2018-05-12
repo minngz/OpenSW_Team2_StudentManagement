@@ -52,7 +52,7 @@ void CourseMenu(COURSE **course, int *subjectNumber);
 void RegisterCourse(COURSE **course, int *subjectNumber);
 void ModifyCourse(COURSE **course);
 void DeleteCourse(COURSE **course, int *subjectNumber);
-void ManagementMenu();
+void ManagementMenu(COURSE **course, int *subjectNumber);
 void ScoreMenu();
 void RegisterScore();
 void ModifyScore();

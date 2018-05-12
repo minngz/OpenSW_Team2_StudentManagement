@@ -436,12 +436,12 @@ void ReadFile(STUDENT *student, int *studentNum, int *subjectNum)
 void PrintCourseMenu()
 {
 	system("cls");
-	printf("\n       [ Course ]  \n\n");;
-	printf("1.     Register \n");
-	printf("2.     Modifiy \n");
-	printf("3      Delete \n");
-	printf("4.     Manage \n");
-	printf("ESC.    Back \n\n");
+	printf("\n      [ Course ]  \n\n");;
+	printf(" 1.     Register \n");
+	printf(" 2.     Modifiy \n");
+	printf(" 3      Delete \n");
+	printf(" 4.     Manage \n");
+	printf(" 5.      Exit \n\n");
 }
 
 void PrintManagementMenu()
@@ -504,31 +504,36 @@ void PrintNoticeMenu()
 void CourseMenu(COURSE **course, int *subjectNumber)
 {
 	char menuInput;
-
-	PrintCourseMenu();
-	menuInput = getch();
-
-	switch (menuInput)
+	
+	while(1)
 	{
-	case '1':
-		RegisterCourse(course, subjectNumber);
-		break;
+		PrintCourseMenu();
+		menuInput = getch();
 
-	case '2':
-		ModifyCourse(course);
-		break;
+		switch (menuInput)
+		{
+		case '1':
+			RegisterCourse(course, subjectNumber);
+			break;
 
-	case '3':
-		DeleteCourse(course, subjectNumber);
-		break;
+		case '2':
+			ModifyCourse(course);
+			break;
 
-	case '4':
-//		ManagementMenu(course);
-		break;
+		case '3':
+			DeleteCourse(course, subjectNumber);
+			break;
 
-	default:
-		printf("Wrong Input\n");
-		break;
+		case '4':
+			ManagementMenu(course, subjectNumber);
+			break;
+		case '5':
+			exit(1);
+			break;
+
+		default:
+			break;
+		}
 	}
 }
 
@@ -563,10 +568,6 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	printf("[ %s ] course is successfully registed!\n\n", (*course)[*subjectNumber-1].name);
 	printf("It will return to course menu 3 seconds later\n");
 	Sleep(3000);
-
-	CourseMenu(course, subjectNumber);
-
-	CourseMenu(course, subjectNumber);
 }
 
 void ModifyCourse(COURSE** course)
@@ -579,38 +580,39 @@ void DeleteCourse(COURSE **course, int *subjectNumber)
 
 }
 
-void ManagementMenu()
+void ManagementMenu(COURSE **course, int *subjectNumber)
 {
 	char menuInput;
 
-	PrintManagementMenu();
-	menuInput = getch();
-
-	switch (menuInput)
+	while (1)
 	{
-	case '1':
-		ScoreMenu();
-		break;
+		PrintManagementMenu();
+		menuInput = getch();
 
-	case '2':
-		AssignmentMenu();
-		break;
+		switch (menuInput)
+		{
+		 case '1':
+			ScoreMenu();
+			break;
 
-	case '3':
-		StudentMenu();
-		break;
+		case '2':
+			AssignmentMenu();
+			break;
 
-	case '4':
-		NoticeMenu();
-		break;
+		case '3':
+			StudentMenu();
+			break;
 
-	case ESC:
-	//	CourseMenu(COURSE *course);
-		break;
+		case '4':
+			NoticeMenu();
+			break;
 
-	default:
-		printf("Wrong Input\n");
-		break;
+		case ESC:
+			return;
+
+		default:
+			break;
+		}
 	}
 }
 
@@ -618,38 +620,39 @@ void ScoreMenu()
 {
 	char menuInput;
 
-	PrintCourseMenu();
-	menuInput = getch();
-
-	switch (menuInput)
+	while (1)
 	{
-	case '1':
-		RegisterScore();
-		break;
+		PrintScoreMenu();
+		menuInput = getch();
 
-	case '2':
-		ModifyScore();
-		break;
+		switch (menuInput)
+		{
+		case '1':
+			RegisterScore();
+			break;
 
-	case '3':
-		DeleteScore();
-		break;
+		case '2':
+			ModifyScore();
+			break;
 
-	case '4':
-		PrintScore();
-		break;
+		case '3':
+			DeleteScore();
+			break;
 
-	case '5':
-		WriteScoreFile();
-		break;
+		case '4':
+			PrintScore();
+			break;
 
-	case ESC:
-		ManagementMenu();
-		break;
+		case '5':
+			WriteScoreFile();
+			break;
 
-	default:
-		printf("Wrong Input\n");
-		break;
+		case ESC:
+			return;
+
+		default:
+			break;
+		}
 	}
 }
 
@@ -682,34 +685,35 @@ void AssignmentMenu()
 {
 	char menuInput;
 
-	PrintAssignmentMenu();
-	menuInput = getch();
-
-	switch (menuInput)
+	while (1)
 	{
-	case '1':
-		RegisterAssignment();
-		break;
+		PrintAssignmentMenu();
+		menuInput = getch();
 
-	case '2':
-		ModifyAssignment();
-		break;
+		switch (menuInput)
+		{
+		case '1':
+			RegisterAssignment();
+			break;
 
-	case '3':
-		DeleteAssignment();
-		break;
+		case '2':
+			ModifyAssignment();
+			break;
 
-	case '4':
-		PrintAssignment();
-		break;
+		case '3':
+			DeleteAssignment();
+			break;
 
-	case ESC:
-		ManagementMenu();
-		break;
+		case '4':
+			PrintAssignment();
+			break;
 
-	default:
-		printf("Wrong Input\n");
-		break;
+		case ESC:
+			return;
+
+		default:
+			break;
+		}
 	}
 }
 
@@ -737,42 +741,43 @@ void StudentMenu()
 {
 	char menuInput;
 
-	PrintStudentMenu();
-	menuInput = getch();
-
-	switch (menuInput)
+	while (1)
 	{
-	case '1':
-		RegisterStudent();
-		break;
+		PrintStudentMenu();
+		menuInput = getch();
 
-	case '2':
-		ModifyStudent();
-		break;
+		switch (menuInput)
+		{
+		case '1':
+			RegisterStudent();
+			break;
 
-	case '3':
-		DeleteStudent();
-		break;
+		case '2':
+			ModifyStudent();
+			break;
 
-	case '4':
-		PrintStudent();
-		break;
+		case '3':
+			DeleteStudent();
+			break;
 
-	case '5':
-		ReadStudentFile();
-		break;
+		case '4':
+			PrintStudent();
+			break;
 
-	case '6':
-		WriteStudentFile();
-		break;
+		case '5':
+			ReadStudentFile();
+			break;
 
-	case ESC:
-		ManagementMenu();
-		break;
+		case '6':
+			WriteStudentFile();
+			break;
 
-	default:
-		printf("Wrong Input\n");
-		break;
+		case ESC:
+			return;
+
+		default:
+			break;
+		}
 	}
 }
 
@@ -810,30 +815,31 @@ void NoticeMenu()
 {
 	char menuInput;
 
-	PrintNoticeMenu();
-	menuInput = getch();
-
-	switch (menuInput)
+	while (1)
 	{
-	case '1':
-		RegisterNotice();
-		break;
+		PrintNoticeMenu();
+		menuInput = getch();
 
-	case '2':
-		ModifyNotice();
-		break;
+		switch (menuInput)
+		{
+		case '1':
+			RegisterNotice();
+			break;
 
-	case '3':
-		DeleteNotice();
-		break;
+		case '2':
+			ModifyNotice();
+			break;
 
-	case ESC:
-		ManagementMenu();
-		break;
+		case '3':
+			DeleteNotice();
+			break;
 
-	default:
-		printf("Wrong Input\n");
-		break;
+		case ESC:
+			return;
+		
+		default:
+			break;
+		}
 	}
 }
 
