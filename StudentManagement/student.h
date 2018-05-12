@@ -76,5 +76,4 @@ void RegisterNotice();
 void ModifyNotice();
 void DeleteNotice();
 
-
 #endif // STUDENT_H_INCLUDED
