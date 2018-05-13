@@ -288,7 +288,7 @@ void WriteFile(STUDENT *student, int *studentNum, int *subjectNum)
 	2-1) If the file exists,
 	it writes the total number of students(studentNum) and subject(subjectNum) in the first row.
 	Then, it writes information of student(student array) one row by one.
-	The information contains student number, name, score, total score and average score.
+	The information contains student number, name, score.
 
 	2-2) If the file doens't exist,
 	Print the "Cannot open the file" on console windows and exit program.
@@ -359,22 +359,22 @@ void ReadFile(STUDENT *student, int *studentNum, int *subjectNum)
 
 	---------------------------------------------------------------------------------------------------------------
 	11 5
-	13011040    Jongwon    63.00   63.00   100.00  10.00   36.00    272.00   54.40
-	13011041    Minji      63.00   63.00   100.00  10.00   36.00    272.00   54.40
-	13011042    Younghov   71.00   56.00   41.00   26.00   71.00    265.00   53.00
-	13011043    Haein      66.00   56.00   46.00   36.00   66.00    270.00   54.00
-	13011044    Seokho     78.00   56.00   63.00   63.00   78.00    338.00   67.60
-	13011045    Dohyun     75.00   84.00   56.00   56.00   75.00    346.00   69.20
-	13011046    Taegyun    91.00   80.00   56.00   49.00   91.00    367.00   73.40
-	13011047    Jangwon    78.00   54.00   63.00   42.00   78.00    315.00   63.00
-	13011048    Jaehyuk    64.00   84.00   56.00   84.00   64.00    352.00   70.40
-	13011049    Moonsoo    84.00   80.00   77.00   80.00   84.00    405.00   81.00
-	13011050    Myungho    80.00   54.00   41.00   54.00   80.00    309.00   61.80
+	13011040    Jongwon    63.00   63.00   100.00  10.00   36.00   
+	13011041    Minji      63.00   63.00   100.00  10.00   36.00   
+	13011042    Younghov   71.00   56.00   41.00   26.00   71.00   
+	13011043    Haein      66.00   56.00   46.00   36.00   66.00   
+	13011044    Seokho     78.00   56.00   63.00   63.00   78.00   
+	13011045    Dohyun     75.00   84.00   56.00   56.00   75.00   
+	13011046    Taegyun    91.00   80.00   56.00   49.00   91.00   
+	13011047    Jangwon    78.00   54.00   63.00   42.00   78.00   
+	13011048    Jaehyuk    64.00   84.00   56.00   84.00   64.00   
+	13011049    Moonsoo    84.00   80.00   77.00   80.00   84.00   
+	13011050    Myungho    80.00   54.00   41.00   54.00   80.00   
 	---------------------------------------------------------------------------------------------------------------
 
 	Total number of students(11) and subjects(5) should be on the first row.
 	Then, student_number(13011045) name(Jongwon) subject1_score(63.00) subject2_score(63.00) ... subject5_score(36)
-	total_score(272.00) average_score(54.40) should be placed on one row by one student.
+	should be placed on one row by one student.
 
 
 	бр Description
@@ -383,7 +383,7 @@ void ReadFile(STUDENT *student, int *studentNum, int *subjectNum)
 	2-1) If the file exists,
 	it reads the total number of students(studentNum) and subject(subjectNum) in the first row.
 	Then, it reads information of student(student array) one row by one.
-	The information contains student number, name, score, total score and average score.
+	The information contains student number, name, score.
 
 	2-2) If the file doens't exist,
 	Print the "Cannot open the file" on console windows and exit program.
@@ -529,7 +529,7 @@ void CourseMenu(COURSE **course, int *subjectNumber)
 			break;
 
 		case '2':
-			ModifyCourse(course);
+			ModifyCourse(course, subjectNumber);
 			break;
 
 		case '3':
@@ -595,9 +595,23 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	Sleep(3000);
 }
 
-void ModifyCourse(COURSE **course)
+void ModifyCourse(COURSE **course, int *subjectNumber)
 {
+	int index;
+	char newName[20];
 
+	PrintCourseList(course, subjectNumber);
+	printf("please insert number what you want to modify\n");
+	scanf("%d", &index);
+	getchar();
+	printf("please enter the new name of course\n");
+	gets(newName);
+
+	strcpy((*course)[index].name, newName);
+
+	printf("course is successfully modified!\n");
+	printf("It will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
 void DeleteCourse(COURSE **course, int *subjectNumber)

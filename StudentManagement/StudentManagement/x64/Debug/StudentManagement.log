@@ -5,8 +5,11 @@ c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\studen
 c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(425): warning C4477: 'fscanf' : 서식 문자열 '%f'에 'float *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'double *'입니다.
   c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(425): note: 서식 문자열에서 '%lf'을(를) 사용하는 것이 좋습니다.
 c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(523): warning C4013: 'getch'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(532): warning C4020: 'ModifyCourse': 실제 매개 변수가 너무 많습니다.
 c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(569): warning C4013: 'gets'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
 c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(595): warning C4013: 'Sleep'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(605): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
+c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(599): warning C4029: 선언된 정식 매개 변수 목록이 정의와 다릅니다.
+c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(619): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
   코드를 생성하고 있습니다...
+  LINK : C:\Users\cjw94\Documents\OpenSW_Team2_StudentManagement\StudentManagement\x64\Debug\StudentManagement.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
   StudentManagement.vcxproj -> C:\Users\cjw94\Documents\OpenSW_Team2_StudentManagement\StudentManagement\x64\Debug\StudentManagement.exe
