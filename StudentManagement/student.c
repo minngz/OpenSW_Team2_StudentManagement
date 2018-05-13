@@ -735,7 +735,21 @@ void DeleteScore()
 
 void PrintScore(COURSE *course, int printType, int studentIndex)
 {
-	
+	int i, j;
+	if (printType == PRINTTYPE_ALL)
+	{
+		for (i = 0; i < course->studentNumber; i++)
+		{
+			printf("%d %s\n", course->student[i].id, course->student[i].name);
+			printf("Midterm Exam : %-8.2lf / Final Exam : %-8.2lf \n\n", course->student[i].examScore[0], course->student[i].examScore[1]);
+		}
+		printf("Pressing Enter will be returned to Score Menu...");
+	}
+
+	if (printType == PRINTTYPE_EDIT || printType == PRINTTYPE_DELETE)
+	{
+		printf("%d %s\n", course->student[studentIndex].id, course->student[studentIndex].name);
+	}
 }
 
 void WriteScoreFile()
