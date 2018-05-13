@@ -506,7 +506,6 @@ void PrintCourseList(COURSE **course, int *subjectNumber)
 	int i;
 
 	system("cls");
-	printf("\n        [ Course Select ]   \n\n");
 
 	for (i = 0; i < *subjectNumber; i++)
 	{
@@ -603,6 +602,42 @@ void ModifyCourse(COURSE **course)
 
 void DeleteCourse(COURSE **course, int *subjectNumber)
 {
+	int i, j;
+	int index;
+	int newIndex;
+	
+	if (*subjectNumber == 0)
+	{
+		printf("There is nothing to delete\n");
+	}
+	else
+	{
+		PrintCourseList(course, subjectNumber);
+		printf("please insert number what you want to delete\n");
+		scanf("%d", &index);
+
+		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*subjectNumber - 1));
+
+		newIndex = 0;
+
+		for (i = 0; i < *subjectNumber; i++)
+		{
+			if (i != index)
+			{
+				temp[newIndex] = (*course)[i];
+				newIndex++;
+			}
+		}
+
+		free(*course);
+		*course = temp;
+
+		*subjectNumber -= 1;
+		printf("course is successfully deleted!\n\n");
+	}
+
+	printf("It will return to course menu 3 seconds later\n");
+	Sleep(3000);
 
 }
 
