@@ -775,7 +775,7 @@ void StudentMenu(COURSE *course)
 		switch (menuInput)
 		{
 		case '1':
-			RegisterStudent();
+			RegisterStudent(course);
 			break;
 
 		case '2':
@@ -807,9 +807,26 @@ void StudentMenu(COURSE *course)
 	}
 }
 
-void RegisterStudent()
+void RegisterStudent(COURSE *course)
 {
+	int currentStudentCnt; //current the number of student in this course
+	char addID[10];
+	char addName[20];
 
+	printf("ID of new student : ");
+	scanf("%s", addID);
+	printf("name of new student : ");
+	scanf("%s", addName);
+
+	currentStudentCnt = course->studentNumber;
+
+	strcpy(course->student[currentStudentCnt].id, addID);
+	strcpy(course->student[currentStudentCnt].name, addName);
+	course->studentNumber++;
+
+	printf("\n** Student Registration has been completed! **\n");
+	printf("It will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
 void ModifyStudent()
@@ -840,9 +857,9 @@ void PrintStudent(COURSE *course)
 		}
 		printf("\n\n");
 	}
-	//system("pause");
-	printf("\nIt will return to course menu 3 seconds later\n");
-	Sleep(3000);
+	system("pause"); //영어로 변경하기!
+	//printf("\nIt will return to course menu 3 seconds later\n");
+	//Sleep(3000);
 }
 
 void ReadStudentFile()
