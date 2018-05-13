@@ -725,10 +725,42 @@ void RegisterScore(COURSE *course)
 
 void ModifyScore(COURSE *course)
 {
-	
+	system("cls");
+
+	int studentID;
+	double midtermScore;
+	double finalScore;
+	int studentIndex = 0;
+
+	printf("Input student ID to modify score: ");
+	scanf("%d", &studentID);
+	printf("\n");
+
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (course->student[i].id == studentID)
+		{
+			studentIndex = i;
+		}
+	}
+
+	printf("----------------Scores of you found one's-------------------------");
+	PrintScore(course, PRINTTYPE_EDIT, studentIndex);
+
+	printf("Input midterm score : ");
+	scanf("%lf", &midtermScore);
+	printf("\n");
+
+	printf("Input final score : ");
+	scanf("%lf", &finalScore);
+	printf("\n");
+
+	course->student[studentIndex].examScore[0] = midtermScore;
+	course->student[studentIndex].examScore[1] = finalScore;
+
 }
 
-void DeleteScore()
+void DeleteScore(COURSE *course)
 {
 
 }
