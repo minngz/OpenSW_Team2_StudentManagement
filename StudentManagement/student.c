@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include "student.h"
 
+#define PRINTTYPE_EDIT 1
+#define PRINTTYPE_DELETE 2
+#define PRINTTYPE_ALL 3
+
 //函数部分
 //系统设置
 void SystemSet()
@@ -645,7 +649,7 @@ void ManagementMenu(COURSE *course)
 void ScoreMenu(COURSE *course)
 {
 	char menuInput;
-
+	
 	while (1)
 	{
 		PrintScoreMenu();
@@ -654,11 +658,11 @@ void ScoreMenu(COURSE *course)
 		switch (menuInput)
 		{
 		case '1':
-			RegisterScore();
+			RegisterScore(course);
 			break;
 
 		case '2':
-			ModifyScore();
+			ModifyScore(course);
 			break;
 
 		case '3':
@@ -666,7 +670,7 @@ void ScoreMenu(COURSE *course)
 			break;
 
 		case '4':
-			PrintScore();
+			PrintScore(course, PRINTTYPE_ALL, 0);
 			break;
 
 		case '5':
@@ -682,14 +686,46 @@ void ScoreMenu(COURSE *course)
 	}
 }
 
-void RegisterScore()
+void RegisterScore(COURSE *course)
 {
+	system("cls");
 
+	int studentID;
+	double midtermScore;
+	double finalScore;
+	int studentIndex = 0;
+
+	printf("Input student ID to register score: ");
+	scanf("%d", &studentID);
+	printf("\n");
+
+	printf("Input midterm score : ");
+	scanf("%lf", &midtermScore);
+	printf("\n");
+
+	printf("Input final score : ");
+	scanf("%lf", &finalScore);
+	printf("\n");
+
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (course->student[i].id == studentID) 
+		{
+			studentIndex = i;
+		}
+	}
+	course->student[studentIndex].examScore[0] = midtermScore;
+	course->student[studentIndex].examScore[1] = finalScore;
+
+	printf("Registration is Succeed!\n");
+	printf("(It will be returned to Score Menu after 2 seconds automatically)");
+	Sleep(2000);
+	ScoreMenu(course);
 }
 
-void ModifyScore()
+void ModifyScore(COURSE *course)
 {
-
+	
 }
 
 void DeleteScore()
@@ -697,9 +733,9 @@ void DeleteScore()
 
 }
 
-void PrintScore()
+void PrintScore(COURSE *course, int printType, int studentIndex)
 {
-
+	
 }
 
 void WriteScoreFile()
