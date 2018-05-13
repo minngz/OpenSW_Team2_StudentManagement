@@ -779,15 +779,16 @@ void StudentMenu(COURSE *course)
 			break;
 
 		case '2':
-			ModifyStudent();
+			ModifyStudent(course);
 			break;
 
 		case '3':
-			DeleteStudent();
+			DeleteStudent(course);
 			break;
 
 		case '4':
 			PrintStudent(course);
+			system("pause"); //영어로 변경하기!
 			break;
 
 		case '5':
@@ -815,7 +816,7 @@ void RegisterStudent(COURSE *course)
 
 	printf("ID of new student : ");
 	scanf("%s", addID);
-	printf("name of new student : ");
+	printf("Name of new student : ");
 	scanf("%s", addName);
 
 	currentStudentCnt = course->studentNumber;
@@ -829,12 +830,43 @@ void RegisterStudent(COURSE *course)
 	Sleep(3000);
 }
 
-void ModifyStudent()
+void ModifyStudent(COURSE *course)
 {
+	int searchStudent = -1;
+	char searchID[10];
+	char newName[20];
 
+	PrintStudent(course);
+	printf("ID of student to modify : ");
+	scanf("%s", searchID);
+
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (strcmp(course->student[i].id, searchID) == 0)
+		{
+			searchStudent = i;
+			break;
+		}
+	}
+
+	if (searchStudent == -1)
+	{
+		printf("\nNo student ID found..");
+	}
+	else
+	{
+		printf("\nNew name of %s student : ", searchID);
+		scanf("%s", newName);
+
+		strcpy(course->student[searchStudent].name, newName);
+		printf("\n** Student Modification has been completed! **\n");
+	}
+
+	printf("It will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-void DeleteStudent()
+void DeleteStudent(COURSE *course)
 {
 
 }
@@ -857,7 +889,6 @@ void PrintStudent(COURSE *course)
 		}
 		printf("\n\n");
 	}
-	system("pause"); //영어로 변경하기!
 	//printf("\nIt will return to course menu 3 seconds later\n");
 	//Sleep(3000);
 }
