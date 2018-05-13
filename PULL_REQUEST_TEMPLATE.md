@@ -1,5 +1,3 @@
-Bug Fixes **ONLY**. NO NEW FEATURE ACCEPTED!
-
 <!--- Provide a general summary of your changes in the Title above -->
 
 ## Description
