@@ -787,7 +787,7 @@ void StudentMenu(COURSE *course)
 			break;
 
 		case '4':
-			PrintStudent();
+			PrintStudent(course);
 			break;
 
 		case '5':
@@ -822,9 +822,27 @@ void DeleteStudent()
 
 }
 
-void PrintStudent()
+void PrintStudent(COURSE *course)
 {
+	if (course->studentNumber == 0)
+	{
+		printf("\nThere are no students in this class..");
+	}
+	else
+	{
+		printf("\n\t\t∫ Student List ∮\n\n");
+		printf("\t  ID		Name		\n");
+		printf("	曳收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收朽\n");
 
+		for (int i = 0; i < course->studentNumber; i++)
+		{
+			printf("	  %s	%s	\n", course->student[i].id, course->student[i].name);
+		}
+		printf("\n\n");
+	}
+	//system("pause");
+	printf("\nIt will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
 void ReadStudentFile()
