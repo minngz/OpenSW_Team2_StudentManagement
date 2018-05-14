@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.c" />
+    <ClCompile Include="..\student.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\student.h" />

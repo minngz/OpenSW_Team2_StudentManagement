@@ -18,6 +18,9 @@
     <ClCompile Include="..\main.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\student.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\student.h">
