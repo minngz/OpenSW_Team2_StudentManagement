@@ -5,6 +5,6 @@ c:\users\minji\documents\studentmanagment\studentmanagement\student.c(425): warn
   c:\users\minji\documents\studentmanagment\studentmanagement\student.c(425): note: 서식 문자열에서 '%lf'을(를) 사용하는 것이 좋습니다.
 c:\users\minji\documents\studentmanagment\studentmanagement\student.c(524): warning C4013: 'getch'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
 c:\users\minji\documents\studentmanagment\studentmanagement\student.c(570): warning C4013: 'gets'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-c:\users\minji\documents\studentmanagment\studentmanagement\student.c(596): warning C4013: 'Sleep'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-c:\users\minji\documents\studentmanagment\studentmanagement\student.c(897): warning C4013: 'getche'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+c:\users\minji\documents\studentmanagment\studentmanagement\student.c(595): warning C4013: 'Sleep'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+c:\users\minji\documents\studentmanagment\studentmanagement\student.c(896): warning C4013: 'getche'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
   StudentManagement.vcxproj -> C:\Users\minji\Documents\StudentManagment\StudentManagement\x64\Debug\StudentManagement.exe
