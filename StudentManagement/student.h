@@ -16,7 +16,7 @@ typedef struct student
 
 typedef struct course
 {
-	char name[20];
+	char name[40];
 	STUDENT student[100];
 	char notice[10][50];
 	char assignment[5][50];
@@ -52,7 +52,7 @@ void PrintNoticeMenu();
 void PrintCourseList(COURSE **course, int *subjectNumber);
 void CourseMenu(COURSE **course, int *subjectNumber);
 void RegisterCourse(COURSE **course, int *subjectNumber);
-void ModifyCourse(COURSE **course);
+void ModifyCourse(COURSE **course, int *subjectNumber);
 void DeleteCourse(COURSE **course, int *subjectNumber);
 void SelectCourse(COURSE **course, int *subjectNumber);
 void ManagementMenu(COURSE *course);

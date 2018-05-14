@@ -563,7 +563,7 @@ void SelectCourse(COURSE **course, int *subjectNumber)
 void RegisterCourse(COURSE **course, int *subjectNumber)
 {
 	int i; 
-	char courseName[20];
+	char courseName[40];
 
 	printf("please insert name of new subject\n");	
 	gets(courseName);
