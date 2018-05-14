@@ -124,36 +124,39 @@ void Print(STUDENT *student, int *studentNumber, int *subjectNumber)
 	}
 	returnUserFace();
 }
-//按名字查找
+//Search for students by name
 void nameSearch(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
-	int i = 0, j, k = 0;
+	int i, j, k = 0;
 	char c;
 	char name[30];
 E:
-	printf("请输入学生的名字\n"); //循环开端
-						  //getchar();
-	k = 0;
+	printf("Enter student name \n");
 	scanf("%s", name);
+
+	//find student
 	for (i = 0; i<*studentNumber; i++)
 	{
 		if (strcmp(name, student[i].name) == 0)
 		{
-			printf("%-12s%-10s", student[i].id, student[i].name);
+			printf("number: %-15s \nname: %-15s\n", student[i].id, student[i].name);
+			printf("score: ");
 			for (j = 0; j<*subjectNumber; j++)
 				printf("%-8.2f", student[i].examScore[j]);
 			k = 1;
 		}
 
 	}
-	if (k == 1)
-		putchar(10);
-	else printf("没找到学生\n");
+
+	if (k == 1) //success
+		printf("\n");
+	else
+		printf("Cannot fine the student\n");
 	getchar();
 E1:
-	printf("输\"n\"结束或者输入\"y\"继续\n");
-
+	printf("Continue \"y\" Exit and return \"n\" \n");
 	scanf("%c", &c);
+
 	if (c == 'y')
 		goto E;
 	else if (c == 'n')
@@ -163,38 +166,40 @@ E1:
 		while (getchar() != '\n');
 		goto E1;
 	}
-
-
 }
-//按学号查找
+
+//Search for students by number
 void numberSearch(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
-	int i = 0, j, k = 0;
+	int i, j, k = 0;
 	char c, number[10];
 E:
-	printf("请输入学号\n");//循环开端
-					  //getchar();
-	k = 0;
+	printf("Enter student number\n");
 	scanf("%s", number);
+
 	for (i = 0; i<*studentNumber; i++)
 	{
 		if (strcmp(student[i].id, number) == 0)
 		{
-			printf("%-12s%-10s ", student[i].id, student[i].name);
+			printf("number: %-15s \nname: %-15s\n", student[i].id, student[i].name);
+			printf("score: ");
 			for (j = 0; j<*subjectNumber; j++)
 				printf("%-8.2f", student[i].examScore[j]);
 			k = 1;
 		}
 
 	}
-	if (k == 1)
-		putchar(10);
-	else printf("没找到学生\n");
-	getchar();
-E1:
-	printf("输\"n\"结束或者输入\"y\"继续\n");
 
+	if (k == 1) //success
+		printf("\n");
+	else
+		printf("Cannot fine the student\n");
+	getchar();
+
+E1:
+	printf("Continue \"y\"Exit and return \"n\" \n");
 	scanf("%c", &c);
+
 	if (c == 'y')
 		goto E;
 	else if (c == 'n')
@@ -204,8 +209,8 @@ E1:
 		while (getchar() != '\n');
 		goto E1;
 	}
-
 }
+
 int Excellente = 0, Fine = 0, Medium = 0, Pass = 0, Fail = 0;
 //分类成绩
 void SortScore(STUDENT *student, int *studentNumber, int *subjectNumber)

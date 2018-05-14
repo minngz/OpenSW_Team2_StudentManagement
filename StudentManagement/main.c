@@ -7,8 +7,8 @@ int main()
 	int subjectNumber = 0;
 
 	COURSE *course;
-    
+	
 	SystemSet();
 	CourseMenu(&course, &subjectNumber);
-    return 0;
+	return 0;
 }
