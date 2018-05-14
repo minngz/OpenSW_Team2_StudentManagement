@@ -49,6 +49,8 @@ void PrintScoreMenu();
 void PrintAssignmentMenu();
 void PrintStudentMenu();
 void PrintNoticeMenu();
+void initAssignment(COURSE *course);
+void initNotice(COURSE *course);
 void PrintCourseList(COURSE **course, int *subjectNumber);
 void CourseMenu(COURSE **course, int *subjectNumber);
 void RegisterCourse(COURSE **course, int *subjectNumber);

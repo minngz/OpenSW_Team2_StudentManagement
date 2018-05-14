@@ -587,12 +587,34 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 		(*course)[*subjectNumber].studentNumber=0;
 	}
 
+	initAssignment(&((*course)[*subjectNumber]));
+	initNotice(&((*course)[*subjectNumber]));
+
 	strcpy((*course)[*subjectNumber].name, courseName);
 	*subjectNumber += 1;
 
 	printf("[ %s ] course is successfully registed!\n\n", (*course)[*subjectNumber-1].name);
 	printf("It will return to course menu 3 seconds later\n");
 	Sleep(3000);
+}
+
+void initAssignment(COURSE *course)
+{
+	int i;
+
+	for (i = 0; i < 5; i++)
+	{
+		strcpy((*course).assignment[i], "");
+	}
+}
+
+void initNotice(COURSE *course)
+{
+	int i;
+	for (i = 0; i < 10; i++)
+	{
+		strcpy((*course).notice[i], "");
+	}
 }
 
 void ModifyCourse(COURSE **course, int *subjectNumber)
