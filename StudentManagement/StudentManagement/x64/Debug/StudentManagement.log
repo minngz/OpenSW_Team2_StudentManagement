@@ -1,12 +1,10 @@
 ﻿  student.c
-c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(105): warning C4244: 'return': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(261): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(425): warning C4477: 'fscanf' : 서식 문자열 '%f'에 'float *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'double *'입니다.
-  c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(425): note: 서식 문자열에서 '%lf'을(를) 사용하는 것이 좋습니다.
-c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(523): warning C4013: 'getch'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(569): warning C4013: 'gets'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(604): warning C4013: 'Sleep'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(595): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 '::size_t'입니다.
-  c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(595): note: 서식 문자열에서 '%zd'을(를) 사용하는 것이 좋습니다.
-c:\users\cjw94\documents\opensw_team2_studentmanagement\studentmanagement\student.c(647): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
-  StudentManagement.vcxproj -> C:\Users\cjw94\Documents\OpenSW_Team2_StudentManagement\StudentManagement\x64\Debug\StudentManagement.exe
+c:\users\user\desktop\opensw_team2_studentmanagement\studentmanagement\student.c(105): warning C4244: 'return': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\opensw_team2_studentmanagement\studentmanagement\student.c(266): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\opensw_team2_studentmanagement\studentmanagement\student.c(430): warning C4477: 'fscanf' : 서식 문자열 '%f'에 'float *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'double *'입니다.
+  c:\users\user\desktop\opensw_team2_studentmanagement\studentmanagement\student.c(430): note: 서식 문자열에서 '%lf'을(를) 사용하는 것이 좋습니다.
+c:\users\user\desktop\opensw_team2_studentmanagement\studentmanagement\student.c(529): warning C4013: 'getch'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+c:\users\user\desktop\opensw_team2_studentmanagement\studentmanagement\student.c(575): warning C4013: 'gets'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+c:\users\user\desktop\opensw_team2_studentmanagement\studentmanagement\student.c(604): warning C4013: 'Sleep'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+c:\users\user\desktop\opensw_team2_studentmanagement\studentmanagement\student.c(647): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
+  StudentManagement.vcxproj -> C:\Users\user\Desktop\OpenSW_Team2_StudentManagement\StudentManagement\x64\Debug\StudentManagement.exe
