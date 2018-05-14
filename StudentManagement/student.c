@@ -124,36 +124,39 @@ void Print(STUDENT *student, int *studentNumber, int *subjectNumber)
 	}
 	returnUserFace();
 }
-//按名字查找
+//Search for students by name
 void nameSearch(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
-	int i = 0, j, k = 0;
+	int i, j, k = 0;
 	char c;
 	char name[30];
 E:
-	printf("请输入学生的名字\n"); //循环开端
-						  //getchar();
-	k = 0;
+	printf("Enter student name \n");
 	scanf("%s", name);
-	for (i = 0; i < *studentNumber; i++)
+
+	//find student
+	for (i = 0; i<*studentNumber; i++)
 	{
 		if (strcmp(name, student[i].name) == 0)
 		{
-			printf("%-12s%-10s", student[i].id, student[i].name);
-			for (j = 0; j < *subjectNumber; j++)
+			printf("number: %-15s \nname: %-15s\n", student[i].id, student[i].name);
+			printf("score: ");
+			for (j = 0; j<*subjectNumber; j++)
 				printf("%-8.2f", student[i].examScore[j]);
 			k = 1;
 		}
 
 	}
-	if (k == 1)
-		putchar(10);
-	else printf("没找到学生\n");
+
+	if (k == 1) //success
+		printf("\n");
+	else
+		printf("Cannot fine the student\n");
 	getchar();
 E1:
-	printf("输\"n\"结束或者输入\"y\"继续\n");
-
+	printf("Continue \"y\" Exit and return \"n\" \n");
 	scanf("%c", &c);
+
 	if (c == 'y')
 		goto E;
 	else if (c == 'n')
@@ -163,38 +166,40 @@ E1:
 		while (getchar() != '\n');
 		goto E1;
 	}
-
-
 }
-//按学号查找
+
+//Search for students by number
 void numberSearch(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
-	int i = 0, j, k = 0;
+	int i, j, k = 0;
 	char c, number[10];
 E:
-	printf("请输入学号\n");//循环开端
-					  //getchar();
-	k = 0;
+	printf("Enter student number\n");
 	scanf("%s", number);
-	for (i = 0; i < *studentNumber; i++)
+
+	for (i = 0; i<*studentNumber; i++)
 	{
 		if (strcmp(student[i].id, number) == 0)
 		{
-			printf("%-12s%-10s ", student[i].id, student[i].name);
-			for (j = 0; j < *subjectNumber; j++)
+			printf("number: %-15s \nname: %-15s\n", student[i].id, student[i].name);
+			printf("score: ");
+			for (j = 0; j<*subjectNumber; j++)
 				printf("%-8.2f", student[i].examScore[j]);
 			k = 1;
 		}
 
 	}
-	if (k == 1)
-		putchar(10);
-	else printf("没找到学生\n");
-	getchar();
-E1:
-	printf("输\"n\"结束或者输入\"y\"继续\n");
 
+	if (k == 1) //success
+		printf("\n");
+	else
+		printf("Cannot fine the student\n");
+	getchar();
+
+E1:
+	printf("Continue \"y\"Exit and return \"n\" \n");
 	scanf("%c", &c);
+
 	if (c == 'y')
 		goto E;
 	else if (c == 'n')
@@ -204,8 +209,8 @@ E1:
 		while (getchar() != '\n');
 		goto E1;
 	}
-
 }
+
 int Excellente = 0, Fine = 0, Medium = 0, Pass = 0, Fail = 0;
 //分类成绩
 void SortScore(STUDENT *student, int *studentNumber, int *subjectNumber)
@@ -288,7 +293,7 @@ void WriteFile(STUDENT *student, int *studentNum, int *subjectNum)
 	2-1) If the file exists,
 	it writes the total number of students(studentNum) and subject(subjectNum) in the first row.
 	Then, it writes information of student(student array) one row by one.
-	The information contains student number, name, score, total score and average score.
+	The information contains student number, name, score.
 
 	2-2) If the file doens't exist,
 	Print the "Cannot open the file" on console windows and exit program.
@@ -359,22 +364,22 @@ void ReadFile(STUDENT *student, int *studentNum, int *subjectNum)
 
 	---------------------------------------------------------------------------------------------------------------
 	11 5
-	13011040    Jongwon    63.00   63.00   100.00  10.00   36.00    272.00   54.40
-	13011041    Minji      63.00   63.00   100.00  10.00   36.00    272.00   54.40
-	13011042    Younghov   71.00   56.00   41.00   26.00   71.00    265.00   53.00
-	13011043    Haein      66.00   56.00   46.00   36.00   66.00    270.00   54.00
-	13011044    Seokho     78.00   56.00   63.00   63.00   78.00    338.00   67.60
-	13011045    Dohyun     75.00   84.00   56.00   56.00   75.00    346.00   69.20
-	13011046    Taegyun    91.00   80.00   56.00   49.00   91.00    367.00   73.40
-	13011047    Jangwon    78.00   54.00   63.00   42.00   78.00    315.00   63.00
-	13011048    Jaehyuk    64.00   84.00   56.00   84.00   64.00    352.00   70.40
-	13011049    Moonsoo    84.00   80.00   77.00   80.00   84.00    405.00   81.00
-	13011050    Myungho    80.00   54.00   41.00   54.00   80.00    309.00   61.80
+	13011040    Jongwon    63.00   63.00   100.00  10.00   36.00   
+	13011041    Minji      63.00   63.00   100.00  10.00   36.00   
+	13011042    Younghov   71.00   56.00   41.00   26.00   71.00   
+	13011043    Haein      66.00   56.00   46.00   36.00   66.00   
+	13011044    Seokho     78.00   56.00   63.00   63.00   78.00   
+	13011045    Dohyun     75.00   84.00   56.00   56.00   75.00   
+	13011046    Taegyun    91.00   80.00   56.00   49.00   91.00   
+	13011047    Jangwon    78.00   54.00   63.00   42.00   78.00   
+	13011048    Jaehyuk    64.00   84.00   56.00   84.00   64.00   
+	13011049    Moonsoo    84.00   80.00   77.00   80.00   84.00   
+	13011050    Myungho    80.00   54.00   41.00   54.00   80.00   
 	---------------------------------------------------------------------------------------------------------------
 
 	Total number of students(11) and subjects(5) should be on the first row.
 	Then, student_number(13011045) name(Jongwon) subject1_score(63.00) subject2_score(63.00) ... subject5_score(36)
-	total_score(272.00) average_score(54.40) should be placed on one row by one student.
+	should be placed on one row by one student.
 
 
 	∴ Description
@@ -383,7 +388,7 @@ void ReadFile(STUDENT *student, int *studentNum, int *subjectNum)
 	2-1) If the file exists,
 	it reads the total number of students(studentNum) and subject(subjectNum) in the first row.
 	Then, it reads information of student(student array) one row by one.
-	The information contains student number, name, score, total score and average score.
+	The information contains student number, name, score.
 
 	2-2) If the file doens't exist,
 	Print the "Cannot open the file" on console windows and exit program.
@@ -506,7 +511,6 @@ void PrintCourseList(COURSE **course, int *subjectNumber)
 	int i;
 
 	system("cls");
-	printf("\n        [ Course Select ]   \n\n");
 
 	for (i = 0; i < *subjectNumber; i++)
 	{
@@ -530,7 +534,7 @@ void CourseMenu(COURSE **course, int *subjectNumber)
 			break;
 
 		case '2':
-			ModifyCourse(course);
+			ModifyCourse(course, subjectNumber);
 			break;
 
 		case '3':
@@ -563,8 +567,8 @@ void SelectCourse(COURSE **course, int *subjectNumber)
 
 void RegisterCourse(COURSE **course, int *subjectNumber)
 {
-	int i;
-	char courseName[20];
+	int i; 
+	char courseName[40];
 
 	printf("please insert name of new subject\n");
 	gets(courseName);
@@ -586,7 +590,13 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 		*course = temp;
 	}
 
+
 	(*course)[*subjectNumber].studentNumber = 0;
+
+	initAssignment(&((*course)[*subjectNumber]));
+	initNotice(&((*course)[*subjectNumber]));
+
+
 	strcpy((*course)[*subjectNumber].name, courseName);
 	*subjectNumber += 1;
 
@@ -595,13 +605,82 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	Sleep(3000);
 }
 
-void ModifyCourse(COURSE **course)
+void initAssignment(COURSE *course)
 {
+	int i;
 
+	for (i = 0; i < 5; i++)
+	{
+		strcpy((*course).assignment[i], "");
+	}
+}
+
+void initNotice(COURSE *course)
+{
+	int i;
+	for (i = 0; i < 10; i++)
+	{
+		strcpy((*course).notice[i], "");
+	}
+}
+
+void ModifyCourse(COURSE **course, int *subjectNumber)
+{
+	int index;
+	char newName[20];
+
+	PrintCourseList(course, subjectNumber);
+	printf("please insert number what you want to modify\n");
+	scanf("%d", &index);
+	getchar();
+	printf("please enter the new name of course\n");
+	gets(newName);
+
+	strcpy((*course)[index].name, newName);
+
+	printf("course is successfully modified!\n");
+	printf("It will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
 void DeleteCourse(COURSE **course, int *subjectNumber)
 {
+	int i, j;
+	int index;
+	int newIndex;
+	
+	if (*subjectNumber == 0)
+	{
+		printf("There is nothing to delete\n");
+	}
+	else
+	{
+		PrintCourseList(course, subjectNumber);
+		printf("please insert number what you want to delete\n");
+		scanf("%d", &index);
+
+		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*subjectNumber - 1));
+
+		newIndex = 0;
+
+		for (i = 0; i < *subjectNumber; i++)
+		{
+			if (i != index)
+			{
+				temp[newIndex] = (*course)[i];
+				newIndex++;
+			}
+		}
+
+		free(*course);
+		*course = temp;
+
+		*subjectNumber -= 1;
+		printf("course is successfully deleted!\n\n");
+	}
+
+	printf("It will return to course menu 3 seconds later\n");
+	Sleep(3000);
 
 }
 
