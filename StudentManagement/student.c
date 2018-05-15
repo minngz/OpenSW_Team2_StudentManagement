@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include "student.h"
 
+#define PRINTTYPE_EDIT 1
+#define PRINTTYPE_DELETE 2
+#define PRINTTYPE_ALL 3
+
 //函数部分
 //系统设置
 void SystemSet()
@@ -733,19 +737,19 @@ void ScoreMenu(COURSE *course)
 		switch (menuInput)
 		{
 		case '1':
-			RegisterScore();
+			RegisterScore(course);
 			break;
 
 		case '2':
-			ModifyScore();
+			ModifyScore(course);
 			break;
 
 		case '3':
-			DeleteScore();
+			DeleteScore(course);
 			break;
 
 		case '4':
-			PrintScore();
+			PrintScore(course, PRINTTYPE_ALL, 0);
 			break;
 
 		case '5':
@@ -761,24 +765,202 @@ void ScoreMenu(COURSE *course)
 	}
 }
 
-void RegisterScore()
+void RegisterScore(COURSE *course)
 {
+	char studentID[10];
+	double midtermScore;
+	double finalScore;
+	int studentIndex = -1;
+
+	printf("Input student ID to register score: ");
+	scanf("%s", studentID);
+	printf("\n");
+
+	//studentNumber means number of students in selected course
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (strcmp(course->student[i].id, studentID) == 0)
+		{
+			studentIndex = i;
+			break;
+		}
+	}
+
+	if (studentIndex == -1) // case studentID which entered doesn't exists
+	{
+		printf("There is no student who you entered\n");
+		printf("It will be returned to Score Menu after 3 seconds automatically");
+		Sleep(3000);
+		ScoreMenu(course);
+		return;
+	}
+
+	printf("Input midterm score : ");
+	scanf("%lf", &midtermScore);
+	printf("\n");
+
+	printf("Input final score : ");
+	scanf("%lf", &finalScore);
+	printf("\n");
+
+	course->student[studentIndex].examScore[0] = midtermScore;
+	course->student[studentIndex].examScore[1] = finalScore;
+
+	printf("Registration is Succeed!\n");
+	printf("(It will be returned to Score Menu after 3 seconds automatically)");
+	Sleep(3000);
+	ScoreMenu(course);
 
 }
 
-void ModifyScore()
+void ModifyScore(COURSE *course)
 {
+	char studentID[10];
+	double midtermScore;
+	double finalScore;
+	int studentIndex = -1;
 
+	printf("Input student ID to modify score: ");
+	scanf("%s", studentID);
+	getchar();
+	printf("\n");
+
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (strcmp(course->student[i].id, studentID) == 0)
+		{
+			studentIndex = i;
+			break;
+		}
+	}
+
+	if (studentIndex == -1) //if it doesn't exists
+	{
+		printf("There is no student who you entered\n");
+		printf("It will be returned to Score Menu after 3 seconds automatically");
+		Sleep(3000);
+		ScoreMenu(course);
+		return;
+	}
+
+	printf("----------------Scores of you found-------------------------\n");
+	PrintScore(course, PRINTTYPE_EDIT, studentIndex);
+
+	printf("Input midterm score to modify : ");
+	scanf("%lf", &midtermScore);
+	getchar();
+	printf("\n");
+
+	printf("Input final score to modify : ");
+	scanf("%lf", &finalScore);
+	getchar();
+	printf("\n");
+
+	course->student[studentIndex].examScore[0] = midtermScore;
+	course->student[studentIndex].examScore[1] = finalScore;
+
+	printf("----------------Changed Scores of %s-------------------------\n");
+	printf("midterm score what you changed : %.2lf\n", midtermScore);
+	printf("final score what you changed : %.2lf\n\n", finalScore);
+
+	printf("Modified Complete!\n");
+	printf("It will be returned to Score Menu after 3 seconds");
+	Sleep(3000);
 }
 
-void DeleteScore()
+void DeleteScore(COURSE *course)
 {
+	char studentID[10];
+	int studentIndex = -1;
+	char confirm = ' ';
 
+	printf("Input student ID to Delete Score: ");
+	scanf("%s", studentID);
+	getchar();
+	printf("\n");
+
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (strcmp(course->student[i].id, studentID) == 0)
+		{
+			studentIndex = i;
+		}
+	}
+
+	if (studentIndex == -1) //if it doesn't exists
+	{
+		printf("There is no student who you entered\n");
+		printf("It will be returned to Score Menu after 3 seconds automatically");
+		Sleep(3000);
+		return;
+	}
+
+	if (course->student[studentIndex].examScore[0] > 100 && course->student[studentIndex].examScore[1] > 100) //already deleted case if score exceed 100
+	{
+		printf("It is already deleted score.\n");
+		printf("It will be returned to Score Menu after 3 seconds...");
+		return;
+	}
+
+	printf("----------------Scores of you found one's-------------------------\n");
+	PrintScore(course, PRINTTYPE_DELETE, studentIndex);
+
+	printf("\nAre you sure of removing it? (Y/N) : ");
+	scanf("%c", &confirm);
+	getchar();
+	if (confirm == 'n' || confirm == 'N')
+	{
+		printf("Deleteing Score is canceled.\n");
+		printf("It will be returned to Score Menu after 3 seconds");
+		Sleep(3000);
+		return;
+	}
+
+	else if (confirm == 'y' || confirm == 'Y')
+	{
+		course->student[studentIndex].examScore[0] = 300;
+		course->student[studentIndex].examScore[1] = 300;
+		printf("\nDeleted is complete!\n");
+		printf("It will be returned to Score Menu after 3 seconds");
+		Sleep(3000);
+		return;
+	}
 }
 
-void PrintScore()
+void PrintScore(COURSE *course, int printType, int studentIndex)
 {
+	int i, j;
+	if (printType == PRINTTYPE_ALL)
+	{
+		if (course->student[studentIndex].examScore[0] > 100 && course->student[studentIndex].examScore[1] > 100)
+		{
+			printf("You didn't register score of studentID: %s\n", course->student[studentIndex].id);
+			printf("It will be returned to Score Menu after 3 seconds");
+			Sleep(3000);
+			return;
+		}
+		for (i = 0; i < course->studentNumber; i++)
+		{
+			printf("%s %s\n", course->student[i].id, course->student[i].name);
+			printf("Midterm Exam : %.2lf / Final Exam : %.2lf\n\n", course->student[i].examScore[0], course->student[i].examScore[1]);
+		}
+		printf("It will be returned to Score Menu after 3 seconds");
+		Sleep(3000);
+	}
 
+	if (printType == PRINTTYPE_EDIT || printType == PRINTTYPE_DELETE)
+	{
+		if (course->student[studentIndex].examScore[0] > 100 && course->student[studentIndex].examScore[1] > 100)
+		{
+			printf("You didn't register score of studentID: %s\n", course->student[studentIndex].id);
+			printf("It will be returned to Score Menu after 3 seconds");
+			Sleep(3000);
+			return;
+		}
+		printf("Student ID : %s\n", course->student[studentIndex].id);
+		printf("Student Name : %s\n", course->student[studentIndex].name);
+		printf("Midterm Exam Score : %.2lf  | Final Exam Score : %.2lf\n\n", course->student[studentIndex].examScore[0], course->student[studentIndex].examScore[1]);
+	}
 }
 
 void WriteScoreFile()
@@ -1084,11 +1266,11 @@ void RegisterNotice(COURSE *course)
 	printf("Enter notice ");
 	scanf("%s", course->notice[size]);
 
-	printf("[%d] notice is successfully registered!\n", size+1);
+	printf("[%d] notice is successfully registered!\n", size + 1);
 
 	//display notice
 	for (i = 0; i <= size; i++)
-		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+		printf("Notice [%d]\n%s\n\n", i + 1, course->notice[i]);
 	printf("It will return to notice menu 3 seconds later\n");
 	Sleep(3000);
 }
@@ -1111,13 +1293,13 @@ void ModifyNotice(COURSE *course)
 
 	//display notice
 	for (i = 0; i < size; i++)
-		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+		printf("Notice [%d]\n%s\n\n", i + 1, course->notice[i]);
 
 	printf("Select notice to modify ");
 	scanf("%d", &a);
 
 	printf("Enter notice ");
-	scanf("%s", course->notice[a-1]);
+	scanf("%s", course->notice[a - 1]);
 
 	printf("[%d] notice is successfully modified!\n", a);
 	Sleep(1500);
@@ -1141,13 +1323,13 @@ void DeleteNotice(COURSE *course)
 
 	//display notice
 	for (i = 0; i < size; i++)
-		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+		printf("Notice [%d]\n%s\n\n", i + 1, course->notice[i]);
 
 	printf("Select notice to delete ");
 	scanf("%d", &a);
 
 	for (i = a; i < 10; i++)
-		strcpy(course->notice[i-1], course->notice[i]);
+		strcpy(course->notice[i - 1], course->notice[i]);
 
 	printf("[%d] notice is successfully deleted!\n", a);
 	Sleep(1500);
@@ -1169,8 +1351,8 @@ void PrintNotice(COURSE *course)
 		NoticeMenu(course);
 	}
 
-	for (i = 0; i <size; i++)
-		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+	for (i = 0; i < size; i++)
+		printf("Notice [%d]\n%s\n\n", i + 1, course->notice[i]);
 	printf("It will return to notice menu 3 seconds later\n");
 	Sleep(3000);
 }
