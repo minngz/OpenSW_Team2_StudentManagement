@@ -8,9 +8,9 @@
 
 typedef struct student
 {
-    char id[10];
-    char name[20];
-    double examScore[2];
+	char id[10];
+	char name[20];
+	double examScore[2];
 	double assignmentScore[5];
 }STUDENT;
 
@@ -80,5 +80,6 @@ void NoticeMenu(COURSE *course);
 void RegisterNotice();
 void ModifyNotice();
 void DeleteNotice();
+void PrintNotice();
 
 #endif // STUDENT_H_INCLUDED

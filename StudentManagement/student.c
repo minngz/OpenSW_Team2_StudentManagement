@@ -135,13 +135,13 @@ E:
 	scanf("%s", name);
 
 	//find student
-	for (i = 0; i<*studentNumber; i++)
+	for (i = 0; i < *studentNumber; i++)
 	{
 		if (strcmp(name, student[i].name) == 0)
 		{
 			printf("number: %-15s \nname: %-15s\n", student[i].id, student[i].name);
 			printf("score: ");
-			for (j = 0; j<*subjectNumber; j++)
+			for (j = 0; j < *subjectNumber; j++)
 				printf("%-8.2f", student[i].examScore[j]);
 			k = 1;
 		}
@@ -177,13 +177,13 @@ E:
 	printf("Enter student number\n");
 	scanf("%s", number);
 
-	for (i = 0; i<*studentNumber; i++)
+	for (i = 0; i < *studentNumber; i++)
 	{
 		if (strcmp(student[i].id, number) == 0)
 		{
 			printf("number: %-15s \nname: %-15s\n", student[i].id, student[i].name);
 			printf("score: ");
-			for (j = 0; j<*subjectNumber; j++)
+			for (j = 0; j < *subjectNumber; j++)
 				printf("%-8.2f", student[i].examScore[j]);
 			k = 1;
 		}
@@ -364,17 +364,17 @@ void ReadFile(STUDENT *student, int *studentNum, int *subjectNum)
 
 	---------------------------------------------------------------------------------------------------------------
 	11 5
-	13011040    Jongwon    63.00   63.00   100.00  10.00   36.00   
-	13011041    Minji      63.00   63.00   100.00  10.00   36.00   
-	13011042    Younghov   71.00   56.00   41.00   26.00   71.00   
-	13011043    Haein      66.00   56.00   46.00   36.00   66.00   
-	13011044    Seokho     78.00   56.00   63.00   63.00   78.00   
-	13011045    Dohyun     75.00   84.00   56.00   56.00   75.00   
-	13011046    Taegyun    91.00   80.00   56.00   49.00   91.00   
-	13011047    Jangwon    78.00   54.00   63.00   42.00   78.00   
-	13011048    Jaehyuk    64.00   84.00   56.00   84.00   64.00   
-	13011049    Moonsoo    84.00   80.00   77.00   80.00   84.00   
-	13011050    Myungho    80.00   54.00   41.00   54.00   80.00   
+	13011040    Jongwon    63.00   63.00   100.00  10.00   36.00
+	13011041    Minji      63.00   63.00   100.00  10.00   36.00
+	13011042    Younghov   71.00   56.00   41.00   26.00   71.00
+	13011043    Haein      66.00   56.00   46.00   36.00   66.00
+	13011044    Seokho     78.00   56.00   63.00   63.00   78.00
+	13011045    Dohyun     75.00   84.00   56.00   56.00   75.00
+	13011046    Taegyun    91.00   80.00   56.00   49.00   91.00
+	13011047    Jangwon    78.00   54.00   63.00   42.00   78.00
+	13011048    Jaehyuk    64.00   84.00   56.00   84.00   64.00
+	13011049    Moonsoo    84.00   80.00   77.00   80.00   84.00
+	13011050    Myungho    80.00   54.00   41.00   54.00   80.00
 	---------------------------------------------------------------------------------------------------------------
 
 	Total number of students(11) and subjects(5) should be on the first row.
@@ -503,6 +503,7 @@ void PrintNoticeMenu()
 	printf(" 1.    Register \n");
 	printf(" 2.    Modifiy \n");
 	printf(" 3.     Delete \n");
+	printf(" 4.     Print   \n");
 	printf("ESC.     Back \n\n");
 }
 
@@ -567,7 +568,7 @@ void SelectCourse(COURSE **course, int *subjectNumber)
 
 void RegisterCourse(COURSE **course, int *subjectNumber)
 {
-	int i; 
+	int i;
 	char courseName[40];
 
 	printf("please insert name of new subject\n");
@@ -648,7 +649,7 @@ void DeleteCourse(COURSE **course, int *subjectNumber)
 	int i, j;
 	int index;
 	int newIndex;
-	
+
 	if (*subjectNumber == 0)
 	{
 		printf("There is nothing to delete\n");
@@ -1040,15 +1041,19 @@ void NoticeMenu(COURSE *course)
 		switch (menuInput)
 		{
 		case '1':
-			RegisterNotice();
+			RegisterNotice(course);
 			break;
 
 		case '2':
-			ModifyNotice();
+			ModifyNotice(course);
 			break;
 
 		case '3':
-			DeleteNotice();
+			DeleteNotice(course);
+			break;
+
+		case '4':
+			PrintNotice(course);
 			break;
 
 		case ESC:
@@ -1060,17 +1065,112 @@ void NoticeMenu(COURSE *course)
 	}
 }
 
-void RegisterNotice()
+void RegisterNotice(COURSE *course)
 {
+	int i, size = 0;
+	//get size
+	for (i = 0; i < 10; i++) {
+		if (strlen(course->notice[i]) == 0) {
+			size = i; break;
+		}
+	}
+
+	if (size == 9) {
+		printf("Unable to add notice! Please delete the notice.\n");
+		Sleep(1500);
+		NoticeMenu(course);
+	}
+
+	printf("Enter notice ");
+	scanf("%s", course->notice[size]);
+
+	printf("[%d] notice is successfully registered!\n", size+1);
+
+	//display notice
+	for (i = 0; i <= size; i++)
+		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+	printf("It will return to notice menu 3 seconds later\n");
+	Sleep(3000);
+}
+
+void ModifyNotice(COURSE *course)
+{
+	int i, a, size = 0;
+	//get size
+	for (i = 0; i < 10; i++) {
+		if (strlen(course->notice[i]) == 0) {
+			size = i; break;
+		}
+	}
+
+	if (size == 0) {
+		printf("There are no notices to modify\n");
+		Sleep(1500);
+		NoticeMenu(course);
+	}
+
+	//display notice
+	for (i = 0; i < size; i++)
+		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+
+	printf("Select notice to modify ");
+	scanf("%d", &a);
+
+	printf("Enter notice ");
+	scanf("%s", course->notice[a-1]);
+
+	printf("[%d] notice is successfully modified!\n", a);
+	Sleep(1500);
 
 }
 
-void ModifyNotice()
+void DeleteNotice(COURSE *course)
 {
+	int i, a, size = 0;
+	for (i = 0; i < 10; i++) {
+		if (strlen(course->notice[i]) == 0) {
+			size = i; break;
+		}
+	}
 
+	if (size == 0) {
+		printf("There are no notices to delete\n");
+		Sleep(1500);
+		NoticeMenu(course);
+	}
+
+	//display notice
+	for (i = 0; i < size; i++)
+		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+
+	printf("Select notice to delete ");
+	scanf("%d", &a);
+
+	for (i = a; i < 10; i++)
+		strcpy(course->notice[i-1], course->notice[i]);
+
+	printf("[%d] notice is successfully deleted!\n", a);
+	Sleep(1500);
 }
 
-void DeleteNotice()
+void PrintNotice(COURSE *course)
 {
+	int i, size = 0;
 
+	for (i = 0; i < 10; i++) {
+		if (strlen(course->notice[i]) == 0) {
+			size = i; break;
+		}
+	}
+
+	if (size == 0) {
+		printf("There are no notices to display\n");
+		Sleep(1500);
+		NoticeMenu(course);
+	}
+
+	for (i = 0; i <size; i++)
+		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+	printf("It will return to notice menu 3 seconds later\n");
+	Sleep(3000);
 }
