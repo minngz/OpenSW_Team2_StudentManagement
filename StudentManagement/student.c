@@ -844,7 +844,27 @@ void RegisterAssignment(COURSE *course)
 
 void ModifyAssignment(COURSE *course)
 {
-	
+	int assignmentNumber = 0;
+	int i = 0;
+	char assignmentComment[50];
+
+	PrintAssignment(course);
+	printf("\n\nwhich assignment do you want to modify?\n");
+	scanf("%d", &assignmentNumber);
+	getchar();
+	assignmentNumber--;
+	printf("\n\nplease insert comments about an assignment that you want to modify\n");
+	gets(assignmentComment);
+
+	for (i = 0; i < 5; i++) {
+		if (i == assignmentNumber) {
+			strcpy((*course).assignment[i], assignmentComment);
+		}
+	}
+
+	printf("\ncomments about an assignment is successfully modified!\n\n");
+	printf("It will return to assignment menu 3 seconds later\n");
+	Sleep(3000);
 }
 
 void DeleteAssignment(COURSE *course)
