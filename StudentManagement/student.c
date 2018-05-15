@@ -26,11 +26,11 @@ void readDate(STUDENT *student, int *studentNumber, int *subjectNumber)
 	printf("请输入科目数\n");
 	scanf("%d", subjectNumber);
 	getchar();
-	for (i = 0; i<*studentNumber; i++)
+	for (i = 0; i < *studentNumber; i++)
 	{
 		printf("请输入学号、名字、分数 中间以空格隔开\n");
 		scanf("%s%s", student[i].id, student[i].name);
-		for (j = 0; j<*subjectNumber; j++)
+		for (j = 0; j < *subjectNumber; j++)
 		{
 			scanf("%lf", &student[i].examScore[j]);
 		}
@@ -51,10 +51,10 @@ void sumAndAveSubjectSore(STUDENT *student, int *studenNumber, int *subjectNumbe
 {
 	int i, j;
 	double sum;
-	for (i = 0; i<*subjectNumber; i++)
+	for (i = 0; i < *subjectNumber; i++)
 	{
 		sum = 0;
-		for (j = 0; j<*studenNumber; j++)
+		for (j = 0; j < *studenNumber; j++)
 		{
 			sum += student[j].examScore[i];
 		}
@@ -113,10 +113,10 @@ int orderName(const void *a, const void *b)
 void Print(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
 	int i, j;//控制读取的学生数和科目数
-	for (i = 0; i<*studentNumber; i++)
+	for (i = 0; i < *studentNumber; i++)
 	{
 		printf("%-12s%-10s ", student[i].id, student[i].name);
-		for (j = 0; j<*subjectNumber; j++)
+		for (j = 0; j < *subjectNumber; j++)
 		{
 			printf("%-8.2f ", student[i].examScore[j]);
 		}
@@ -135,13 +135,13 @@ E:
 	scanf("%s", name);
 
 	//find student
-	for (i = 0; i<*studentNumber; i++)
+	for (i = 0; i < *studentNumber; i++)
 	{
 		if (strcmp(name, student[i].name) == 0)
 		{
 			printf("number: %-15s \nname: %-15s\n", student[i].id, student[i].name);
 			printf("score: ");
-			for (j = 0; j<*subjectNumber; j++)
+			for (j = 0; j < *subjectNumber; j++)
 				printf("%-8.2f", student[i].examScore[j]);
 			k = 1;
 		}
@@ -177,13 +177,13 @@ E:
 	printf("Enter student number\n");
 	scanf("%s", number);
 
-	for (i = 0; i<*studentNumber; i++)
+	for (i = 0; i < *studentNumber; i++)
 	{
 		if (strcmp(student[i].id, number) == 0)
 		{
 			printf("number: %-15s \nname: %-15s\n", student[i].id, student[i].name);
 			printf("score: ");
-			for (j = 0; j<*subjectNumber; j++)
+			for (j = 0; j < *subjectNumber; j++)
 				printf("%-8.2f", student[i].examScore[j]);
 			k = 1;
 		}
@@ -217,9 +217,9 @@ void SortScore(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
 	Excellente = 0, Fine = 0, Medium = 0, Pass = 0, Fail = 0;
 	int i, j;
-	for (i = 0; i<*subjectNumber; ++i)
+	for (i = 0; i < *subjectNumber; ++i)
 	{
-		for (j = 0; j<*studentNumber; ++j)
+		for (j = 0; j < *studentNumber; ++j)
 		{
 			if (student[j].examScore[i] >= 90) Excellente++;
 			else if (student[j].examScore[i] >= 80) Fine++;
@@ -241,10 +241,10 @@ void SortScore(STUDENT *student, int *studentNumber, int *subjectNumber)
 void Print2(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
 	int i, j;//控制读取的学生数和科目数
-	for (i = 0; i<*studentNumber; i++)
+	for (i = 0; i < *studentNumber; i++)
 	{
 		printf("%-12s%-10s分数是 ", student[i].id, student[i].name);
-		for (j = 0; j<*subjectNumber; j++)
+		for (j = 0; j < *subjectNumber; j++)
 		{
 			printf("%-8.2f", student[i].examScore[j]);
 		}
@@ -258,10 +258,10 @@ void sumAndAveStudentSore2(STUDENT *student, int *studentNumber, int *subjectNum
 {
 	int i, j;
 	float sum = 0;
-	for (i = 0; i<*studentNumber; i++)
+	for (i = 0; i < *studentNumber; i++)
 	{
 		sum = 0;
-		for (j = 0; j<*subjectNumber; j++)
+		for (j = 0; j < *subjectNumber; j++)
 		{
 			sum += student[i].examScore[j];
 		}
@@ -325,11 +325,11 @@ void WriteFile(STUDENT *student, int *studentNum, int *subjectNum)
 															 //fwrite(student,sizeof(STU),*studentNumber,p);   // 2) fwrite
 
 															 // Write all information of student array on the next row.
-		for (i = 0; i<*studentNum; i++)
+		for (i = 0; i < *studentNum; i++)
 		{
 			fprintf(file, "%-12s%-10s ", student[i].id, student[i].name);
 
-			for (j = 0; j<*subjectNum; j++)
+			for (j = 0; j < *subjectNum; j++)
 			{
 				fprintf(file, "%-8.2f", student[i].examScore[j]);
 			}
@@ -364,17 +364,17 @@ void ReadFile(STUDENT *student, int *studentNum, int *subjectNum)
 
 	---------------------------------------------------------------------------------------------------------------
 	11 5
-	13011040    Jongwon    63.00   63.00   100.00  10.00   36.00   
-	13011041    Minji      63.00   63.00   100.00  10.00   36.00   
-	13011042    Younghov   71.00   56.00   41.00   26.00   71.00   
-	13011043    Haein      66.00   56.00   46.00   36.00   66.00   
-	13011044    Seokho     78.00   56.00   63.00   63.00   78.00   
-	13011045    Dohyun     75.00   84.00   56.00   56.00   75.00   
-	13011046    Taegyun    91.00   80.00   56.00   49.00   91.00   
-	13011047    Jangwon    78.00   54.00   63.00   42.00   78.00   
-	13011048    Jaehyuk    64.00   84.00   56.00   84.00   64.00   
-	13011049    Moonsoo    84.00   80.00   77.00   80.00   84.00   
-	13011050    Myungho    80.00   54.00   41.00   54.00   80.00   
+	13011040    Jongwon    63.00   63.00   100.00  10.00   36.00
+	13011041    Minji      63.00   63.00   100.00  10.00   36.00
+	13011042    Younghov   71.00   56.00   41.00   26.00   71.00
+	13011043    Haein      66.00   56.00   46.00   36.00   66.00
+	13011044    Seokho     78.00   56.00   63.00   63.00   78.00
+	13011045    Dohyun     75.00   84.00   56.00   56.00   75.00
+	13011046    Taegyun    91.00   80.00   56.00   49.00   91.00
+	13011047    Jangwon    78.00   54.00   63.00   42.00   78.00
+	13011048    Jaehyuk    64.00   84.00   56.00   84.00   64.00
+	13011049    Moonsoo    84.00   80.00   77.00   80.00   84.00
+	13011050    Myungho    80.00   54.00   41.00   54.00   80.00
 	---------------------------------------------------------------------------------------------------------------
 
 	Total number of students(11) and subjects(5) should be on the first row.
@@ -421,11 +421,11 @@ void ReadFile(STUDENT *student, int *studentNum, int *subjectNum)
 		//fread(student,sizeof(STU),*studentNumber,p);    // 2) fread
 
 		// Read all information of student array on the next row.
-		for (i = 0; i<*studentNum; i++)
+		for (i = 0; i < *studentNum; i++)
 		{
 			fscanf(file, "%s%s", student[i].id, student[i].name);
 
-			for (j = 0; j<*subjectNum; j++)
+			for (j = 0; j < *subjectNum; j++)
 			{
 				fscanf(file, "%f", &student[i].examScore[j]);
 			}
@@ -503,6 +503,7 @@ void PrintNoticeMenu()
 	printf(" 1.    Register \n");
 	printf(" 2.    Modifiy \n");
 	printf(" 3.     Delete \n");
+	printf(" 4.     Print   \n");
 	printf("ESC.     Back \n\n");
 }
 
@@ -521,8 +522,8 @@ void PrintCourseList(COURSE **course, int *subjectNumber)
 void CourseMenu(COURSE **course, int *subjectNumber)
 {
 	char menuInput;
-	
-	while(1)
+
+	while (1)
 	{
 		PrintCourseMenu();
 		menuInput = getch();
@@ -567,16 +568,15 @@ void SelectCourse(COURSE **course, int *subjectNumber)
 
 void RegisterCourse(COURSE **course, int *subjectNumber)
 {
-	int i; 
+	int i;
 	char courseName[40];
 
-	printf("please insert name of new subject\n");	
+	printf("please insert name of new subject\n");
 	gets(courseName);
 
 	if (*subjectNumber == 0)
 	{
 		*course = (COURSE*)malloc(sizeof(COURSE));
-		(*course)->studentNumber = 0;
 	}
 	else
 	{
@@ -586,19 +586,22 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 		{
 			temp[i] = (*course)[i];
 		}
-		
+
 		free(*course);
 		*course = temp;
-		(*course)[*subjectNumber].studentNumber=0;
 	}
+
+
+	(*course)[*subjectNumber].studentNumber = 0;
 
 	initAssignment(&((*course)[*subjectNumber]));
 	initNotice(&((*course)[*subjectNumber]));
 
+
 	strcpy((*course)[*subjectNumber].name, courseName);
 	*subjectNumber += 1;
 
-	printf("[ %s ] course is successfully registed!\n\n", (*course)[*subjectNumber-1].name);
+	printf("[ %s ] course is successfully registed!\n\n", (*course)[*subjectNumber - 1].name);
 	printf("It will return to course menu 3 seconds later\n");
 	Sleep(3000);
 }
@@ -646,7 +649,7 @@ void DeleteCourse(COURSE **course, int *subjectNumber)
 	int i, j;
 	int index;
 	int newIndex;
-	
+
 	if (*subjectNumber == 0)
 	{
 		printf("There is nothing to delete\n");
@@ -693,7 +696,7 @@ void ManagementMenu(COURSE *course)
 
 		switch (menuInput)
 		{
-		 case '1':
+		case '1':
 			ScoreMenu(course);
 			break;
 
@@ -851,19 +854,20 @@ void StudentMenu(COURSE *course)
 		switch (menuInput)
 		{
 		case '1':
-			RegisterStudent();
+			RegisterStudent(course);
 			break;
 
 		case '2':
-			ModifyStudent();
+			ModifyStudent(course);
 			break;
 
 		case '3':
-			DeleteStudent();
+			DeleteStudent(course);
 			break;
 
 		case '4':
-			PrintStudent();
+			PrintStudent(course);
+			system("pause"); //康绢肺 函版窍扁!
 			break;
 
 		case '5':
@@ -883,24 +887,136 @@ void StudentMenu(COURSE *course)
 	}
 }
 
-void RegisterStudent()
+void RegisterStudent(COURSE *course)
 {
+	int currentStudentCnt; //current the number of student in this course
+	char addID[10];
+	char addName[20];
 
+	printf("ID of new student : ");
+	scanf("%s", addID);
+	printf("Name of new student : ");
+	scanf("%s", addName);
+
+	currentStudentCnt = course->studentNumber;
+
+	strcpy(course->student[currentStudentCnt].id, addID);
+	strcpy(course->student[currentStudentCnt].name, addName);
+	course->studentNumber++;
+
+	printf("\n** Student has successfully been registered! **\n");
+	printf("It will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-void ModifyStudent()
+void ModifyStudent(COURSE *course)
 {
+	int searchStudent = -1;
+	char searchID[10];
+	char newName[20];
 
+	PrintStudent(course);
+	printf("ID of student to modify : ");
+	scanf("%s", searchID);
+
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (strcmp(course->student[i].id, searchID) == 0)
+		{
+			searchStudent = i;
+			break;
+		}
+	}
+
+	if (searchStudent == -1)
+	{
+		printf("\nNo student ID found..");
+	}
+	else
+	{
+		printf("\nNew name of %s student : ", searchID);
+		scanf("%s", newName);
+
+		strcpy(course->student[searchStudent].name, newName);
+		printf("\n** Student has successfully been modified! **\n");
+	}
+
+	printf("It will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-void DeleteStudent()
+void DeleteStudent(COURSE *course)
 {
+	int searchStudent = -1; //index
+	char searchID[10];
+	char checkDelete;
 
+	PrintStudent(course);
+	printf("ID of student to delete : ");
+	scanf("%s", searchID);
+
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (strcmp(course->student[i].id, searchID) == 0)
+		{
+			searchStudent = i;
+			break;
+		}
+	}
+
+	if (searchStudent == -1)
+	{
+		printf("\nNo student ID found..");
+	}
+	else
+	{
+		printf("Delete %s student [y/n] : ", searchID);
+		//scanf("%c", &checkDelete);
+		//getchar();
+		checkDelete = getche();
+
+		if (checkDelete == 'y' || checkDelete == 'Y')
+		{
+			for (int i = 0; i < course->studentNumber - 1; i++) //单捞磐 丹绢静扁
+				course->student[i] = course->student[i + 1];
+
+			course->studentNumber--;
+
+			printf("\n** Student has successfully been deleted! **\n");
+		}
+		else if (checkDelete == 'n' || checkDelete == 'N')
+		{
+		}
+		else
+		{
+			printf("\nWrong input..");
+		}
+	}
+
+	printf("\nIt will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-void PrintStudent()
+void PrintStudent(COURSE *course)
 {
+	if (course->studentNumber == 0)
+	{
+		printf("\nThere are no students in this class..\n");
+	}
+	else
+	{
+		printf("\n\t\t§ Student List №\n\n");
+		printf("\t  ID		Name		\n");
+		printf("	ΣΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΥ\n");
 
+		for (int i = 0; i < course->studentNumber; i++)
+		{
+			printf("	  %s	%s	\n", course->student[i].id, course->student[i].name);
+		}
+		printf("\n\n");
+	}
+	//printf("\nIt will return to course menu 3 seconds later\n");
+	//Sleep(3000);
 }
 
 void ReadStudentFile()
@@ -925,37 +1041,136 @@ void NoticeMenu(COURSE *course)
 		switch (menuInput)
 		{
 		case '1':
-			RegisterNotice();
+			RegisterNotice(course);
 			break;
 
 		case '2':
-			ModifyNotice();
+			ModifyNotice(course);
 			break;
 
 		case '3':
-			DeleteNotice();
+			DeleteNotice(course);
+			break;
+
+		case '4':
+			PrintNotice(course);
 			break;
 
 		case ESC:
 			return;
-		
+
 		default:
 			break;
 		}
 	}
 }
 
-void RegisterNotice()
+void RegisterNotice(COURSE *course)
 {
+	int i, size = 0;
+	//get size
+	for (i = 0; i < 10; i++) {
+		if (strlen(course->notice[i]) == 0) {
+			size = i; break;
+		}
+	}
+
+	if (size == 9) {
+		printf("Unable to add notice! Please delete the notice.\n");
+		Sleep(1500);
+		NoticeMenu(course);
+	}
+
+	printf("Enter notice ");
+	scanf("%s", course->notice[size]);
+
+	printf("[%d] notice is successfully registered!\n", size+1);
+
+	//display notice
+	for (i = 0; i <= size; i++)
+		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+	printf("It will return to notice menu 3 seconds later\n");
+	Sleep(3000);
+}
+
+void ModifyNotice(COURSE *course)
+{
+	int i, a, size = 0;
+	//get size
+	for (i = 0; i < 10; i++) {
+		if (strlen(course->notice[i]) == 0) {
+			size = i; break;
+		}
+	}
+
+	if (size == 0) {
+		printf("There are no notices to modify\n");
+		Sleep(1500);
+		NoticeMenu(course);
+	}
+
+	//display notice
+	for (i = 0; i < size; i++)
+		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+
+	printf("Select notice to modify ");
+	scanf("%d", &a);
+
+	printf("Enter notice ");
+	scanf("%s", course->notice[a-1]);
+
+	printf("[%d] notice is successfully modified!\n", a);
+	Sleep(1500);
 
 }
 
-void ModifyNotice()
+void DeleteNotice(COURSE *course)
 {
+	int i, a, size = 0;
+	for (i = 0; i < 10; i++) {
+		if (strlen(course->notice[i]) == 0) {
+			size = i; break;
+		}
+	}
 
+	if (size == 0) {
+		printf("There are no notices to delete\n");
+		Sleep(1500);
+		NoticeMenu(course);
+	}
+
+	//display notice
+	for (i = 0; i < size; i++)
+		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+
+	printf("Select notice to delete ");
+	scanf("%d", &a);
+
+	for (i = a; i < 10; i++)
+		strcpy(course->notice[i-1], course->notice[i]);
+
+	printf("[%d] notice is successfully deleted!\n", a);
+	Sleep(1500);
 }
 
-void DeleteNotice()
+void PrintNotice(COURSE *course)
 {
+	int i, size = 0;
 
+	for (i = 0; i < 10; i++) {
+		if (strlen(course->notice[i]) == 0) {
+			size = i; break;
+		}
+	}
+
+	if (size == 0) {
+		printf("There are no notices to display\n");
+		Sleep(1500);
+		NoticeMenu(course);
+	}
+
+	for (i = 0; i <size; i++)
+		printf("Notice [%d]\n%s\n\n", i+1, course->notice[i]);
+	printf("It will return to notice menu 3 seconds later\n");
+	Sleep(3000);
 }
