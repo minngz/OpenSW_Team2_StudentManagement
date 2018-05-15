@@ -798,19 +798,19 @@ void AssignmentMenu(COURSE *course)
 		switch (menuInput)
 		{
 		case '1':
-			RegisterAssignment();
+			RegisterAssignment(course);
 			break;
 
 		case '2':
-			ModifyAssignment();
+			ModifyAssignment(course);
 			break;
 
 		case '3':
-			DeleteAssignment();
+			DeleteAssignment(course);
 			break;
 
 		case '4':
-			PrintAssignment();
+			PrintAssignment(course);
 			break;
 
 		case ESC:
@@ -822,24 +822,46 @@ void AssignmentMenu(COURSE *course)
 	}
 }
 
-void RegisterAssignment()
+void RegisterAssignment(COURSE *course)
 {
+	int i;
+	char assignmentComment[50];
 
+	printf("please insert comments of a new assignment\n");
+	gets(assignmentComment);
+
+	for (i = 0; i < 5; i++) {
+		if (strlen(course->assignment[i]) == 0) {
+			strcpy((*course).assignment[i], assignmentComment);
+			break;
+		}
+	}
+
+	printf("comments about an assignment is successfully registed!\n\n");
+	printf("It will return to assignment menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-void ModifyAssignment()
+void ModifyAssignment(COURSE *course)
 {
-
+	
 }
 
-void DeleteAssignment()
+void DeleteAssignment(COURSE *course)
 {
-
+	
 }
 
-void PrintAssignment()
+void PrintAssignment(COURSE *course)
 {
-
+	int i = 0;
+	int assignmentNumber = 0;
+	for (i = 0; i < 5; i++) {
+		assignmentNumber = i + 1;
+		printf("%d %12s\n", assignmentNumber, (*course).assignment[i]);
+	}
+	printf("\n\nIt will return to assignment menu 3 seconds later\n");
+	Sleep(3000);
 }
 
 void StudentMenu(COURSE *course)
