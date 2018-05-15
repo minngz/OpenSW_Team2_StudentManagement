@@ -869,7 +869,22 @@ void ModifyAssignment(COURSE *course)
 
 void DeleteAssignment(COURSE *course)
 {
-	
+	PrintAssignment(course);
+	int assignmentNumber = 0;
+	int i = 0;
+
+	printf("\n\nwhich assignment do you want to delete?\n");
+	scanf("%d", &assignmentNumber);
+	assignmentNumber--;
+	for (i = 0; i < 5; i++) {
+		if (i == assignmentNumber) {
+			strcpy((*course).assignment[i], "");
+		}
+	}
+
+	printf("comments about an assignment is successfully deleted!\n\n");
+	printf("It will return to assignment menu 3 seconds later\n");
+	Sleep(3000);
 }
 
 void PrintAssignment(COURSE *course)
