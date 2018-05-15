@@ -577,7 +577,6 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	if (*subjectNumber == 0)
 	{
 		*course = (COURSE*)malloc(sizeof(COURSE));
-		(*course)->studentNumber = 0;
 	}
 	else
 	{
@@ -590,11 +589,14 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 
 		free(*course);
 		*course = temp;
-		(*course)[*subjectNumber].studentNumber = 0;
 	}
+
+
+	(*course)[*subjectNumber].studentNumber = 0;
 
 	initAssignment(&((*course)[*subjectNumber]));
 	initNotice(&((*course)[*subjectNumber]));
+
 
 	strcpy((*course)[*subjectNumber].name, courseName);
 	*subjectNumber += 1;
@@ -852,19 +854,20 @@ void StudentMenu(COURSE *course)
 		switch (menuInput)
 		{
 		case '1':
-			RegisterStudent();
+			RegisterStudent(course);
 			break;
 
 		case '2':
-			ModifyStudent();
+			ModifyStudent(course);
 			break;
 
 		case '3':
-			DeleteStudent();
+			DeleteStudent(course);
 			break;
 
 		case '4':
-			PrintStudent();
+			PrintStudent(course);
+			system("pause"); //영어로 변경하기!
 			break;
 
 		case '5':
@@ -884,24 +887,136 @@ void StudentMenu(COURSE *course)
 	}
 }
 
-void RegisterStudent()
+void RegisterStudent(COURSE *course)
 {
+	int currentStudentCnt; //current the number of student in this course
+	char addID[10];
+	char addName[20];
 
+	printf("ID of new student : ");
+	scanf("%s", addID);
+	printf("Name of new student : ");
+	scanf("%s", addName);
+
+	currentStudentCnt = course->studentNumber;
+
+	strcpy(course->student[currentStudentCnt].id, addID);
+	strcpy(course->student[currentStudentCnt].name, addName);
+	course->studentNumber++;
+
+	printf("\n** Student has successfully been registered! **\n");
+	printf("It will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-void ModifyStudent()
+void ModifyStudent(COURSE *course)
 {
+	int searchStudent = -1;
+	char searchID[10];
+	char newName[20];
 
+	PrintStudent(course);
+	printf("ID of student to modify : ");
+	scanf("%s", searchID);
+
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (strcmp(course->student[i].id, searchID) == 0)
+		{
+			searchStudent = i;
+			break;
+		}
+	}
+
+	if (searchStudent == -1)
+	{
+		printf("\nNo student ID found..");
+	}
+	else
+	{
+		printf("\nNew name of %s student : ", searchID);
+		scanf("%s", newName);
+
+		strcpy(course->student[searchStudent].name, newName);
+		printf("\n** Student has successfully been modified! **\n");
+	}
+
+	printf("It will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-void DeleteStudent()
+void DeleteStudent(COURSE *course)
 {
+	int searchStudent = -1; //index
+	char searchID[10];
+	char checkDelete;
 
+	PrintStudent(course);
+	printf("ID of student to delete : ");
+	scanf("%s", searchID);
+
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (strcmp(course->student[i].id, searchID) == 0)
+		{
+			searchStudent = i;
+			break;
+		}
+	}
+
+	if (searchStudent == -1)
+	{
+		printf("\nNo student ID found..");
+	}
+	else
+	{
+		printf("Delete %s student [y/n] : ", searchID);
+		//scanf("%c", &checkDelete);
+		//getchar();
+		checkDelete = getche();
+
+		if (checkDelete == 'y' || checkDelete == 'Y')
+		{
+			for (int i = 0; i < course->studentNumber - 1; i++) //데이터 덮어쓰기
+				course->student[i] = course->student[i + 1];
+
+			course->studentNumber--;
+
+			printf("\n** Student has successfully been deleted! **\n");
+		}
+		else if (checkDelete == 'n' || checkDelete == 'N')
+		{
+		}
+		else
+		{
+			printf("\nWrong input..");
+		}
+	}
+
+	printf("\nIt will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-void PrintStudent()
+void PrintStudent(COURSE *course)
 {
+	if (course->studentNumber == 0)
+	{
+		printf("\nThere are no students in this class..\n");
+	}
+	else
+	{
+		printf("\n\t\t≪ Student List ≫\n\n");
+		printf("\t  ID		Name		\n");
+		printf("	┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
 
+		for (int i = 0; i < course->studentNumber; i++)
+		{
+			printf("	  %s	%s	\n", course->student[i].id, course->student[i].name);
+		}
+		printf("\n\n");
+	}
+	//printf("\nIt will return to course menu 3 seconds later\n");
+	//Sleep(3000);
 }
 
 void ReadStudentFile()

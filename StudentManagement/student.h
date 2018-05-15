@@ -70,10 +70,10 @@ void ModifyAssignment();
 void DeleteAssignment();
 void PrintAssignment();
 void StudentMenu(COURSE *course);
-void RegisterStudent();
-void ModifyStudent();
-void DeleteStudent();
-void PrintStudent();
+void RegisterStudent(COURSE *course);
+void ModifyStudent(COURSE *course);
+void DeleteStudent(COURSE *course);
+void PrintStudent(COURSE *course);
 void ReadStudentFile();
 void WriteStudentFile();
 void NoticeMenu(COURSE *course);
@@ -81,6 +81,5 @@ void RegisterNotice();
 void ModifyNotice();
 void DeleteNotice();
 void PrintNotice();
-
 
 #endif // STUDENT_H_INCLUDED
