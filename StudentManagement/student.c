@@ -744,7 +744,7 @@ void ScoreMenu(COURSE *course)
 			break;
 
 		case '3':
-			DeleteScore();
+			DeleteScore(course);
 			break;
 
 		case '4':
@@ -766,16 +766,33 @@ void ScoreMenu(COURSE *course)
 
 void RegisterScore(COURSE *course)
 {
-	system("cls");
-
-	int studentID;
+	char studentID[10];
 	double midtermScore;
 	double finalScore;
-	int studentIndex = 0;
+	int studentIndex = -1;
 
 	printf("Input student ID to register score: ");
-	scanf("%d", &studentID);
+	scanf("%s", studentID);
 	printf("\n");
+
+	//studentNumber means number of students in selected course
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (strcmp(course->student[i].id, studentID) == 0)
+		{
+			studentIndex = i;
+			break;
+		}
+	}
+
+	if (studentIndex == -1) // case studentID which entered doesn't exists
+	{
+		printf("There is no student who you entered\n");
+		printf("It will be returned to Score Menu after 3 seconds automatically");
+		Sleep(3000);
+		ScoreMenu(course);
+		return;
+	}
 
 	printf("Input midterm score : ");
 	scanf("%lf", &midtermScore);
@@ -785,20 +802,14 @@ void RegisterScore(COURSE *course)
 	scanf("%lf", &finalScore);
 	printf("\n");
 
-	for (int i = 0; i < course->studentNumber; i++)
-	{
-		if (course->student[i].id == studentID) 
-		{
-			studentIndex = i;
-		}
-	}
 	course->student[studentIndex].examScore[0] = midtermScore;
 	course->student[studentIndex].examScore[1] = finalScore;
 
 	printf("Registration is Succeed!\n");
-	printf("(It will be returned to Score Menu after 2 seconds automatically)");
-	Sleep(2000);
+	printf("(It will be returned to Score Menu after 3 seconds automatically)");
+	Sleep(3000);
 	ScoreMenu(course);
+
 }
 
 void ModifyScore(COURSE *course)
