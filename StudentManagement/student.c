@@ -933,15 +933,26 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 	{
 		for (i = 0; i < course->studentNumber; i++)
 		{
-			printf("%d %s\n", course->student[i].id, course->student[i].name);
-			printf("Midterm Exam : %-8.2lf / Final Exam : %-8.2lf \n\n", course->student[i].examScore[0], course->student[i].examScore[1]);
+			printf("%s %s\n", course->student[i].id, course->student[i].name);
+			printf("Midterm Exam : %.2lf / Final Exam : %.2lf \n\n", course->student[i].examScore[0], course->student[i].examScore[1]);
 		}
-		printf("Pressing Enter will be returned to Score Menu...");
+		printf("It will be returned to Score Menu after 3 seconds");
+		Sleep(3000);
+		ScoreMenu(course);
 	}
 
 	if (printType == PRINTTYPE_EDIT || printType == PRINTTYPE_DELETE)
 	{
-		printf("%d %s\n", course->student[studentIndex].id, course->student[studentIndex].name);
+		if (course->student[studentIndex].examScore[0] > 100 || course->student[studentIndex].examScore[1] > 100)
+		{
+			printf("You didn't register score of studentID: %s", course->student[studentIndex].id);
+			printf("It will be returned to Score Menu after 3 seconds");
+			Sleep(3000);
+			ScoreMenu(course);
+		}
+		printf("Student ID : %s\n", course->student[studentIndex].id);
+		printf("Student Name : %s\n", course->student[studentIndex].name);
+		printf("Midterm Exam Score : %.2lf  | Final Exam Score : %.2lf\n\n", course->student[studentIndex].examScore[0], course->student[studentIndex].examScore[1]);
 	}
 }
 
