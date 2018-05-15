@@ -786,28 +786,29 @@ void WriteScoreFile()
 void AssignmentMenu(COURSE *course)
 {
 	char menuInput;
-
+	getchar();
 	while (1)
 	{
 		PrintAssignmentMenu();
+		
 		menuInput = getch();
-
+		
 		switch (menuInput)
 		{
 		case '1':
-			RegisterAssignment();
+			RegisterAssignment(course);
 			break;
 
 		case '2':
-			ModifyAssignment();
+			ModifyAssignment(course);
 			break;
 
 		case '3':
-			DeleteAssignment();
+			DeleteAssignment(course);
 			break;
 
 		case '4':
-			PrintAssignment();
+			PrintAssignment(course);
 			break;
 
 		case ESC:
@@ -819,24 +820,81 @@ void AssignmentMenu(COURSE *course)
 	}
 }
 
-void RegisterAssignment()
+void RegisterAssignment(COURSE *course)
 {
+	int i;
+	char assignmentComment[50];
 
+	printf("please insert comments of a new assignment\n");
+	gets(assignmentComment);
+
+	for (i = 0; i < 5; i++) {
+		if (strlen(course->assignment[i]) == 0) {
+			strcpy((*course).assignment[i], assignmentComment);
+			break;
+		}
+	}
+
+	printf("comments about an assignment is successfully registed!\n\n");
+	printf("It will return to assignment menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-void ModifyAssignment()
+void ModifyAssignment(COURSE *course)
 {
+	int assignmentNumber = 0;
+	int i = 0;
+	char assignmentComment[50];
 
+	PrintAssignment(course);
+	printf("\n\nwhich assignment do you want to modify?\n");
+	scanf("%d", &assignmentNumber);
+	getchar();
+	assignmentNumber--;
+	printf("\n\nplease insert comments about an assignment that you want to modify\n");
+	gets(assignmentComment);
+		
+	for (i = 0; i < 5; i++) {
+		if (i == assignmentNumber) {
+			strcpy((*course).assignment[i], assignmentComment);
+		}
+	}
+
+	printf("\ncomments about an assignment is successfully modified!\n\n");
+	printf("It will return to assignment menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-void DeleteAssignment()
+void DeleteAssignment(COURSE *course)
 {
+	PrintAssignment(course);
+	int assignmentNumber = 0;
+	int i = 0;
 
+	printf("\n\nwhich assignment do you want to delete?\n");
+	scanf("%d", &assignmentNumber);
+	assignmentNumber--;
+	for (i = 0; i < 5; i++) {
+		if (i == assignmentNumber) {
+			strcpy((*course).assignment[i], "");
+		}
+	}
+
+	printf("comments about an assignment is successfully deleted!\n\n");
+	printf("It will return to assignment menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-void PrintAssignment()
+void PrintAssignment(COURSE *course)
 {
-
+	int i = 0;
+	int assignmentNumber = 0;
+	for (i = 0; i < 5; i++) {
+		assignmentNumber = i + 1;
+		printf("%d %12s\n", assignmentNumber, (*course).assignment[i]);
+	}
+	printf("\n\nIt will return to assignment menu 3 seconds later\n");
+	Sleep(3000);
 }
 
 void StudentMenu(COURSE *course)
