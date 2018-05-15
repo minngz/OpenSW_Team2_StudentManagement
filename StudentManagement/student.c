@@ -814,39 +814,55 @@ void RegisterScore(COURSE *course)
 
 void ModifyScore(COURSE *course)
 {
-	system("cls");
-
-	int studentID;
+	char studentID[10];
 	double midtermScore;
 	double finalScore;
-	int studentIndex = 0;
+	int studentIndex = -1;
 
 	printf("Input student ID to modify score: ");
-	scanf("%d", &studentID);
+	scanf("%s", studentID);
 	printf("\n");
 
 	for (int i = 0; i < course->studentNumber; i++)
 	{
-		if (course->student[i].id == studentID)
+		if (strcmp(course->student[i].id, studentID) == 0)
 		{
 			studentIndex = i;
+			break;
 		}
 	}
 
-	printf("----------------Scores of you found one's-------------------------");
+	if (studentIndex == -1) //if it doesn't exists
+	{
+		printf("There is no student who you entered\n");
+		printf("It will be returned to Score Menu after 3 seconds automatically");
+		Sleep(3000);
+		ScoreMenu(course);
+		return;
+	}
+
+	printf("----------------Scores of you found-------------------------\n");
 	PrintScore(course, PRINTTYPE_EDIT, studentIndex);
 
-	printf("Input midterm score : ");
+	printf("Input midterm score to modify : ");
 	scanf("%lf", &midtermScore);
 	printf("\n");
 
-	printf("Input final score : ");
+	printf("Input final score to modify : ");
 	scanf("%lf", &finalScore);
 	printf("\n");
 
 	course->student[studentIndex].examScore[0] = midtermScore;
 	course->student[studentIndex].examScore[1] = finalScore;
 
+	printf("----------------Changed Scores of %s-------------------------");
+	printf("midterm score what you changed : %.2lf\n", midtermScore);
+	printf("final score what you changed : %.2lf\n\n", finalScore);
+
+	printf("Modified Complete!\n");
+	printf("It will be returned to Score Menu after 3 seconds");
+	Sleep(3000);
+	ScoreMenu(course);
 }
 
 void DeleteScore(COURSE *course)
