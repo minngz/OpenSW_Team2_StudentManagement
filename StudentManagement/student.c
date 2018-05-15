@@ -855,7 +855,7 @@ void ModifyScore(COURSE *course)
 	course->student[studentIndex].examScore[0] = midtermScore;
 	course->student[studentIndex].examScore[1] = finalScore;
 
-	printf("----------------Changed Scores of %s-------------------------");
+	printf("----------------Changed Scores of %s-------------------------\n");
 	printf("midterm score what you changed : %.2lf\n", midtermScore);
 	printf("final score what you changed : %.2lf\n\n", finalScore);
 
@@ -867,7 +867,63 @@ void ModifyScore(COURSE *course)
 
 void DeleteScore(COURSE *course)
 {
+	char studentID[10];
+	int studentIndex = -1;
+	char confirm = ' ';
 
+	printf("Input student ID to Delete Score: ");
+	scanf("%s", studentID);
+	getchar();
+	printf("\n");
+
+	for (int i = 0; i < course->studentNumber; i++)
+	{
+		if (strcmp(course->student[i].id, studentID) == 0)
+		{
+			studentIndex = i;
+		}
+	}
+
+	if (studentIndex == -1) //if it doesn't exists
+	{
+		printf("There is no student who you entered\n");
+		printf("It will be returned to Score Menu after 3 seconds automatically");
+		Sleep(3000);
+		ScoreMenu(course);
+		return;
+	}
+
+	if (course->student[studentIndex].examScore[0] > 100 && course->student[studentIndex].examScore[1] > 100) //already deleted case if score exceed 100
+	{
+		printf("It is already deleted score.\n");
+		printf("It will be returned to Score Menu after 3 seconds...");
+		ScoreMenu(course);
+	}
+
+	printf("----------------Scores of you found one's-------------------------\n");
+	PrintScore(course, PRINTTYPE_DELETE, studentIndex);
+
+	printf("\nAre you sure of removing it? (Y/N) : ");
+	scanf("%c", &confirm);
+
+	if (confirm == 'n' || confirm == 'N')
+	{
+		printf("Deleteing Score is canceled.\n");
+		printf("It will be returned to Score Menu after 3 seconds");
+		Sleep(3000);
+		ScoreMenu(course);
+	}
+
+	else if (confirm == 'y' || confirm == 'Y')
+	{
+		course->student[studentIndex].examScore[0] = 300;
+		course->student[studentIndex].examScore[1] = 300;
+		PrintScore(course, PRINTTYPE_DELETE, studentIndex);
+		printf("\nDeleted is complete!\n");
+		printf("It will be returned to Score Menu after 3 seconds");
+		Sleep(3000);
+		ScoreMenu(course);
+	}
 }
 
 void PrintScore(COURSE *course, int printType, int studentIndex)
