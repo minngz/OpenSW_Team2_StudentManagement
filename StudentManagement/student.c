@@ -971,7 +971,7 @@ void WriteScoreFile()
 void AssignmentMenu(COURSE *course)
 {
 	char menuInput;
-
+	getchar();
 	while (1)
 	{
 		PrintAssignmentMenu();
