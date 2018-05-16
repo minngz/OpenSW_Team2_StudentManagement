@@ -174,46 +174,23 @@ E1:
 }
 
 //Search for students by number
-void numberSearch(STUDENT *student, int *studentNumber, int *subjectNumber)
+int SearchID(COURSE* course)
 {
-	int i, j, k = 0;
-	char c, number[10];
-E:
-	printf("Enter student number\n");
-	scanf("%s", number);
+	int searchStudent = -1;
+	char selectID[10];
 
-	for (i = 0; i < *studentNumber; i++)
+	printf("Enter ID of student to select : ");
+	scanf("%s", selectID);
+
+	for (int i = 0; i < course->studentNumber; i++)
 	{
-		if (strcmp(student[i].id, number) == 0)
+		if (strcmp(course->student[i].id, selectID) == 0)
 		{
-			printf("number: %-15s \nname: %-15s\n", student[i].id, student[i].name);
-			printf("score: ");
-			for (j = 0; j < *subjectNumber; j++)
-				printf("%-8.2f", student[i].examScore[j]);
-			k = 1;
+			searchStudent = i;
+			break;
 		}
-
 	}
-
-	if (k == 1) //success
-		printf("\n");
-	else
-		printf("Cannot fine the student\n");
-	getchar();
-
-E1:
-	printf("Continue \"y\"Exit and return \"n\" \n");
-	scanf("%c", &c);
-
-	if (c == 'y')
-		goto E;
-	else if (c == 'n')
-		returnUserFace();
-	else
-	{
-		while (getchar() != '\n');
-		goto E1;
-	}
+	return searchStudent;
 }
 
 int Excellente = 0, Fine = 0, Medium = 0, Pass = 0, Fail = 0;
@@ -1151,22 +1128,11 @@ void RegisterStudent(COURSE *course)
 
 void ModifyStudent(COURSE *course)
 {
-	int searchStudent = -1;
-	char searchID[10];
+	int searchStudent; //index
 	char newName[20];
 
 	PrintStudent(course);
-	printf("ID of student to modify : ");
-	scanf("%s", searchID);
-
-	for (int i = 0; i < course->studentNumber; i++)
-	{
-		if (strcmp(course->student[i].id, searchID) == 0)
-		{
-			searchStudent = i;
-			break;
-		}
-	}
+	searchStudent = SearchID(course);
 
 	if (searchStudent == -1)
 	{
@@ -1174,7 +1140,7 @@ void ModifyStudent(COURSE *course)
 	}
 	else
 	{
-		printf("\nNew name of %s student : ", searchID);
+		printf("\nNew name of the student : ");
 		scanf("%s", newName);
 
 		strcpy(course->student[searchStudent].name, newName);
@@ -1187,22 +1153,11 @@ void ModifyStudent(COURSE *course)
 
 void DeleteStudent(COURSE *course)
 {
-	int searchStudent = -1; //index
-	char searchID[10];
+	int searchStudent;
 	char checkDelete;
 
 	PrintStudent(course);
-	printf("ID of student to delete : ");
-	scanf("%s", searchID);
-
-	for (int i = 0; i < course->studentNumber; i++)
-	{
-		if (strcmp(course->student[i].id, searchID) == 0)
-		{
-			searchStudent = i;
-			break;
-		}
-	}
+	searchStudent = SearchID(course);
 
 	if (searchStudent == -1)
 	{
@@ -1210,7 +1165,7 @@ void DeleteStudent(COURSE *course)
 	}
 	else
 	{
-		printf("Delete %s student [y/n] : ", searchID);
+		printf("Delete the student [y/n] : ");
 		//scanf("%c", &checkDelete);
 		//getchar();
 		checkDelete = getche();
@@ -1226,6 +1181,7 @@ void DeleteStudent(COURSE *course)
 		}
 		else if (checkDelete == 'n' || checkDelete == 'N')
 		{
+
 		}
 		else
 		{
