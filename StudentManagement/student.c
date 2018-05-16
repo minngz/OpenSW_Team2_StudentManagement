@@ -86,34 +86,35 @@ void sumAndAveStudentSore(STUDENT *student, int *studenNumber, int *subjectNumbe
 	returnUserFace();
 }
 
-/*
-int orderBig(const void *a,const void *b)
-{
-STUDENT *p1=(STUDENT*)a;
-STUDENT *p2=(STUDENT*)b;
-
-return (int)((p1->sumScore)-(p2->sumScore));
-}
-int orderSmall(const void *a,const void *b)
-{
-STUDENT *p1=(STUDENT*)a;
-STUDENT *p2=(STUDENT*)b;
-return (int)((p2->sumScore)-(p1->sumScore));
-}
-*/
-
-int orderNumber(const void *a, const void *b)
+int orderBig(const void *a, const void *b)
 {
 	STUDENT *p1 = (STUDENT*)a;
 	STUDENT *p2 = (STUDENT*)b;
-	return (p2->id) - (p1->id);
+
+	//return (int)((p1->sumScore) - (p2->sumScore));
 }
+
+int orderSmall(const void *a, const void *b)
+{
+	STUDENT *p1 = (STUDENT*)a;
+	STUDENT *p2 = (STUDENT*)b;
+	//return (int)((p2->sumScore) - (p1->sumScore));
+}
+
+int CompareID(const void *elem1, const void *elem2)
+{
+	STUDENT *student1 = (STUDENT*)elem1;
+	STUDENT *student2 = (STUDENT*)elem2;
+	return strcmp((student1->id), (student2->id));
+}
+
 int orderName(const void *a, const void *b)
 {
 	STUDENT *p1 = (STUDENT*)a;
 	STUDENT *p2 = (STUDENT*)b;
 	return strcmp((p1->name), (p2->name));
 }
+
 void Print(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
 	int i, j;//控制读取的学生数和科目数
@@ -1106,7 +1107,7 @@ void StudentMenu(COURSE *course)
 
 		case '4':
 			PrintStudent(course);
-			system("pause"); //康绢肺 函版窍扁!
+			system("pause"); //Press any key to continue..
 			break;
 
 		case '5':
@@ -1248,6 +1249,7 @@ void PrintStudent(COURSE *course)
 		printf("\t  ID		Name		\n");
 		printf("	ΣΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΥ\n");
 
+		qsort(course->student, course->studentNumber, sizeof(STUDENT), CompareID);
 		for (int i = 0; i < course->studentNumber; i++)
 		{
 			printf("	  %s	%s	\n", course->student[i].id, course->student[i].name);
