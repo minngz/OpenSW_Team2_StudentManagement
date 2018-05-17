@@ -434,11 +434,13 @@ void PrintCourseMenu()
 void PrintManagementMenu()
 {
 	system("cls");
-	printf("\n           [ Management ]  \n\n");
+	printf("\n        [ Management ]  \n\n");
 	printf(" 1.     Score    Management \n");
 	printf(" 2.   Assignment Management \n");
 	printf(" 3.     Student  Management \n");
 	printf(" 4.     Notice   Management \n");
+	printf(" 5.          Read File\n");
+	printf(" 6.         Write File\n\n");
 	printf("ESC.           Back \n\n");
 }
 
@@ -450,7 +452,6 @@ void PrintScoreMenu()
 	printf(" 2.     Modifiy \n");
 	printf(" 3.     Delete \n");
 	printf(" 4.      Print \n");
-	printf(" 5.    FileWrite \n");
 	printf("ESC.     Back \n\n");
 }
 
@@ -473,8 +474,6 @@ void PrintStudentMenu()
 	printf(" 2.    Modifiy \n");
 	printf(" 3.    Delete \n");
 	printf(" 4.     Print \n");
-	printf(" 5.   FileRead \n");
-	printf(" 6.   FileWrite \n");
 	printf("ESC.    Back \n\n");
 }
 
@@ -527,6 +526,7 @@ void CourseMenu(COURSE **course, int *subjectNumber)
 		case '4':
 			SelectCourse(course, subjectNumber);
 			break;
+
 		case '5':
 			exit(1);
 			break;
@@ -693,6 +693,12 @@ void ManagementMenu(COURSE *course)
 		case '4':
 			NoticeMenu(course);
 			break;
+		
+		case '5':
+			break;
+
+		case '6':
+			break;
 
 		case ESC:
 			return;
@@ -728,10 +734,6 @@ void ScoreMenu(COURSE *course)
 
 		case '4':
 			PrintScore(course, PRINTTYPE_ALL, 0);
-			break;
-
-		case '5':
-			WriteScoreFile();
 			break;
 
 		case ESC:
@@ -941,11 +943,6 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 	}
 }
 
-void WriteScoreFile()
-{
-
-}
-
 void AssignmentMenu(COURSE *course)
 {
 	char menuInput;
@@ -1087,14 +1084,6 @@ void StudentMenu(COURSE *course)
 			system("pause"); //Press any key to continue..
 			break;
 
-		case '5':
-			ReadStudentFile();
-			break;
-
-		case '6':
-			WriteStudentFile();
-			break;
-
 		case ESC:
 			return;
 
@@ -1232,16 +1221,6 @@ void PrintStudent(COURSE *course)
 	}
 	//printf("\nIt will return to course menu 3 seconds later\n");
 	//Sleep(3000);
-}
-
-void ReadStudentFile()
-{
-
-}
-
-void WriteStudentFile()
-{
-
 }
 
 void NoticeMenu(COURSE *course)

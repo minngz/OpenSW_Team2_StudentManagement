@@ -63,23 +63,20 @@ void RegisterScore();
 void ModifyScore();
 void DeleteScore();
 void PrintScore();
-void WriteScoreFile();
 void AssignmentMenu(COURSE *course);
-void RegisterAssignment();
-void ModifyAssignment();
-void DeleteAssignment();
-void PrintAssignment();
+void RegisterAssignment(COURSE *course);
+void ModifyAssignment(COURSE *course);
+void DeleteAssignment(COURSE *course);
+void PrintAssignment(COURSE *course);
 void StudentMenu(COURSE *course);
 void RegisterStudent(COURSE *course);
 void ModifyStudent(COURSE *course);
 void DeleteStudent(COURSE *course);
 void PrintStudent(COURSE *course);
-void ReadStudentFile();
-void WriteStudentFile();
 void NoticeMenu(COURSE *course);
 void RegisterNotice();
 void ModifyNotice();
 void DeleteNotice();
-void PrintNotice();
+void PrintNotice(COURSE *course);
 
 #endif // STUDENT_H_INCLUDED
