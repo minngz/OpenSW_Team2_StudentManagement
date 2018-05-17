@@ -1107,22 +1107,40 @@ void StudentMenu(COURSE *course)
 void RegisterStudent(COURSE *course)
 {
 	int currentStudentCnt; //current the number of student in this course
+	int checkRegister;
 	char addID[10];
 	char addName[20];
 
 	printf("ID of new student : ");
 	scanf("%s", addID);
-	printf("Name of new student : ");
-	scanf("%s", addName);
 
-	currentStudentCnt = course->studentNumber;
+	for (int i = 0; i < course->studentNumber; i++) 
+	{
+		if (strcmp(course->student[i].id, addID) == 0)
+		{
+			checkRegister = 0;
+			break;
+		}
+	}
 
-	strcpy(course->student[currentStudentCnt].id, addID);
-	strcpy(course->student[currentStudentCnt].name, addName);
-	course->studentNumber++;
+	if (checkRegister == 0)
+	{
+		printf("\nstudent [%s] already exists in this course..", addID);
+	}
+	else
+	{
+		printf("Name of new student : ");
+		scanf("%s", addName);
 
-	printf("\n** Student has successfully been registered! **\n");
-	printf("It will return to course menu 3 seconds later\n");
+		currentStudentCnt = course->studentNumber;
+		strcpy(course->student[currentStudentCnt].id, addID);
+		strcpy(course->student[currentStudentCnt].name, addName);
+		course->studentNumber++;
+
+		printf("\n** Student has successfully been registered! **");
+	}
+	
+	printf("\nIt will return to course menu 3 seconds later\n");
 	Sleep(3000);
 }
 
