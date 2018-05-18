@@ -1,4 +1,4 @@
-﻿5
+5
 122172 suckho 80.0 90.0 7.0 10.0 6.0 10.0 7.0
 122211 youngho 95.0 95.0 7.0 10.0 8.0 10.0 0.0
 13011045 jongwon 70.0 50.0  0.0 10.0 0.0 10.0 0.0
@@ -7,7 +7,7 @@
 3
 There is no lecture on 6, June.
 Final exam will be on 18, June.
-The last assignment should be done with your team member and submit report until friday.
+The assignment should be submit until friday.
 3
 Review of open source video
 OSS survey and presentation
