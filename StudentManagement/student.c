@@ -1044,9 +1044,10 @@ void PrintAssignment(COURSE *course)
 {
 	int i = 0;
 	int assignmentNumber = 0;
-	for (i = 0; i < 5; i++) {
+	for (i = 0; i < 5; i++) 
+	{
 		assignmentNumber = i + 1;
-		printf("%d %12s\n", assignmentNumber, (*course).assignment[i]);
+		printf("%d %s\n", assignmentNumber, (*course).assignment[i]);
 	}
 	printf("\n\nIt will return to assignment menu 3 seconds later\n");
 	Sleep(3000);
