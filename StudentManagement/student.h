@@ -40,7 +40,7 @@ void Print2(STUDENT *student,int *studentNumber,int *subjectNumber);
 void sumAndAveStudentSore2(STUDENT *student,int *studenNumber,int *subjectNumber);
 void SystemSet();
 int ScanfSet();
-void WriteFile(STUDENT *student,int *studentNumber,int *subjectNumber);
+void WriteFile(COURSE *course);
 void ReadFile(COURSE *course);
 void SystemSet();
 void PrintCourseMenu();
