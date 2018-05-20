@@ -6,64 +6,9 @@
 #define PRINTTYPE_DELETE 2
 #define PRINTTYPE_ALL 3
 
-//函数部分
-//系统设置
 void SystemSet()
 {
 	system("title  Student Management");
-}
-//读取选项。
-int ScanfSet()
-{
-	int n;
-	scanf("%d", &n);
-	return n;
-}
-
-//读取数据
-void readDate(STUDENT *student, int *studentNumber, int *subjectNumber)
-{
-	int i, j;//控制读取的学生数和科目数
-			 //FILE *p = freopen("test.txt","r",stdin);
-	printf("请输入学生的数目\n");
-	scanf("%d", studentNumber);
-	printf("请输入科目数\n");
-	scanf("%d", subjectNumber);
-	getchar();
-	for (i = 0; i < *studentNumber; i++)
-	{
-		printf("请输入学号、名字、分数 中间以空格隔开\n");
-		scanf("%s%s", student[i].id, student[i].name);
-		for (j = 0; j < *subjectNumber; j++)
-		{
-			scanf("%lf", &student[i].examScore[j]);
-		}
-	}
-	//fclose(p);
-	returnUserFace();
-}
-
-//返回用户界面
-void returnUserFace()
-{
-	while (getchar() != '\n');
-	system("pause");
-	system("cls");
-}
-
-int orderBig(const void *a, const void *b)
-{
-	STUDENT *p1 = (STUDENT*)a;
-	STUDENT *p2 = (STUDENT*)b;
-
-	//return (int)((p1->sumScore) - (p2->sumScore));
-}
-
-int orderSmall(const void *a, const void *b)
-{
-	STUDENT *p1 = (STUDENT*)a;
-	STUDENT *p2 = (STUDENT*)b;
-	//return (int)((p2->sumScore) - (p1->sumScore));
 }
 
 int CompareID(const void *elem1, const void *elem2)
@@ -71,71 +16,6 @@ int CompareID(const void *elem1, const void *elem2)
 	STUDENT *student1 = (STUDENT*)elem1;
 	STUDENT *student2 = (STUDENT*)elem2;
 	return strcmp((student1->id), (student2->id));
-}
-
-int orderName(const void *a, const void *b)
-{
-	STUDENT *p1 = (STUDENT*)a;
-	STUDENT *p2 = (STUDENT*)b;
-	return strcmp((p1->name), (p2->name));
-}
-
-void Print(STUDENT *student, int *studentNumber, int *subjectNumber)
-{
-	int i, j;//控制读取的学生数和科目数
-	for (i = 0; i < *studentNumber; i++)
-	{
-		printf("%-12s%-10s ", student[i].id, student[i].name);
-		for (j = 0; j < *subjectNumber; j++)
-		{
-			printf("%-8.2f ", student[i].examScore[j]);
-		}
-		printf("\n");
-	}
-	returnUserFace();
-}
-//Search for students by name
-void nameSearch(STUDENT *student, int *studentNumber, int *subjectNumber)
-{
-	int i, j, k = 0;
-	char c;
-	char name[30];
-E:
-	printf("Enter student name \n");
-	scanf("%s", name);
-
-	//find student
-	for (i = 0; i < *studentNumber; i++)
-	{
-		if (strcmp(name, student[i].name) == 0)
-		{
-			printf("number: %-15s \nname: %-15s\n", student[i].id, student[i].name);
-			printf("score: ");
-			for (j = 0; j < *subjectNumber; j++)
-				printf("%-8.2f", student[i].examScore[j]);
-			k = 1;
-		}
-
-	}
-
-	if (k == 1) //success
-		printf("\n");
-	else
-		printf("Cannot fine the student\n");
-	getchar();
-E1:
-	printf("Continue \"y\" Exit and return \"n\" \n");
-	scanf("%c", &c);
-
-	if (c == 'y')
-		goto E;
-	else if (c == 'n')
-		returnUserFace();
-	else
-	{
-		while (getchar() != '\n');
-		goto E1;
-	}
 }
 
 //Search for students by number
@@ -156,65 +36,6 @@ int SearchID(COURSE* course)
 		}
 	}
 	return searchStudent;
-}
-
-int Excellente = 0, Fine = 0, Medium = 0, Pass = 0, Fail = 0;
-//分类成绩
-void SortScore(STUDENT *student, int *studentNumber, int *subjectNumber)
-{
-	Excellente = 0, Fine = 0, Medium = 0, Pass = 0, Fail = 0;
-	int i, j;
-	for (i = 0; i < *subjectNumber; ++i)
-	{
-		for (j = 0; j < *studentNumber; ++j)
-		{
-			if (student[j].examScore[i] >= 90) Excellente++;
-			else if (student[j].examScore[i] >= 80) Fine++;
-			else if (student[j].examScore[i] >= 70) Medium++;
-			else if (student[j].examScore[i] >= 60) Pass++;
-			else Fail++;
-		}
-		printf("科目 %d\n", i + 1);
-		printf("优秀(90-100) %2d %-5.2f%%\n", Excellente, 1.0*Excellente / (*studentNumber) * 100);
-		printf("良好(80-89)  %2d %-5.2f%%\n", Fine, 1.0*Fine / (*studentNumber) * 100);
-		printf("中等(70-79)  %2d %-5.2f%%\n", Medium, 1.0*Medium / (*studentNumber) * 100);
-		printf("及格(60-69)  %2d %-5.2f%%\n", Pass, 1.0*Pass / (*studentNumber) * 100);
-		printf("不及格(0-59) %2d %-5.2f%%\n", Fail, 1.0*Fail / (*studentNumber) * 100);
-		Excellente = 0, Fine = 0, Medium = 0, Pass = 0, Fail = 0;
-	}
-	returnUserFace();
-}
-//打印没门成绩和总分平均分
-void Print2(STUDENT *student, int *studentNumber, int *subjectNumber)
-{
-	int i, j;//控制读取的学生数和科目数
-	for (i = 0; i < *studentNumber; i++)
-	{
-		printf("%-12s%-10s分数是 ", student[i].id, student[i].name);
-		for (j = 0; j < *subjectNumber; j++)
-		{
-			printf("%-8.2f", student[i].examScore[j]);
-		}
-		//     printf("总分是 %-8.2f平均分是 %-8.2f",student[i].sumScore,student[i].sumScore/(*subjectNumber));
-		printf("\n");
-	}
-	returnUserFace();
-}
-//单独计算总分
-void sumAndAveStudentSore2(STUDENT *student, int *studentNumber, int *subjectNumber)
-{
-	int i, j;
-	float sum = 0;
-	for (i = 0; i < *studentNumber; i++)
-	{
-		sum = 0;
-		for (j = 0; j < *subjectNumber; j++)
-		{
-			sum += student[i].examScore[j];
-		}
-		//student[i].sumScore=sum;
-	}
-
 }
 
 void WriteFile(COURSE *course)
@@ -937,7 +758,7 @@ void AverageCourseScore(COURSE *course)
 
 	printf("Average score of midterm for %s course is %.2lf\n", course->name, average_midterm);
 	printf("Average score of final for %s course is %.2lf\n\n", course->name, average_final);
-	Sleep(20000);
+	Sleep(3000);
 }
 
 void WriteScoreFile()
