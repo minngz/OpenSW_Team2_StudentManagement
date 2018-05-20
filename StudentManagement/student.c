@@ -6,13 +6,13 @@
 #define PRINTTYPE_DELETE 2
 #define PRINTTYPE_ALL 3
 
-//º¯Êı²¿·Ö
-//ÏµÍ³ÉèÖÃ
+//å‡½æ•°éƒ¨åˆ†
+//ç³»ç»Ÿè®¾ç½®
 void SystemSet()
 {
 	system("title  Student Management");
 }
-//¶ÁÈ¡Ñ¡Ïî¡£
+//è¯»å–é€‰é¡¹ã€‚
 int ScanfSet()
 {
 	int n;
@@ -20,19 +20,19 @@ int ScanfSet()
 	return n;
 }
 
-//¶ÁÈ¡Êı¾İ
+//è¯»å–æ•°æ®
 void readDate(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
-	int i, j;//¿ØÖÆ¶ÁÈ¡µÄÑ§ÉúÊıºÍ¿ÆÄ¿Êı
+	int i, j;//æ§åˆ¶è¯»å–çš„å­¦ç”Ÿæ•°å’Œç§‘ç›®æ•°
 			 //FILE *p = freopen("test.txt","r",stdin);
-	printf("ÇëÊäÈëÑ§ÉúµÄÊıÄ¿\n");
+	printf("è¯·è¾“å…¥å­¦ç”Ÿçš„æ•°ç›®\n");
 	scanf("%d", studentNumber);
-	printf("ÇëÊäÈë¿ÆÄ¿Êı\n");
+	printf("è¯·è¾“å…¥ç§‘ç›®æ•°\n");
 	scanf("%d", subjectNumber);
 	getchar();
 	for (i = 0; i < *studentNumber; i++)
 	{
-		printf("ÇëÊäÈëÑ§ºÅ¡¢Ãû×Ö¡¢·ÖÊı ÖĞ¼äÒÔ¿Õ¸ñ¸ô¿ª\n");
+		printf("è¯·è¾“å…¥å­¦å·ã€åå­—ã€åˆ†æ•° ä¸­é—´ä»¥ç©ºæ ¼éš”å¼€\n");
 		scanf("%s%s", student[i].id, student[i].name);
 		for (j = 0; j < *subjectNumber; j++)
 		{
@@ -43,47 +43,12 @@ void readDate(STUDENT *student, int *studentNumber, int *subjectNumber)
 	returnUserFace();
 }
 
-//·µ»ØÓÃ»§½çÃæ
+//è¿”å›ç”¨æˆ·ç•Œé¢
 void returnUserFace()
 {
 	while (getchar() != '\n');
 	system("pause");
 	system("cls");
-}
-
-void sumAndAveSubjectSore(STUDENT *student, int *studenNumber, int *subjectNumber)
-{
-	int i, j;
-	double sum;
-	for (i = 0; i < *subjectNumber; i++)
-	{
-		sum = 0;
-		for (j = 0; j < *studenNumber; j++)
-		{
-			sum += student[j].examScore[i];
-		}
-		printf("Ñ§¿Æ%d µÄ×Ü·ÖÊÇ %-8.2lf ", i + 1, 1.0*sum);
-		printf("Æ½¾ù·ÖÊÇ %-8.2lf\n", 1.0*sum / (*studenNumber));
-	}
-	returnUserFace();
-}
-
-void sumAndAveStudentSore(STUDENT *student, int *studenNumber, int *subjectNumber)
-{
-	int i, j;
-	double sum = 0;
-	for (i = 0; i < *studenNumber; i++)
-	{
-		sum = 0;
-		for (j = 0; j < *subjectNumber; j++)
-		{
-			sum += student[i].examScore[j];
-		}
-
-		printf("id : %-12s name : %-10s ", student[i].id, student[i].name);
-		printf("Sum : %-8.2lf  Avg : %-8.2lf\n", 1.0*sum, 1.0*sum / (*subjectNumber));
-	}
-	returnUserFace();
 }
 
 int orderBig(const void *a, const void *b)
@@ -117,7 +82,7 @@ int orderName(const void *a, const void *b)
 
 void Print(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
-	int i, j;//¿ØÖÆ¶ÁÈ¡µÄÑ§ÉúÊıºÍ¿ÆÄ¿Êı
+	int i, j;//æ§åˆ¶è¯»å–çš„å­¦ç”Ÿæ•°å’Œç§‘ç›®æ•°
 	for (i = 0; i < *studentNumber; i++)
 	{
 		printf("%-12s%-10s ", student[i].id, student[i].name);
@@ -194,7 +159,7 @@ int SearchID(COURSE* course)
 }
 
 int Excellente = 0, Fine = 0, Medium = 0, Pass = 0, Fail = 0;
-//·ÖÀà³É¼¨
+//åˆ†ç±»æˆç»©
 void SortScore(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
 	Excellente = 0, Fine = 0, Medium = 0, Pass = 0, Fail = 0;
@@ -209,33 +174,33 @@ void SortScore(STUDENT *student, int *studentNumber, int *subjectNumber)
 			else if (student[j].examScore[i] >= 60) Pass++;
 			else Fail++;
 		}
-		printf("¿ÆÄ¿ %d\n", i + 1);
-		printf("ÓÅĞã(90-100) %2d %-5.2f%%\n", Excellente, 1.0*Excellente / (*studentNumber) * 100);
-		printf("Á¼ºÃ(80-89)  %2d %-5.2f%%\n", Fine, 1.0*Fine / (*studentNumber) * 100);
-		printf("ÖĞµÈ(70-79)  %2d %-5.2f%%\n", Medium, 1.0*Medium / (*studentNumber) * 100);
-		printf("¼°¸ñ(60-69)  %2d %-5.2f%%\n", Pass, 1.0*Pass / (*studentNumber) * 100);
-		printf("²»¼°¸ñ(0-59) %2d %-5.2f%%\n", Fail, 1.0*Fail / (*studentNumber) * 100);
+		printf("ç§‘ç›® %d\n", i + 1);
+		printf("ä¼˜ç§€(90-100) %2d %-5.2f%%\n", Excellente, 1.0*Excellente / (*studentNumber) * 100);
+		printf("è‰¯å¥½(80-89)  %2d %-5.2f%%\n", Fine, 1.0*Fine / (*studentNumber) * 100);
+		printf("ä¸­ç­‰(70-79)  %2d %-5.2f%%\n", Medium, 1.0*Medium / (*studentNumber) * 100);
+		printf("åŠæ ¼(60-69)  %2d %-5.2f%%\n", Pass, 1.0*Pass / (*studentNumber) * 100);
+		printf("ä¸åŠæ ¼(0-59) %2d %-5.2f%%\n", Fail, 1.0*Fail / (*studentNumber) * 100);
 		Excellente = 0, Fine = 0, Medium = 0, Pass = 0, Fail = 0;
 	}
 	returnUserFace();
 }
-//´òÓ¡Ã»ÃÅ³É¼¨ºÍ×Ü·ÖÆ½¾ù·Ö
+//æ‰“å°æ²¡é—¨æˆç»©å’Œæ€»åˆ†å¹³å‡åˆ†
 void Print2(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
-	int i, j;//¿ØÖÆ¶ÁÈ¡µÄÑ§ÉúÊıºÍ¿ÆÄ¿Êı
+	int i, j;//æ§åˆ¶è¯»å–çš„å­¦ç”Ÿæ•°å’Œç§‘ç›®æ•°
 	for (i = 0; i < *studentNumber; i++)
 	{
-		printf("%-12s%-10s·ÖÊıÊÇ ", student[i].id, student[i].name);
+		printf("%-12s%-10såˆ†æ•°æ˜¯ ", student[i].id, student[i].name);
 		for (j = 0; j < *subjectNumber; j++)
 		{
 			printf("%-8.2f", student[i].examScore[j]);
 		}
-		//     printf("×Ü·ÖÊÇ %-8.2fÆ½¾ù·ÖÊÇ %-8.2f",student[i].sumScore,student[i].sumScore/(*subjectNumber));
+		//     printf("æ€»åˆ†æ˜¯ %-8.2få¹³å‡åˆ†æ˜¯ %-8.2f",student[i].sumScore,student[i].sumScore/(*subjectNumber));
 		printf("\n");
 	}
 	returnUserFace();
 }
-//µ¥¶À¼ÆËã×Ü·Ö
+//å•ç‹¬è®¡ç®—æ€»åˆ†
 void sumAndAveStudentSore2(STUDENT *student, int *studentNumber, int *subjectNumber)
 {
 	int i, j;
@@ -785,8 +750,6 @@ void RegisterScore(COURSE *course)
 	printf("Registration is Succeed!\n");
 	printf("(It will be returned to Score Menu after 3 seconds automatically)");
 	Sleep(3000);
-	ScoreMenu(course);
-
 }
 
 void ModifyScore(COURSE *course)
@@ -815,7 +778,6 @@ void ModifyScore(COURSE *course)
 		printf("There is no student who you entered\n");
 		printf("It will be returned to Score Menu after 3 seconds automatically");
 		Sleep(3000);
-		ScoreMenu(course);
 		return;
 	}
 
@@ -906,6 +868,7 @@ void DeleteScore(COURSE *course)
 void PrintScore(COURSE *course, int printType, int studentIndex)
 {
 	int i, j;
+	double sum;
 	if (printType == PRINTTYPE_ALL)
 	{
 		if (course->student[studentIndex].examScore[0] > 100 && course->student[studentIndex].examScore[1] > 100)
@@ -920,8 +883,10 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 			printf("%s %s\n", course->student[i].id, course->student[i].name);
 			printf("Midterm Exam : %.2lf / Final Exam : %.2lf\n\n", course->student[i].examScore[0], course->student[i].examScore[1]);
 		}
-		printf("It will be returned to Score Menu after 3 seconds");
+		AverageCourseScore(course);
+		printf("It will be returned to Score Menu after 3 seconds\n");
 		Sleep(3000);
+		return;
 	}
 
 	if (printType == PRINTTYPE_EDIT || printType == PRINTTYPE_DELETE)
@@ -937,6 +902,47 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 		printf("Student Name : %s\n", course->student[studentIndex].name);
 		printf("Midterm Exam Score : %.2lf  | Final Exam Score : %.2lf\n\n", course->student[studentIndex].examScore[0], course->student[studentIndex].examScore[1]);
 	}
+}
+
+void AverageCourseScore(COURSE *course)
+{
+	int i;
+	int midterm_delete_count = 0;
+	int final_delete_count = 0;
+	double midtermSum = 0;
+	double finalSum = 0;
+	double average_midterm = 0;
+	double average_final = 0;
+
+	for (i = 0; i < course->studentNumber; i++)
+	{
+		if (course->student[i].examScore[0] > 100) 
+		{
+			midterm_delete_count = midterm_delete_count + 1;
+		}
+
+		if (course->student[i].examScore[1] > 100)
+		{
+			final_delete_count = final_delete_count + 1;
+		}
+		midtermSum = midtermSum + course->student[i].examScore[0];
+		finalSum = finalSum + course->student[i].examScore[1];
+	}
+
+	midtermSum = midtermSum - 300 * midterm_delete_count;
+	finalSum = finalSum - 300 * final_delete_count;
+
+	average_midterm = midtermSum / (course->studentNumber - midterm_delete_count);
+	average_final = finalSum / (course->studentNumber - final_delete_count);
+
+	printf("Average score of midterm for %s course is %.2lf\n", course->name, average_midterm);
+	printf("Average score of final for %s course is %.2lf\n\n", course->name, average_final);
+	Sleep(20000);
+}
+
+void WriteScoreFile()
+{
+
 }
 
 void AssignmentMenu(COURSE *course)
@@ -1176,7 +1182,7 @@ void DeleteStudent(COURSE *course)
 
 		if (checkDelete == 'y' || checkDelete == 'Y')
 		{
-			for (int i = 0; i < course->studentNumber - 1; i++) //µ¥ÀÌÅÍ µ¤¾î¾²±â
+			for (int i = 0; i < course->studentNumber - 1; i++) //å•æç£ ä¸¹ç»¢é™æ‰
 				course->student[i] = course->student[i + 1];
 
 			course->studentNumber--;
@@ -1205,9 +1211,9 @@ void PrintStudent(COURSE *course)
 	}
 	else
 	{
-		printf("\n\t\t¡ì Student List ¡í\n\n");
+		printf("\n\t\tÂ§ Student List â„–\n\n");
 		printf("\t  ID		Name		\n");
-		printf("	¦²¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦´\n");
+		printf("	Î£ÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎœÎ¥\n");
 
 		qsort(course->student, course->studentNumber, sizeof(STUDENT), CompareID);
 		for (int i = 0; i < course->studentNumber; i++)

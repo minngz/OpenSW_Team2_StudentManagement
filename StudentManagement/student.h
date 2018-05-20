@@ -23,7 +23,7 @@ typedef struct course
 	int studentNumber;
 }COURSE;
 
-//º¯ÊýÉùÃ÷²¿·Ö
+//ÂºÂ¯ÃŠÃ½Ã‰Ã¹ÃƒÃ·Â²Â¿Â·Ã–
 void readDate(STUDENT *student,int *studentNumber,int *subjectNumber);
 void returnUserFace();
 void sumAndAveSubjectSore(STUDENT *student,int *studenNumber,int *subjectNumber);
@@ -59,10 +59,11 @@ void DeleteCourse(COURSE **course, int *subjectNumber);
 void SelectCourse(COURSE **course, int *subjectNumber);
 void ManagementMenu(COURSE *course);
 void ScoreMenu(COURSE *course);
-void RegisterScore();
-void ModifyScore();
-void DeleteScore();
-void PrintScore();
+void RegisterScore(COURSE *course);
+void ModifyScore(COURSE *course);
+void DeleteScore(COURSE *course);
+void PrintScore(COURSE *course, int printType, int studentIndex);
+void AverageCourseScore(COURSE *course);
 void AssignmentMenu(COURSE *course);
 void RegisterAssignment(COURSE *course);
 void ModifyAssignment(COURSE *course);
