@@ -252,169 +252,163 @@ void sumAndAveStudentSore2(STUDENT *student, int *studentNumber, int *subjectNum
 
 }
 
-void WriteFile(STUDENT *student, int *studentNum, int *subjectNum)
+void WriteFile(COURSE *course)
 {
-	/*
-	бр Function Name
-	- WriteFile
-
-	бр Parameter ([type] name)
-	- [STU*] student       : Array of STU which contains student's information
-	ex) name, student ID, array of score, total score, average score
-	- [int*] studentNumber : Total number of students
-	- [int*] subjectNumber : Total number of subjects
-
-	бр File
-	- student.txt
-	: WriteFile function uses file which name is "student.txt".
-	So if you have "student.txt" and it contains important information, you should change your file name to another.
-
-	бр Description
-	- 1) WriteFile function open or create the file which name is "student.txt".
-
-	2-1) If the file exists,
-	it writes the total number of students(studentNum) and subject(subjectNum) in the first row.
-	Then, it writes information of student(student array) one row by one.
-	The information contains student number, name, score.
-
-	2-2) If the file doens't exist,
-	Print the "Cannot open the file" on console windows and exit program.
-
-	3) Finally, it closes the file and print "Successful File write!"
-	*/
-
 	FILE *file;        // file variables to open, write, and close the txt file
 	int i, j;           // int variables for "for statement"
+	int noticeCount;
+	int assignmentCount;
 
-	file = fopen("student.txt", "w"); // open "student.txt" file by "write" mode. 
-									  // if it doesn't exist, it makes new "student.txt" file.
+	file = fopen("sample_course.txt", "w");									 
 
 	if (file == NULL)
 	{
 		printf("Cannot open the file\n");
 		exit(0);
-	} // "student.txt" doesnt' exist
+	} // "sample_course.txt" doesnt' exist
 	else
 	{
-		/*
-		There is two way to write information on file.
-		1) If you want to write information by printf format, you can use 'fprintf'
-		2) If not, you can use 'fwrite' which write all of information in buffer.
-		*/
-
-		// Write total number of student and subject on the first row.
-		fprintf(file, "%d %d\n", *studentNum, *subjectNum);  // 1) fprintf
-															 //fwrite(student,sizeof(STU),*studentNumber,p);   // 2) fwrite
-
-															 // Write all information of student array on the next row.
-		for (i = 0; i < *studentNum; i++)
+		fprintf(file, "%d\n", (*course).studentNumber);  
+														
+		for (i = 0; i <  (*course).studentNumber; i++)
 		{
-			fprintf(file, "%-12s%-10s ", student[i].id, student[i].name);
+			fprintf(file, "%s %s ", (*course).student[i].id, (*course).student[i].name);
 
-			for (j = 0; j < *subjectNum; j++)
+			for (j = 0; j < 2; j++)
 			{
-				fprintf(file, "%-8.2f", student[i].examScore[j]);
+				fprintf(file, "%-8.2f", (*course).student[i].examScore[j]);
 			}
+
+			for (j = 0; j < 5; j++)
+			{
+				fprintf(file, "%-8.2f", (*course).student[i].assignmentScore[j]);
+			}
+
 			fprintf(file, "\n");
 		}
-	} // "student.txt" exist
+
+		noticeCount = 0;
+
+		for (i = 0; i < 10; i++)
+		{
+			if (strlen((*course).notice[i]) != 0)
+			{
+				noticeCount++;
+			}
+		}
+
+		fprintf(file, "%d\n", noticeCount);
+
+		for (i = 0; i < noticeCount; i++)
+		{
+			fprintf(file, "%s\n", (*course).notice[i]);
+		}
+
+		assignmentCount = 0;
+
+		for (i = 0; i < 5; i++)
+		{
+			if (strlen((*course).assignment[i]) != 0)
+			{
+				assignmentCount++;
+			}
+		}
+
+		fprintf(file, "%d\n", assignmentCount);
+
+		for (i = 0; i <assignmentCount; i++)
+		{
+			fprintf(file, "%s\n", (*course).assignment[i]);
+		}
+
+	} // "sample_course.txt" exist
 
 	fclose(file);   // close the file
-	printf("Successful File write!");
-	returnUserFace();
+	printf("Write data is successfully done!\n\n");
+	printf("It will return to course menu 3 seconds later\n");
+	Sleep(3000);
 }
 
-
-
-void ReadFile(STUDENT *student, int *studentNum, int *subjectNum)
+void ReadFile(COURSE *course)
 {
-	/*
-	бр Function Name
-	- ReadFile
-
-	бр Parameter ([type] name)
-	- [STU*] student       : Array of STU which contains student's information
-	ex) name, student ID, array of score, total score, average score
-	- [int*] studentNumber : Total number of students
-	- [int*] subjectNumber : Total number of subjects
-
-	бр File
-	- student.txt
-	: ReadFile function uses file which name is "student.txt".
-	So if you want to read information from your file, you should change your file name to "student.txt"
-	and the information format should be like this.
-
-	---------------------------------------------------------------------------------------------------------------
-	11 5
-	13011040    Jongwon    63.00   63.00   100.00  10.00   36.00
-	13011041    Minji      63.00   63.00   100.00  10.00   36.00
-	13011042    Younghov   71.00   56.00   41.00   26.00   71.00
-	13011043    Haein      66.00   56.00   46.00   36.00   66.00
-	13011044    Seokho     78.00   56.00   63.00   63.00   78.00
-	13011045    Dohyun     75.00   84.00   56.00   56.00   75.00
-	13011046    Taegyun    91.00   80.00   56.00   49.00   91.00
-	13011047    Jangwon    78.00   54.00   63.00   42.00   78.00
-	13011048    Jaehyuk    64.00   84.00   56.00   84.00   64.00
-	13011049    Moonsoo    84.00   80.00   77.00   80.00   84.00
-	13011050    Myungho    80.00   54.00   41.00   54.00   80.00
-	---------------------------------------------------------------------------------------------------------------
-
-	Total number of students(11) and subjects(5) should be on the first row.
-	Then, student_number(13011045) name(Jongwon) subject1_score(63.00) subject2_score(63.00) ... subject5_score(36)
-	should be placed on one row by one student.
-
-
-	бр Description
-	- 1) ReadFile function open the file which name is "student.txt".
-
-	2-1) If the file exists,
-	it reads the total number of students(studentNum) and subject(subjectNum) in the first row.
-	Then, it reads information of student(student array) one row by one.
-	The information contains student number, name, score.
-
-	2-2) If the file doens't exist,
-	Print the "Cannot open the file" on console windows and exit program.
-
-	3) Finally, closes the file.
-	*/
-
-
-	int i, j;           // int variables for "for statement"
+	int i, j;        
+	int studentCount;
+	int existNoticeCount;
+	int existAssignmentCount;
+	int newNoticeCount;
+	int newAssignmentCount;
 
 	FILE *file;         // file variables to open, write, and close the txt file
-	file = fopen("student.txt", "r"); // open "student.txt" file by "read" mode. 
+	file = fopen("sample_course.txt", "r"); // open "sample_course.txt" file by "read" mode. 
 
 	if (file == NULL)
 	{
 		printf("Cannot open the file\n");
 		exit(0);
-	} // "student.txt" doesnt' exist
+	} // "sample_course.txt" doesnt' exist
 	else
 	{
-		/*
-		There is two way to read information on file.
-		1) If you want to read information by scanf format, you can use 'fscanf'
-		2) If not, you can use 'fread' which read bytes of file at once.
-		*/
-
-		// Read total number of student and subject on the first row.
-		fscanf(file, "%d%d", studentNum, subjectNum);     // 1) fscanf
+		fscanf(file, "%d", &studentCount);   
 		fscanf(file, "\n");
-		//fread(student,sizeof(STU),*studentNumber,p);    // 2) fread
 
 		// Read all information of student array on the next row.
-		for (i = 0; i < *studentNum; i++)
+		for (i = course->studentNumber; i < course->studentNumber+studentCount; i++)
 		{
-			fscanf(file, "%s%s", student[i].id, student[i].name);
+			fscanf(file, "%s%s%",(*course).student[i].id, (*course).student[i].name);
+			fscanf(file, "%lf%lf", (*course).student[i].examScore, (*course).student[i].examScore+1);		
 
-			for (j = 0; j < *subjectNum; j++)
+			for (j = 0; j < 5; j++)
 			{
-				fscanf(file, "%f", &student[i].examScore[j]);
+				fscanf(file, "%lf", (*course).student[i].assignmentScore+j);
 			}
-
 			fscanf(file, "\n");
 		}
-	} // "student.txt" exist
+
+		(*course).studentNumber += studentCount;
+
+		fscanf(file, "%d", &newNoticeCount);
+		fscanf(file, "\n");
+
+		existNoticeCount = 0;
+
+		for (i = 0; i < 10; i++)
+		{
+			if (strlen((*course).notice[i]) != 0)
+			{
+				existNoticeCount++;
+			}
+		}
+
+		for (i = 0; i < newNoticeCount; i++)
+		{
+			fgets((*course).notice[existNoticeCount + i], sizeof((*course).notice[existNoticeCount + i]),file);
+			(*course).notice[existNoticeCount + i][strlen((*course).notice[existNoticeCount + i]) - 1] = '\0';
+		}
+
+		fscanf(file, "%d", &newAssignmentCount);
+		fscanf(file, "\n");
+
+		existAssignmentCount = 0;
+
+		for (i = 0; i < 5; i++)
+		{
+			if (strlen((*course).assignment[i]) != 0)
+			{
+				existAssignmentCount++;
+			}
+		}
+
+		for (i = 0; i < newAssignmentCount; i++)
+		{
+			fgets((*course).assignment[existAssignmentCount + i], sizeof((*course).assignment[existAssignmentCount + i]), file);
+			(*course).assignment[existAssignmentCount + i][strlen((*course).assignment[existAssignmentCount + i]) - 1] = '\0';
+		}
+
+		printf("File data is successfully loaded!\n\n");
+		printf("It will return to course menu 3 seconds later\n");
+		Sleep(3000);
+
+	} // "sample_course.txt" exist
 
 	fclose(file);  // close the file
 }
@@ -434,11 +428,13 @@ void PrintCourseMenu()
 void PrintManagementMenu()
 {
 	system("cls");
-	printf("\n           [ Management ]  \n\n");
+	printf("\n        [ Management ]  \n\n");
 	printf(" 1.     Score    Management \n");
 	printf(" 2.   Assignment Management \n");
 	printf(" 3.     Student  Management \n");
 	printf(" 4.     Notice   Management \n");
+	printf(" 5.          Read File\n");
+	printf(" 6.         Write File\n\n");
 	printf("ESC.           Back \n\n");
 }
 
@@ -450,7 +446,6 @@ void PrintScoreMenu()
 	printf(" 2.     Modifiy \n");
 	printf(" 3.     Delete \n");
 	printf(" 4.      Print \n");
-	printf(" 5.    FileWrite \n");
 	printf("ESC.     Back \n\n");
 }
 
@@ -473,8 +468,6 @@ void PrintStudentMenu()
 	printf(" 2.    Modifiy \n");
 	printf(" 3.    Delete \n");
 	printf(" 4.     Print \n");
-	printf(" 5.   FileRead \n");
-	printf(" 6.   FileWrite \n");
 	printf("ESC.    Back \n\n");
 }
 
@@ -527,6 +520,7 @@ void CourseMenu(COURSE **course, int *subjectNumber)
 		case '4':
 			SelectCourse(course, subjectNumber);
 			break;
+
 		case '5':
 			exit(1);
 			break;
@@ -578,7 +572,7 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 
 	initAssignment(&((*course)[*subjectNumber]));
 	initNotice(&((*course)[*subjectNumber]));
-
+	 
 
 	strcpy((*course)[*subjectNumber].name, courseName);
 	*subjectNumber += 1;
@@ -693,6 +687,14 @@ void ManagementMenu(COURSE *course)
 		case '4':
 			NoticeMenu(course);
 			break;
+		
+		case '5':
+			ReadFile(course);
+			break;
+
+		case '6':
+			WriteFile(course);
+			break;
 
 		case ESC:
 			return;
@@ -728,10 +730,6 @@ void ScoreMenu(COURSE *course)
 
 		case '4':
 			PrintScore(course, PRINTTYPE_ALL, 0);
-			break;
-
-		case '5':
-			WriteScoreFile();
 			break;
 
 		case ESC:
@@ -941,11 +939,6 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 	}
 }
 
-void WriteScoreFile()
-{
-
-}
-
 void AssignmentMenu(COURSE *course)
 {
 	char menuInput;
@@ -1051,9 +1044,10 @@ void PrintAssignment(COURSE *course)
 {
 	int i = 0;
 	int assignmentNumber = 0;
-	for (i = 0; i < 5; i++) {
+	for (i = 0; i < 5; i++) 
+	{
 		assignmentNumber = i + 1;
-		printf("%d %12s\n", assignmentNumber, (*course).assignment[i]);
+		printf("%d %s\n", assignmentNumber, (*course).assignment[i]);
 	}
 	printf("\n\nIt will return to assignment menu 3 seconds later\n");
 	Sleep(3000);
@@ -1085,14 +1079,6 @@ void StudentMenu(COURSE *course)
 		case '4':
 			PrintStudent(course);
 			system("pause"); //Press any key to continue..
-			break;
-
-		case '5':
-			ReadStudentFile();
-			break;
-
-		case '6':
-			WriteStudentFile();
 			break;
 
 		case ESC:
@@ -1232,16 +1218,6 @@ void PrintStudent(COURSE *course)
 	}
 	//printf("\nIt will return to course menu 3 seconds later\n");
 	//Sleep(3000);
-}
-
-void ReadStudentFile()
-{
-
-}
-
-void WriteStudentFile()
-{
-
 }
 
 void NoticeMenu(COURSE *course)
