@@ -1283,7 +1283,7 @@ void NoticeMenu(COURSE *course)
 
 void RegisterNotice(COURSE *course)
 {
-	int i,check;
+	int i,check=0;
 	char newNotice[50];
 
 	printf("Enter notice\n");
