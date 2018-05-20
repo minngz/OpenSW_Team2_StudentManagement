@@ -1247,6 +1247,7 @@ void WriteStudentFile()
 void NoticeMenu(COURSE *course)
 {
 	char menuInput;
+	getchar();
 
 	while (1)
 	{
@@ -1282,110 +1283,117 @@ void NoticeMenu(COURSE *course)
 
 void RegisterNotice(COURSE *course)
 {
-	int i, size = 0;
-	//get size
+	int i,check=0;
+	char newNotice[50];
+
+	printf("Enter notice\n");
+	gets(newNotice);
+
 	for (i = 0; i < 10; i++) {
 		if (strlen(course->notice[i]) == 0) {
-			size = i; break;
+			strcpy((*course).notice[i], newNotice);
+			check=1;
+			break;
 		}
 	}
 
-	if (size == 9) {
+	if (check == 0) {
 		printf("Unable to add notice! Please delete the notice.\n");
-		Sleep(1500);
+		Sleep(3000);
 		NoticeMenu(course);
 	}
 
-	printf("Enter notice ");
-	scanf("%s", course->notice[size]);
-
-	printf("[%d] notice is successfully registered!\n", size + 1);
-
-	//display notice
-	for (i = 0; i <= size; i++)
-		printf("Notice [%d]\n%s\n\n", i + 1, course->notice[i]);
-	printf("It will return to notice menu 3 seconds later\n");
+	printf("Notice [%d] is successfully registered!\n", i);
 	Sleep(3000);
+
 }
 
 void ModifyNotice(COURSE *course)
 {
-	int i, a, size = 0;
-	//get size
+	int i, j, index, check=0;
+	char newNotice[50];
+
+	//display notice
 	for (i = 0; i < 10; i++) {
 		if (strlen(course->notice[i]) == 0) {
-			size = i; break;
+			for (j = 0; j < i; j++)
+				printf("Notice [%d] %s\n", j, (*course).notice[j]);
+			check++;
+			break;
 		}
 	}
 
-	if (size == 0) {
+	if (check == 0) {
 		printf("There are no notices to modify\n");
-		Sleep(1500);
+		Sleep(3000);
 		NoticeMenu(course);
 	}
 
-	//display notice
-	for (i = 0; i < size; i++)
-		printf("Notice [%d]\n%s\n\n", i + 1, course->notice[i]);
-
 	printf("Select notice to modify ");
-	scanf("%d", &a);
+	scanf("%d", &index);
 
-	printf("Enter notice ");
-	scanf("%s", course->notice[a - 1]);
+	getchar();
 
-	printf("[%d] notice is successfully modified!\n", a);
+	printf("Enter notice\n");
+	gets(newNotice);
+
+	strcpy((*course).notice[index], newNotice);
+
+	printf("Notice [%d] is successfully modified!\n", index);
 	Sleep(1500);
 
 }
 
 void DeleteNotice(COURSE *course)
 {
-	int i, a, size = 0;
+	int i, j, check=0;
+
+	//display notice
 	for (i = 0; i < 10; i++) {
 		if (strlen(course->notice[i]) == 0) {
-			size = i; break;
+			for (j = 0; j < i; j++)
+				printf("Notice [%d] %s\n", j, (*course).notice[j]);
+			check++;
+			break;
 		}
 	}
 
-	if (size == 0) {
+	if (check == 0) {
 		printf("There are no notices to delete\n");
 		Sleep(1500);
 		NoticeMenu(course);
 	}
 
-	//display notice
-	for (i = 0; i < size; i++)
-		printf("Notice [%d]\n%s\n\n", i + 1, course->notice[i]);
-
 	printf("Select notice to delete ");
-	scanf("%d", &a);
+	scanf("%d", &j);
 
-	for (i = a; i < 10; i++)
-		strcpy(course->notice[i - 1], course->notice[i]);
+	for (i = j; i < 9; i++)
+		strcpy(course->notice[i], course->notice[i+1]);
 
-	printf("[%d] notice is successfully deleted!\n", a);
+	printf("Notice [%d] is successfully deleted!\n", j);
 	Sleep(1500);
 }
 
 void PrintNotice(COURSE *course)
 {
-	int i, size = 0;
+	int i, j, check = 0;
 
+	//display notice
 	for (i = 0; i < 10; i++) {
 		if (strlen(course->notice[i]) == 0) {
-			size = i; break;
+			for (j = 0; j < i; j++)
+				printf("Notice [%d] %s\n", j, (*course).notice[j]);
+			check++;
+			break;
 		}
 	}
 
-	if (size == 0) {
+	if (check == 0) {
 		printf("There are no notices to display\n");
 		Sleep(1500);
 		NoticeMenu(course);
 	}
 
-	for (i = 0; i < size; i++)
-		printf("Notice [%d]\n%s\n\n", i + 1, course->notice[i]);
 	printf("It will return to notice menu 3 seconds later\n");
 	Sleep(3000);
 }
