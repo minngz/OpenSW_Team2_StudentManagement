@@ -1,0 +1,14 @@
+5
+122172 suckho 80.00   90.00   7.00    10.00   6.00    10.00   7.00    
+122211 youngho 95.00   95.00   7.00    10.00   8.00    10.00   0.00    
+13011045 jongwon 70.00   50.00   0.00    10.00   0.00    10.00   0.00    
+15010982 minji 90.00   95.00   10.00   10.00   10.00   10.00   8.00    
+15011046 haeun 95.00   90.00   10.00   10.00   7.00    10.00   5.00    
+3
+There is no lecture on 6, June.
+Final exam will be on 18, June.
+The assignment should be done until friday.
+3
+Review of open source video
+OSS survey and presentation
+Development plan
