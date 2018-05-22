@@ -1003,7 +1003,7 @@ void DeleteStudent(COURSE *course)
 
 		if (checkDelete == 'y' || checkDelete == 'Y')
 		{
-			for (int i = 0; i < course->studentNumber - 1; i++) //单捞磐 丹绢静扁
+			for (int i = 0; i < course->studentNumber - 1; i++) //?�捞�?丹绢?�扁
 				course->student[i] = course->student[i + 1];
 
 			course->studentNumber--;
@@ -1032,10 +1032,10 @@ void PrintStudent(COURSE *course)
 	}
 	else
 	{
-		printf("\n\t\t§ Student List №\n\n");
+		printf("\n\t\t<< Student List >> \n\n");
 		printf("\t  ID		Name		\n");
-		printf("	ΣΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΜΥ\n");
-
+		printf("	===================================\n");
+	             	
 		qsort(course->student, course->studentNumber, sizeof(STUDENT), CompareID);
 		for (int i = 0; i < course->studentNumber; i++)
 		{
