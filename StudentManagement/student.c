@@ -745,6 +745,7 @@ void ScoreMenu(COURSE *course)
 
 void RegisterScore(COURSE *course)
 {
+	
 	char studentID[10];
 	double midtermScore;
 	double finalScore;
@@ -754,7 +755,7 @@ void RegisterScore(COURSE *course)
 	scanf("%s", studentID);
 	printf("\n");
 
-	//studentNumber means number of students in selected course
+	//studentNumber means count of students in selected course
 	for (int i = 0; i < course->studentNumber; i++)
 	{
 		if (strcmp(course->student[i].id, studentID) == 0)
@@ -764,12 +765,11 @@ void RegisterScore(COURSE *course)
 		}
 	}
 
-	if (studentIndex == -1) // case studentID which entered doesn't exists
+	if (studentIndex == -1) // -1 means unregistered student.
 	{
 		printf("There is no student who you entered\n");
 		printf("It will be returned to Score Menu after 3 seconds automatically");
 		Sleep(3000);
-		ScoreMenu(course);
 		return;
 	}
 
@@ -781,6 +781,7 @@ void RegisterScore(COURSE *course)
 	scanf("%lf", &finalScore);
 	printf("\n");
 
+	//examScore[0] means midterm-score and examScore[1] means final-score.
 	course->student[studentIndex].examScore[0] = midtermScore;
 	course->student[studentIndex].examScore[1] = finalScore;
 
@@ -831,6 +832,7 @@ void ModifyScore(COURSE *course)
 	getchar();
 	printf("\n");
 
+	//examScore[0] means midterm-score and examScore[1] means final-score.
 	course->student[studentIndex].examScore[0] = midtermScore;
 	course->student[studentIndex].examScore[1] = finalScore;
 
@@ -870,7 +872,8 @@ void DeleteScore(COURSE *course)
 		return;
 	}
 
-	if (course->student[studentIndex].examScore[0] > 100 && course->student[studentIndex].examScore[1] > 100) //already deleted case if score exceed 100
+	//deleted score is handled as a 300 so if score exceed 100, it is classifid as a deleted score.
+	if (course->student[studentIndex].examScore[0] > 100 && course->student[studentIndex].examScore[1] > 100)
 	{
 		printf("It is already deleted score.\n");
 		printf("It will be returned to Score Menu after 3 seconds...");
@@ -883,6 +886,7 @@ void DeleteScore(COURSE *course)
 	printf("\nAre you sure of removing it? (Y/N) : ");
 	scanf("%c", &confirm);
 	getchar();
+
 	if (confirm == 'n' || confirm == 'N')
 	{
 		printf("Deleteing Score is canceled.\n");
@@ -906,20 +910,28 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 {
 	int i, j;
 	double sum;
+	int isDeleted;
+	int deleteCount = 0;
+
 	if (printType == PRINTTYPE_ALL)
 	{
-		if (course->student[studentIndex].examScore[0] > 100 && course->student[studentIndex].examScore[1] > 100)
+		if (course->studentNumber == 0)
 		{
-			printf("You didn't register score of studentID: %s\n", course->student[studentIndex].id);
-			printf("It will be returned to Score Menu after 3 seconds");
+			printf("No Data Error!\n");
+			printf("It will be returned to Score Menu after 3 seconds\n");
 			Sleep(3000);
 			return;
 		}
+
 		for (i = 0; i < course->studentNumber; i++)
 		{
-			printf("%s %s\n", course->student[i].id, course->student[i].name);
-			printf("Midterm Exam : %.2lf / Final Exam : %.2lf\n\n", course->student[i].examScore[0], course->student[i].examScore[1]);
+			if (0 <= course->student[i].examScore[0] && course->student[i].examScore[1] <= 100)
+			{
+				printf("%s %s\n", course->student[i].id, course->student[i].name);
+				printf("Midterm Exam : %.2lf / Final Exam : %.2lf\n\n", course->student[i].examScore[0], course->student[i].examScore[1]);
+			}
 		}
+
 		AverageCourseScore(course);
 		printf("It will be returned to Score Menu after 3 seconds\n");
 		Sleep(3000);
@@ -941,11 +953,12 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 	}
 }
 
+
 void AverageCourseScore(COURSE *course)
 {
 	int i;
-	int midterm_delete_count = 0;
-	int final_delete_count = 0;
+	int midterm_registerd_count = 0;
+	int final_registered_count = 0;
 	double midtermSum = 0;
 	double finalSum = 0;
 	double average_midterm = 0;
@@ -953,28 +966,27 @@ void AverageCourseScore(COURSE *course)
 
 	for (i = 0; i < course->studentNumber; i++)
 	{
-		if (course->student[i].examScore[0] > 100) 
+		if (0 <= course->student[i].examScore[0] && course->student[i].examScore[0] <= 100)
 		{
-			midterm_delete_count = midterm_delete_count + 1;
+			midtermSum = midtermSum + course->student[i].examScore[0];
+			midterm_registerd_count = midterm_registerd_count + 1;
 		}
 
-		if (course->student[i].examScore[1] > 100)
+		if (0 <= course->student[i].examScore[1] && course->student[i].examScore[1] <= 100)
 		{
-			final_delete_count = final_delete_count + 1;
+			finalSum = finalSum + course->student[i].examScore[1];
+			final_registered_count = final_registered_count + 1;
 		}
-		midtermSum = midtermSum + course->student[i].examScore[0];
-		finalSum = finalSum + course->student[i].examScore[1];
 	}
 
-	midtermSum = midtermSum - 300 * midterm_delete_count;
-	finalSum = finalSum - 300 * final_delete_count;
+	average_midterm = midtermSum / (midterm_registerd_count);
+	average_final = finalSum / (final_registered_count);
 
-	average_midterm = midtermSum / (course->studentNumber - midterm_delete_count);
-	average_final = finalSum / (course->studentNumber - final_delete_count);
-
-	printf("Average score of midterm for %s course is %.2lf\n", course->name, average_midterm);
-	printf("Average score of final for %s course is %.2lf\n\n", course->name, average_final);
-	Sleep(20000);
+	if (midterm_registerd_count > 0 && final_registered_count > 0)
+	{
+		printf("Average score of midterm for %s course is %.2lf\n", course->name, average_midterm);
+		printf("Average score of final for %s course is %.2lf\n\n", course->name, average_final);
+	}
 }
 
 void WriteScoreFile()
