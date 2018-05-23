@@ -1134,7 +1134,7 @@ void RegisterNotice(COURSE *course)
 	for (i = 0; i < 10; i++) {
 		if (strlen(course->notice[i]) == 0) {
 			strcpy((*course).notice[i], newNotice);
-			check=1;
+			check++;
 			break;
 		}
 	}
@@ -1174,6 +1174,13 @@ void ModifyNotice(COURSE *course)
 	printf("Select notice to modify ");
 	scanf("%d", &index);
 
+
+	while (strlen(course->notice[index]) == 0) {
+		printf("Modify function was not working because notice of that index doesn't exist.\n");
+		printf("Select again: ");
+		scanf("%d", &index);
+	}
+
 	getchar();
 
 	printf("Enter notice\n");
@@ -1188,7 +1195,7 @@ void ModifyNotice(COURSE *course)
 
 void DeleteNotice(COURSE *course)
 {
-	int i, j, check=0;
+	int i, j, index, check=0;
 
 	//display notice
 	for (i = 0; i < 10; i++) {
@@ -1207,12 +1214,20 @@ void DeleteNotice(COURSE *course)
 	}
 
 	printf("Select notice to delete ");
-	scanf("%d", &j);
+	scanf("%d", &index);
 
-	for (i = j; i < 9; i++)
+	while (strlen(course->notice[index]) == 0) {
+		printf("Delete function was not working because notice of that index doesn't exist.\n");
+		printf("Select again: ");
+		scanf("%d", &index);
+	}
+
+	getchar();
+
+	for (i = index; i < 9; i++)
 		strcpy(course->notice[i], course->notice[i+1]);
 
-	printf("Notice [%d] is successfully deleted!\n", j);
+	printf("Notice [%d] is successfully deleted!\n", index);
 	Sleep(1500);
 }
 
