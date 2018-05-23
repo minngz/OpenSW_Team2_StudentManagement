@@ -84,5 +84,8 @@ void PrintToModifyCourse();
 void PrintToModifyNameOfCourse();
 void PrintToDeleteCourse();
 void PrintSelectCourse();
+void PrintIDToRegisterScore();
+void PrintMidtermScoreToRegisterScore();
+void PrintFinalScoreToRegisterScore();
 
 #endif // STUDENT_H_INCLUDED

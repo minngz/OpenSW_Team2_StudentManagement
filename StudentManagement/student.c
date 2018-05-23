@@ -670,8 +670,7 @@ void RegisterScore(COURSE *course)
 	double midtermScore;
 	double finalScore;
 	int studentIndex = -1;
-
-	printf("Input student ID to register score: ");
+	void PrintIDToRegisterScore();
 	scanf("%s", studentID);
 	printf("\n");
 
@@ -687,27 +686,83 @@ void RegisterScore(COURSE *course)
 
 	if (studentIndex == -1) // case studentID which entered doesn't exists
 	{
-		printf("There is no student who you entered\n");
-		printf("It will be returned to Score Menu after 3 seconds automatically");
+		system("cls");
+		printf("\n\n   There is no student who you entered\n");
+		printf("   It will be returned to Score Menu after 3 seconds automatically");
 		Sleep(3000);
 		ScoreMenu(course);
 		return;
 	}
 
-	printf("Input midterm score : ");
+	PrintMidtermScoreToRegisterScore();
 	scanf("%lf", &midtermScore);
 	printf("\n");
 
-	printf("Input final score : ");
+	PrintFinalScoreToRegisterScore();
 	scanf("%lf", &finalScore);
 	printf("\n");
 
 	course->student[studentIndex].examScore[0] = midtermScore;
 	course->student[studentIndex].examScore[1] = finalScore;
 
-	printf("Registration is Succeed!\n");
-	printf("(It will be returned to Score Menu after 3 seconds automatically)");
+	system("cls");
+	printf("\n\n   Registration is Succeed!\n");
+	printf("(   It will be returned to Score Menu after 3 seconds automatically)");
 	Sleep(3000);
+}
+
+void PrintIDToRegisterScore() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HInput student ID to register score");
+	printf("\033[11;13H:  ");
+}
+
+void PrintMidtermScoreToRegisterScore() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HInput midterm score");
+	printf("\033[11;13H:  ");
+}
+
+void PrintFinalScoreToRegisterScore() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HInput final score");
+	printf("\033[11;13H:  ");
 }
 
 void ModifyScore(COURSE *course)
@@ -762,6 +817,24 @@ void ModifyScore(COURSE *course)
 	printf("Modified Complete!\n");
 	printf("It will be returned to Score Menu after 3 seconds");
 	Sleep(3000);
+}
+
+void PrintIDToModifyScore() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HInput final score");
+	printf("\033[11;13H:  ");
 }
 
 void DeleteScore(COURSE *course)
