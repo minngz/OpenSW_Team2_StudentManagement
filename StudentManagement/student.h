@@ -95,5 +95,11 @@ void PrintAssignmentToRegister();
 void PrintAssignmentToModify();
 void PrintCommentsOfAssignmentToModify();
 void PrintAssignmentToDelete();
+void PrintStudentToRegister();
+void PrintStudentToRegister();
+void PrintNameOfStudentToRegister();
+void PrintNameOfStudentToModify();
+void PrintStudentToDelete();
+void PrintNoticeToRegister();
 
 #endif // STUDENT_H_INCLUDED

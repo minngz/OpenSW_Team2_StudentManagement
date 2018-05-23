@@ -1118,16 +1118,15 @@ void ModifyAssignment(COURSE *course)
 	int i = 0;
 	char assignmentComment[50];
 
-	PrintAssignmentToModify();
-	printf("\n\n\n\n\n\n\n\n");
 	PrintAssignment(course);
+	printf("\n\n\n\n\n\n\n\n");
+	PrintAssignmentToModify();
 	printf("\033[11;13H:  ");
 	
 	scanf("%d", &assignmentNumber);
 	getchar();
 	assignmentNumber--;
 	PrintCommentsOfAssignmentToModify();
-	printf("\033[11;13H:  ");
 	gets(assignmentComment);
 
 	for (i = 0; i < 5; i++) {
@@ -1156,6 +1155,7 @@ void PrintAssignmentToModify() {
 	printf("  弛                                                        弛\n");
 	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
 	printf("\033[9;13HWhich assignment do you want to modify?");
+	printf("\033[11;13H:  ");
 }
 
 void PrintCommentsOfAssignmentToModify() {
@@ -1173,6 +1173,7 @@ void PrintCommentsOfAssignmentToModify() {
 	printf("  弛                                                        弛\n");
 	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
 	printf("\033[9;13HPlease insert comments about an assignment");
+	printf("\033[11;13H:  ");
 }
 
 void DeleteAssignment(COURSE *course)
@@ -1189,9 +1190,9 @@ void DeleteAssignment(COURSE *course)
 			strcpy((*course).assignment[i], "");
 		}
 	}
-	system("cls");
-	printf("\n\n   Comments about an assignment is successfully deleted!\n\n");
-	printf("   It will return to assignment menu 3 seconds later\n");
+
+	printf("comments about an assignment is successfully deleted!\n\n");
+	printf("It will return to assignment menu 3 seconds later\n");
 	Sleep(3000);
 }
 
@@ -1210,6 +1211,7 @@ void PrintAssignmentToDelete() {
 	printf("  弛                                                        弛\n");
 	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
 	printf("\033[9;13HWhich assignment do you want to delete?");
+	printf("\033[11;13H:  ");
 }
 
 void PrintAssignment(COURSE *course)
@@ -1221,6 +1223,7 @@ void PrintAssignment(COURSE *course)
 		assignmentNumber = i + 1;
 		printf("\n\n   %d %s\n", assignmentNumber, (*course).assignment[i]);
 	}
+	printf("\n\n   It will return to assignment menu 3 seconds later\n");
 	Sleep(3000);
 }
 
@@ -1268,7 +1271,7 @@ void RegisterStudent(COURSE *course)
 	char addID[10];
 	char addName[20];
 
-	printf("ID of new student : ");
+	PrintStudentToRegister();
 	scanf("%s", addID);
 
 	for (int i = 0; i < course->studentNumber; i++) 
@@ -1282,23 +1285,60 @@ void RegisterStudent(COURSE *course)
 
 	if (checkRegister == 0)
 	{
-		printf("\nstudent [%s] already exists in this course..", addID);
+		system("cls");
+		printf("\n\n   student [%s] already exists in this course..", addID);
 	}
 	else
 	{
-		printf("Name of new student : ");
+		PrintNameOfStudentToRegister();
 		scanf("%s", addName);
 
 		currentStudentCnt = course->studentNumber;
 		strcpy(course->student[currentStudentCnt].id, addID);
 		strcpy(course->student[currentStudentCnt].name, addName);
 		course->studentNumber++;
-
-		printf("\n** Student has successfully been registered! **");
+		system("cls");
+		printf("\n\n   ** Student has successfully been registered! **");
 	}
 	
-	printf("\nIt will return to course menu 3 seconds later\n");
+	printf("\n   It will return to course menu 3 seconds later\n");
 	Sleep(3000);
+}
+
+void PrintStudentToRegister() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HID of new student");
+	printf("\033[11;13H:  ");
+}
+
+void PrintNameOfStudentToRegister() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HName of new student");
+	printf("\033[11;13H:  ");
 }
 
 void ModifyStudent(COURSE *course)
@@ -1311,19 +1351,39 @@ void ModifyStudent(COURSE *course)
 
 	if (searchStudent == -1)
 	{
-		printf("\nNo student ID found..");
+		system("cls");
+		printf("\n\n   No student ID found..");
 	}
 	else
 	{
-		printf("\nNew name of the student : ");
+		PrintNameOfStudentToModify();
 		scanf("%s", newName);
 
 		strcpy(course->student[searchStudent].name, newName);
-		printf("\n** Student has successfully been modified! **\n");
+		system("cls");
+		printf("\n\n   ** Student has successfully been modified! **\n");
 	}
 
-	printf("It will return to course menu 3 seconds later\n");
+	printf("\n   It will return to course menu 3 seconds later\n");
 	Sleep(3000);
+}
+
+void PrintNameOfStudentToModify() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HNew name of the student");
+	printf("\033[11;13H:  ");
 }
 
 void DeleteStudent(COURSE *course)
@@ -1336,11 +1396,12 @@ void DeleteStudent(COURSE *course)
 
 	if (searchStudent == -1)
 	{
-		printf("\nNo student ID found..");
+		system("cls");
+		printf("\n\n   No student ID found..");
 	}
 	else
 	{
-		printf("Delete the student [y/n] : ");
+		PrintStudentToDelete();
 		//scanf("%c", &checkDelete);
 		//getchar();
 		checkDelete = getche();
@@ -1351,8 +1412,8 @@ void DeleteStudent(COURSE *course)
 				course->student[i] = course->student[i + 1];
 
 			course->studentNumber--;
-
-			printf("\n** Student has successfully been deleted! **\n");
+			system("cls");
+			printf("\n\n   ** Student has successfully been deleted! **\n");
 		}
 		else if (checkDelete == 'n' || checkDelete == 'N')
 		{
@@ -1360,12 +1421,31 @@ void DeleteStudent(COURSE *course)
 		}
 		else
 		{
-			printf("\nWrong input..");
+			system("cls");
+			printf("\n\n   Wrong input..");
 		}
 	}
 
-	printf("\nIt will return to course menu 3 seconds later\n");
+	printf("\n   It will return to course menu 3 seconds later\n");
 	Sleep(3000);
+}
+
+void PrintStudentToDelete() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HDelete the student [y/n]");
+	printf("\033[11;13H:  ");
 }
 
 void PrintStudent(COURSE *course)
@@ -1433,7 +1513,7 @@ void RegisterNotice(COURSE *course)
 	int i,check=0;
 	char newNotice[50];
 
-	printf("Enter notice\n");
+	PrintNoticeToRegister();
 	gets(newNotice);
 
 	for (i = 0; i < 10; i++) {
@@ -1445,14 +1525,36 @@ void RegisterNotice(COURSE *course)
 	}
 
 	if (check == 0) {
-		printf("Unable to add notice! Please delete the notice.\n");
+		system("cls");
+		printf("\n\n   Unable to add notice! Please delete the notice.\n");
 		Sleep(3000);
 		NoticeMenu(course);
 	}
+	else {
+		system("cls");
+	}
 
-	printf("Notice [%d] is successfully registered!\n", i);
+	printf("   Notice [%d] is successfully registered!\n", i);
 	Sleep(3000);
 
+}
+
+void PrintNoticeToRegister() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HEnter notice");
+	printf("\033[11;13H:  ");
 }
 
 void ModifyNotice(COURSE *course)
