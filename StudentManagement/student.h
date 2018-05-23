@@ -80,5 +80,9 @@ void ModifyNotice();
 void DeleteNotice();
 void PrintNotice(COURSE *course);
 void PrintToRegisterCourse();
+void PrintToModifyCourse();
+void PrintToModifyNameOfCourse();
+void PrintToDeleteCourse();
+void PrintSelectCourse();
 
 #endif // STUDENT_H_INCLUDED

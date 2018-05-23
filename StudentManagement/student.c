@@ -211,7 +211,7 @@ void PrintCourseMenu()
 	printf("  弛                 2.     Modifiy                         弛\n");
 	printf("  弛                 3      Delete                          弛\n");
 	printf("  弛                 4.     Manage                          弛\n");
-	printf("  弛                 5.      Exit                           弛\n");
+	printf("  弛                 5.     Exit                            弛\n");
 	printf("  弛                                                        弛\n");
 	printf("  弛                                                        弛\n");
 	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
@@ -222,69 +222,103 @@ void PrintCourseMenu()
 void PrintManagementMenu()
 {
 	system("cls");
-	printf("\n        [ Management ]  \n\n");
-	printf(" 1.     Score    Management \n");
-	printf(" 2.   Assignment Management \n");
-	printf(" 3.     Student  Management \n");
-	printf(" 4.     Notice   Management \n");
-	printf(" 5.          Read File\n");
-	printf(" 6.         Write File\n\n");
-	printf("ESC.           Back \n\n");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                    [ Management ]                      弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                 1.     Score                           弛\n");
+	printf("  弛                 2.     Assignment                      弛\n");
+	printf("  弛                 3      Student                         弛\n");
+	printf("  弛                 4.     Notice                          弛\n");
+	printf("  弛                 5.     Read File                       弛\n");
+	printf("  弛                 6.     Write File                      弛\n");
+	printf("  弛                 ESC.   Back                            弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("                               Select number to execute : ");
 }
 
 void PrintScoreMenu()
 {
 	system("cls");
-	printf("\n        [ Score ]  \n\n");
-	printf(" 1.     Register \n");
-	printf(" 2.     Modifiy \n");
-	printf(" 3.     Delete \n");
-	printf(" 4.      Print \n");
-	printf("ESC.     Back \n\n");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                       [ Score ]                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                 1.     Register                        弛\n");
+	printf("  弛                 2.     Modifiy                         弛\n");
+	printf("  弛                 3      Delete                          弛\n");
+	printf("  弛                 4.     Print                           弛\n");
+	printf("  弛                 ESC.   Back                            弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("                               Select number to execute : ");
 }
 
 void PrintAssignmentMenu()
 {
 	system("cls");
-	printf("\n      [ Assignment ]  \n\n");
-	printf(" 1.    Register \n");
-	printf(" 2.    Modifiy \n");
-	printf(" 3.     Delete \n");
-	printf(" 4.     Print \n");
-	printf("ESC.     Back \n\n");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                     [ Assignment ]                     弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                 1.     Register                        弛\n");
+	printf("  弛                 2.     Modifiy                         弛\n");
+	printf("  弛                 3      Delete                          弛\n");
+	printf("  弛                 4.     Print                           弛\n");
+	printf("  弛                 ESC.   Back                            弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("                               Select number to execute : ");
 }
 
 void PrintStudentMenu()
 {
 	system("cls");
-	printf("\n      [ Student ]  \n\n");
-	printf(" 1.    Register \n");
-	printf(" 2.    Modifiy \n");
-	printf(" 3.    Delete \n");
-	printf(" 4.     Print \n");
-	printf("ESC.    Back \n\n");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                      [ Student ]                       弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                 1.     Register                        弛\n");
+	printf("  弛                 2.     Modifiy                         弛\n");
+	printf("  弛                 3      Delete                          弛\n");
+	printf("  弛                 4.     Print                           弛\n");
+	printf("  弛                 ESC.   Back                            弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("                               Select number to execute : ");
 }
 
 void PrintNoticeMenu()
 {
 	system("cls");
-	printf("\n        [ Notice ]  \n\n");
-	printf(" 1.    Register \n");
-	printf(" 2.    Modifiy \n");
-	printf(" 3.     Delete \n");
-	printf(" 4.     Print   \n");
-	printf("ESC.     Back \n\n");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                      [ Notice ]                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                 1.     Register                        弛\n");
+	printf("  弛                 2.     Modifiy                         弛\n");
+	printf("  弛                 3      Delete                          弛\n");
+	printf("  弛                 4.     Print                           弛\n");
+	printf("  弛                 ESC.   Back                            弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("                               Select number to execute : ");
 }
 
 void PrintCourseList(COURSE **course, int *subjectNumber)
 {
 	int i;
 
-	system("cls");
-
+	printf("\n\n\n\n\n\n\n\n");
 	for (i = 0; i < *subjectNumber; i++)
 	{
-		printf(" %d.   %15s\n", i, (*course)[i].name);
+		printf("       %d.   %15s\n", i+1, (*course)[i].name);
 	}
 }
 
@@ -328,13 +362,30 @@ void CourseMenu(COURSE **course, int *subjectNumber)
 void SelectCourse(COURSE **course, int *subjectNumber)
 {
 	int index;
-
+	PrintSelectCourse();
 	PrintCourseList(course, subjectNumber);
+	printf("\033[11;13H:  ");
 	scanf("%d", &index);
-
 	ManagementMenu(&((*course)[index]));
-
 }
+
+void PrintSelectCourse() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HPlease select number of a course to manage");
+}
+
 
 void RegisterCourse(COURSE **course, int *subjectNumber)
 {
@@ -372,7 +423,6 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	*subjectNumber += 1;
 	system("cls");
 	printf("\n\n   [ %s ] course is successfully registed!\n\n", (*course)[*subjectNumber - 1].name);
-	//printf("[ %s ] course is successfully registed!\n\n", (*course)[*subjectNumber - 1].name);
 	printf("   It will return to course menu 3 seconds later");
 	Sleep(3000);
 }
@@ -420,18 +470,55 @@ void ModifyCourse(COURSE **course, int *subjectNumber)
 	int index;
 	char newName[20];
 
-	printf("please insert number what you want to modify\n");
+	PrintToModifyCourse();
 	PrintCourseList(course, subjectNumber);
+	printf("\033[11;13H:  ");
 	scanf("%d", &index);
 	getchar();
-	printf("please enter the new name of course\n");
+	PrintToModifyNameOfCourse();
 	gets(newName);
-
+	index = index--;
 	strcpy((*course)[index].name, newName);
-
-	printf("course is successfully modified!\n");
-	printf("It will return to course menu 3 seconds later\n");
+	system("cls");
+	printf("\n\n   course is successfully modified!\n");
+	printf("   It will return to course menu 3 seconds later");
 	Sleep(3000);
+}
+
+void PrintToModifyCourse() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HPlease insert number what you want to modify");
+	printf("\033[11;13H:  ");
+}
+
+void PrintToModifyNameOfCourse() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HPlease enter the new name of course");
+	printf("\033[11;13H:  ");
 }
 
 void DeleteCourse(COURSE **course, int *subjectNumber)
@@ -442,17 +529,20 @@ void DeleteCourse(COURSE **course, int *subjectNumber)
 
 	if (*subjectNumber == 0)
 	{
-		printf("There is nothing to delete\n");
+		system("cls");
+		printf("\n\n   There is nothing to delete\n");
 	}
 	else
 	{
+		PrintToDeleteCourse();
 		PrintCourseList(course, subjectNumber);
-		printf("please insert number what you want to delete\n");
+		printf("\033[11;13H:  ");
 		scanf("%d", &index);
 
 		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*subjectNumber - 1));
 
 		newIndex = 0;
+		index--;
 
 		for (i = 0; i < *subjectNumber; i++)
 		{
@@ -467,12 +557,31 @@ void DeleteCourse(COURSE **course, int *subjectNumber)
 		*course = temp;
 
 		*subjectNumber -= 1;
-		printf("course is successfully deleted!\n\n");
+		system("cls");
+		printf("\n\n   course is successfully deleted!\n\n");
 	}
 
-	printf("It will return to course menu 3 seconds later\n");
+	printf("   It will return to course menu 3 seconds later");
 	Sleep(3000);
 
+}
+
+void PrintToDeleteCourse() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HPlease insert number what you want to delete");
+	printf("\033[11;13H:  ");
 }
 
 void ManagementMenu(COURSE *course)
