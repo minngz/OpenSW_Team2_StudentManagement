@@ -356,8 +356,8 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 
 	(*course)[*subjectNumber].studentNumber = 0;
 
-	initAssignment(&((*course)[*subjectNumber]));
-	initNotice(&((*course)[*subjectNumber]));
+	InitAssignment(&((*course)[*subjectNumber]));
+	InitNotice(&((*course)[*subjectNumber]));
 	 
 
 	strcpy((*course)[*subjectNumber].name, courseName);
@@ -368,7 +368,7 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	Sleep(3000);
 }
 
-void initAssignment(COURSE *course)
+void InitAssignment(COURSE *course)
 {
 	int i;
 
@@ -378,7 +378,7 @@ void initAssignment(COURSE *course)
 	}
 }
 
-void initNotice(COURSE *course)
+void InitNotice(COURSE *course)
 {
 	int i;
 	for (i = 0; i < 10; i++)
@@ -392,16 +392,25 @@ void ModifyCourse(COURSE **course, int *subjectNumber)
 	int index;
 	char newName[20];
 
-	PrintCourseList(course, subjectNumber);
-	printf("please insert number what you want to modify\n");
-	scanf("%d", &index);
-	getchar();
-	printf("please enter the new name of course\n");
-	gets(newName);
+	if (*subjectNumber > 0)
+	{
+		PrintCourseList(course, subjectNumber);
 
-	strcpy((*course)[index].name, newName);
+		printf("please insert number what you want to modify\n");
+		scanf("%d", &index);
+		getchar();
 
-	printf("course is successfully modified!\n");
+		printf("please enter the new name of course\n");
+		gets(newName);
+
+		strcpy((*course)[index].name, newName);
+		printf("course is successfully modified!\n");
+	}
+	else
+	{
+		printf("There is nothing to modify.\n");
+	}
+
 	printf("It will return to course menu 3 seconds later\n");
 	Sleep(3000);
 }

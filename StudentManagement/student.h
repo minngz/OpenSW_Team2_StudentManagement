@@ -49,8 +49,8 @@ void PrintScoreMenu();
 void PrintAssignmentMenu();
 void PrintStudentMenu();
 void PrintNoticeMenu();
-void initAssignment(COURSE *course);
-void initNotice(COURSE *course);
+void InitAssignment(COURSE *course);
+void InitNotice(COURSE *course);
 void PrintCourseList(COURSE **course, int *subjectNumber);
 void CourseMenu(COURSE **course, int *subjectNumber);
 void RegisterCourse(COURSE **course, int *subjectNumber);
@@ -75,9 +75,9 @@ void ModifyStudent(COURSE *course);
 void DeleteStudent(COURSE *course);
 void PrintStudent(COURSE *course);
 void NoticeMenu(COURSE *course);
-void RegisterNotice();
-void ModifyNotice();
-void DeleteNotice();
+void RegisterNotice(COURSE *course);
+void ModifyNotice(COURSE *course);
+void DeleteNotice(COURSE *course);
 void PrintNotice(COURSE *course);
 
 #endif // STUDENT_H_INCLUDED
