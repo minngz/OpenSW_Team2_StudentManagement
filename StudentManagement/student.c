@@ -857,7 +857,7 @@ void ModifyScore(COURSE *course)
 	course->student[studentIndex].examScore[0] = midtermScore;
 	course->student[studentIndex].examScore[1] = finalScore;
 
-	printf("----------------Changed Scores of %s-------------------------\n");
+	printf("----------------Changed Scores-------------------------\n");
 	printf("midterm score what you changed : %.2lf\n", midtermScore);
 	printf("final score what you changed : %.2lf\n\n", finalScore);
 
@@ -946,8 +946,7 @@ void DeleteScore(COURSE *course)
 ***************************************************************************************************************************************************/
 void PrintScore(COURSE *course, int printType, int studentIndex)
 {
-	int i, j;
-	double sum;
+	int i;
 	int isDeleted;
 	int deleteCount = 0;
 
