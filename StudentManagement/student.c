@@ -203,12 +203,20 @@ void ReadFile(COURSE *course)
 void PrintCourseMenu()
 {
 	system("cls");
-	printf("\n      [ Course ]  \n\n");
-	printf(" 1.     Register \n");
-	printf(" 2.     Modifiy \n");
-	printf(" 3      Delete \n");
-	printf(" 4.     Manage \n");
-	printf(" 5.      Exit \n\n");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                       [ Course ]                       弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                 1.     Register                        弛\n");
+	printf("  弛                 2.     Modifiy                         弛\n");
+	printf("  弛                 3      Delete                          弛\n");
+	printf("  弛                 4.     Manage                          弛\n");
+	printf("  弛                 5.      Exit                           弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("                               Select number to execute : ");
+
 }
 
 void PrintManagementMenu()
@@ -332,8 +340,8 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 {
 	int i;
 	char courseName[40];
-
-	printf("please insert name of new subject\n");
+	
+	PrintToRegisterCourse();
 	gets(courseName);
 
 	if (*subjectNumber == 0)
@@ -362,11 +370,31 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 
 	strcpy((*course)[*subjectNumber].name, courseName);
 	*subjectNumber += 1;
-
-	printf("[ %s ] course is successfully registed!\n\n", (*course)[*subjectNumber - 1].name);
-	printf("It will return to course menu 3 seconds later\n");
+	system("cls");
+	printf("\n\n   [ %s ] course is successfully registed!\n\n", (*course)[*subjectNumber - 1].name);
+	//printf("[ %s ] course is successfully registed!\n\n", (*course)[*subjectNumber - 1].name);
+	printf("   It will return to course menu 3 seconds later");
 	Sleep(3000);
 }
+
+void PrintToRegisterCourse() {
+	system("cls");
+	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛 \n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  弛                                                        弛\n");
+	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
+	printf("\033[9;13HPlease insert name of new subject");
+	printf("\033[11;13H:  ");
+}
+
 
 void initAssignment(COURSE *course)
 {
@@ -392,8 +420,8 @@ void ModifyCourse(COURSE **course, int *subjectNumber)
 	int index;
 	char newName[20];
 
-	PrintCourseList(course, subjectNumber);
 	printf("please insert number what you want to modify\n");
+	PrintCourseList(course, subjectNumber);
 	scanf("%d", &index);
 	getchar();
 	printf("please enter the new name of course\n");

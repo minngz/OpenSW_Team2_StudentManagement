@@ -79,5 +79,6 @@ void RegisterNotice();
 void ModifyNotice();
 void DeleteNotice();
 void PrintNotice(COURSE *course);
+void PrintToRegisterCourse();
 
 #endif // STUDENT_H_INCLUDED
