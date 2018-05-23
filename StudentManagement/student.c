@@ -321,10 +321,19 @@ void SelectCourse(COURSE **course, int *subjectNumber)
 {
 	int index;
 
-	PrintCourseList(course, subjectNumber);
-	scanf("%d", &index);
+	if (*subjectNumber > 0)
+	{
+		PrintCourseList(course, subjectNumber);
+		scanf("%d", &index);
 
-	ManagementMenu(&((*course)[index]));
+		ManagementMenu(&((*course)[index]));
+	}
+	else
+	{
+		printf("There is no course to select.\n");
+		printf("It will return to course menu 3 seconds later\n");
+		Sleep(3000);
+	}
 
 }
 
