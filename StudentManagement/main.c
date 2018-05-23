@@ -4,11 +4,11 @@
 
 int main()
 {
-	int subjectNumber = 0;
+	int courseCount = 0;
 
 	COURSE *course;
 	
 	SystemSet();
-	CourseMenu(&course, &subjectNumber);
+	CourseMenu(&course, &courseCount);
 	return 0;
 }

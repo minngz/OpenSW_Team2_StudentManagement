@@ -280,19 +280,19 @@ void PrintNoticeMenu()
 	printf("ESC.     Back \n\n");
 }
 
-void PrintCourseList(COURSE **course, int *subjectNumber)
+void PrintCourseList(COURSE **course, int *courseCount)
 {
 	int i;
 
 	system("cls");
 
-	for (i = 0; i < *subjectNumber; i++)
+	for (i = 0; i < *courseCount; i++)
 	{
 		printf(" %d.   %15s\n", i, (*course)[i].name);
 	}
 }
 
-void CourseMenu(COURSE **course, int *subjectNumber)
+void CourseMenu(COURSE **course, int *courseCount)
 {
 	char menuInput;
 
@@ -304,19 +304,19 @@ void CourseMenu(COURSE **course, int *subjectNumber)
 		switch (menuInput)
 		{
 		case '1':
-			RegisterCourse(course, subjectNumber);
+			RegisterCourse(course, courseCount);
 			break;
 
 		case '2':
-			ModifyCourse(course, subjectNumber);
+			ModifyCourse(course, courseCount);
 			break;
 
 		case '3':
-			DeleteCourse(course, subjectNumber);
+			DeleteCourse(course, courseCount);
 			break;
 
 		case '4':
-			SelectCourse(course, subjectNumber);
+			SelectCourse(course, courseCount);
 			break;
 
 		case '5':
@@ -329,13 +329,13 @@ void CourseMenu(COURSE **course, int *subjectNumber)
 	}
 }
 
-void SelectCourse(COURSE **course, int *subjectNumber)
+void SelectCourse(COURSE **course, int *courseCount)
 {
 	int index;
 
-	if (*subjectNumber > 0)
+	if (*courseCount > 0)
 	{
-		PrintCourseList(course, subjectNumber);
+		PrintCourseList(course, courseCount);
 		scanf("%d", &index);
 
 		ManagementMenu(&((*course)[index]));
@@ -349,7 +349,7 @@ void SelectCourse(COURSE **course, int *subjectNumber)
 
 }
 
-void RegisterCourse(COURSE **course, int *subjectNumber)
+void RegisterCourse(COURSE **course, int *courseCount)
 {
 	int i;
 	char courseName[40];
@@ -357,15 +357,15 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	printf("please insert name of new subject\n");
 	gets(courseName);
 
-	if (*subjectNumber == 0)
+	if (*courseCount == 0)
 	{
 		*course = (COURSE*)malloc(sizeof(COURSE));
 	}
 	else
 	{
-		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*subjectNumber + 1));
+		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*courseCount + 1));
 
-		for (i = 0; i < *subjectNumber; i++)
+		for (i = 0; i < *courseCount; i++)
 		{
 			temp[i] = (*course)[i];
 		}
@@ -375,16 +375,16 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	}
 
 
-	(*course)[*subjectNumber].studentCount = 0;
+	(*course)[*courseCount].studentCount = 0;
 
-	InitAssignment(&((*course)[*subjectNumber]));
-	InitNotice(&((*course)[*subjectNumber]));
+	InitAssignment(&((*course)[*courseCount]));
+	InitNotice(&((*course)[*courseCount]));
 	 
 
-	strcpy((*course)[*subjectNumber].name, courseName);
-	*subjectNumber += 1;
+	strcpy((*course)[*courseCount].name, courseName);
+	*courseCount += 1;
 
-	printf("[ %s ] course is successfully registed!\n\n", (*course)[*subjectNumber - 1].name);
+	printf("[ %s ] course is successfully registed!\n\n", (*course)[*courseCount - 1].name);
 	printf("It will return to course menu 3 seconds later\n");
 	Sleep(3000);
 }
@@ -408,14 +408,14 @@ void InitNotice(COURSE *course)
 	}
 }
 
-void ModifyCourse(COURSE **course, int *subjectNumber)
+void ModifyCourse(COURSE **course, int *courseCount)
 {
 	int index;
 	char newName[20];
 
-	if (*subjectNumber > 0)
+	if (*courseCount > 0)
 	{
-		PrintCourseList(course, subjectNumber);
+		PrintCourseList(course, courseCount);
 
 		printf("please insert number what you want to modify\n");
 		scanf("%d", &index);
@@ -436,27 +436,27 @@ void ModifyCourse(COURSE **course, int *subjectNumber)
 	Sleep(3000);
 }
 
-void DeleteCourse(COURSE **course, int *subjectNumber)
+void DeleteCourse(COURSE **course, int *courseCount)
 {
 	int i, j;
 	int index;
 	int newIndex;
 
-	if (*subjectNumber == 0)
+	if (*courseCount == 0)
 	{
 		printf("There is nothing to delete\n");
 	}
 	else
 	{
-		PrintCourseList(course, subjectNumber);
+		PrintCourseList(course, courseCount);
 		printf("please insert number what you want to delete\n");
 		scanf("%d", &index);
 
-		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*subjectNumber - 1));
+		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*courseCount - 1));
 
 		newIndex = 0;
 
-		for (i = 0; i < *subjectNumber; i++)
+		for (i = 0; i < *courseCount; i++)
 		{
 			if (i != index)
 			{
@@ -468,7 +468,7 @@ void DeleteCourse(COURSE **course, int *subjectNumber)
 		free(*course);
 		*course = temp;
 
-		*subjectNumber -= 1;
+		*courseCount -= 1;
 		printf("course is successfully deleted!\n\n");
 	}
 
