@@ -11,6 +11,14 @@ void SystemSet()
 	system("title  Student Management");
 }
 
+/*********************************************************************************
+	 The function defines the order of the elements by returning.
+	 Taking two pointers as arguments (both converted to const void *).
+
+	 return value < 0 : student1<student2
+	 return value = 0 : student1=student2
+	 return value > 0 : student1>student2
+**********************************************************************************/
 int CompareID(const void *elem1, const void *elem2)
 {
 	STUDENT *student1 = (STUDENT*)elem1;
@@ -18,7 +26,11 @@ int CompareID(const void *elem1, const void *elem2)
 	return strcmp((student1->id), (student2->id));
 }
 
-//Search for students by number
+/*********************************************************************************
+	This function searchs for a student by student ID 
+	return valuse(searchStudent) : index of the student selected in student array.
+								   It is found through repetitive statement.
+**********************************************************************************/
 int SearchID(COURSE* course)
 {
 	int searchStudent = -1;
@@ -880,6 +892,7 @@ void PrintAssignment(COURSE *course)
 	Sleep(3000);
 }
 
+/* 4.Manage -> 3.Student Management */
 void StudentMenu(COURSE *course)
 {
 	char menuInput;
@@ -917,9 +930,17 @@ void StudentMenu(COURSE *course)
 	}
 }
 
+/****************************************************************************************************
+	int currentStudentCnt : current the number of student in this course
+	int checkRegister :  check if registration is possible to avoid duplicate student ID in a course
+
+	If ID of new student is not duplicated (checkRegister!=0), enter the name of the student you want to add.
+	The name and ID entered (addID, addName) are inserted into current index of the student array, 
+	and the number of students in this course increases.
+******************************************************************************************************/
 void RegisterStudent(COURSE *course)
 {
-	int currentStudentCnt; //current the number of student in this course
+	int currentStudentCnt; 
 	int checkRegister;
 	char addID[10];
 	char addName[20];
@@ -928,7 +949,7 @@ void RegisterStudent(COURSE *course)
 	scanf("%s", addID);
 
 	for (int i = 0; i < course->studentNumber; i++) 
-	{
+	{ 
 		if (strcmp(course->student[i].id, addID) == 0)
 		{
 			checkRegister = 0;
@@ -957,14 +978,19 @@ void RegisterStudent(COURSE *course)
 	Sleep(3000);
 }
 
+/****************************************************************************************************
+	int searchStudent : index of the student you want to modify. (return value of SearchID function)
+
+	If the student you want to modify is in student array (searchStudent!=1), you can change name of the student (newName).
+*****************************************************************************************************/
 void ModifyStudent(COURSE *course)
 {
 	int searchStudent; //index
 	char newName[20];
 
 	PrintStudent(course);
-	searchStudent = SearchID(course);
 
+	searchStudent = SearchID(course);
 	if (searchStudent == -1)
 	{
 		printf("\nNo student ID found..");
@@ -982,14 +1008,21 @@ void ModifyStudent(COURSE *course)
 	Sleep(3000);
 }
 
+/****************************************************************************************************
+	char checkDelete : a variable used to input whether to delete or not.
+
+	Find students to delete by using SearchID function.
+	If the checkDelete is 'y'/'Y', the next student of student to delete will be covered with data, and the array is pulling forwards.
+	Also, thhe number of students in this course decreases.
+*****************************************************************************************************/
 void DeleteStudent(COURSE *course)
 {
 	int searchStudent;
 	char checkDelete;
 
 	PrintStudent(course);
-	searchStudent = SearchID(course);
 
+	searchStudent = SearchID(course);
 	if (searchStudent == -1)
 	{
 		printf("\nNo student ID found..");
@@ -997,22 +1030,20 @@ void DeleteStudent(COURSE *course)
 	else
 	{
 		printf("Delete the student [y/n] : ");
-		//scanf("%c", &checkDelete);
-		//getchar();
 		checkDelete = getche();
 
 		if (checkDelete == 'y' || checkDelete == 'Y')
 		{
-			for (int i = 0; i < course->studentNumber - 1; i++) //?ïÊçûÁ£?‰∏πÁª¢?ôÊâÅ
+			for (int i = 0; i < course->studentNumber - 1; i++)
+			{
 				course->student[i] = course->student[i + 1];
-
+			}
 			course->studentNumber--;
 
 			printf("\n** Student has successfully been deleted! **\n");
 		}
 		else if (checkDelete == 'n' || checkDelete == 'N')
 		{
-
 		}
 		else
 		{
@@ -1024,6 +1055,15 @@ void DeleteStudent(COURSE *course)
 	Sleep(3000);
 }
 
+/****************************************************************************************************
+	If a student exists in this course, the print function will be performed.
+
+	qsort() - This function arranges the list of students in ascending order by student ID 
+	1) course->student : Point of start the target array
+	2) course->studentNumber : Array size for the element
+	3) sizeof(STUDENT) : Element size in bytes
+	4) CompareID : Pointer to a function that compares two elements. This function is called repeatedly by qsort to compare two elements
+*****************************************************************************************************/
 void PrintStudent(COURSE *course)
 {
 	if (course->studentNumber == 0)
@@ -1037,14 +1077,13 @@ void PrintStudent(COURSE *course)
 		printf("	===================================\n");
 	             	
 		qsort(course->student, course->studentNumber, sizeof(STUDENT), CompareID);
+
 		for (int i = 0; i < course->studentNumber; i++)
 		{
 			printf("	  %s	%s	\n", course->student[i].id, course->student[i].name);
 		}
 		printf("\n\n");
 	}
-	//printf("\nIt will return to course menu 3 seconds later\n");
-	//Sleep(3000);
 }
 
 void NoticeMenu(COURSE *course)
