@@ -280,19 +280,19 @@ void PrintNoticeMenu()
 	printf("ESC.     Back \n\n");
 }
 
-void PrintCourseList(COURSE **course, int *subjectNumber)
+void PrintCourseList(COURSE **course, int *courseCount)
 {
 	int i;
 
 	system("cls");
 
-	for (i = 0; i < *subjectNumber; i++)
+	for (i = 0; i < *courseCount; i++)
 	{
 		printf(" %d.   %15s\n", i, (*course)[i].name);
 	}
 }
 
-void CourseMenu(COURSE **course, int *subjectNumber)
+void CourseMenu(COURSE **course, int *courseCount)
 {
 	char menuInput;
 
@@ -304,19 +304,19 @@ void CourseMenu(COURSE **course, int *subjectNumber)
 		switch (menuInput)
 		{
 		case '1':
-			RegisterCourse(course, subjectNumber);
+			RegisterCourse(course, courseCount);
 			break;
 
 		case '2':
-			ModifyCourse(course, subjectNumber);
+			ModifyCourse(course, courseCount);
 			break;
 
 		case '3':
-			DeleteCourse(course, subjectNumber);
+			DeleteCourse(course, courseCount);
 			break;
 
 		case '4':
-			SelectCourse(course, subjectNumber);
+			SelectCourse(course, courseCount);
 			break;
 
 		case '5':
@@ -329,34 +329,45 @@ void CourseMenu(COURSE **course, int *subjectNumber)
 	}
 }
 
-void SelectCourse(COURSE **course, int *subjectNumber)
+void SelectCourse(COURSE **course, int *courseCount)
 {
 	int index;
 
-	PrintCourseList(course, subjectNumber);
-	scanf("%d", &index);
+	if (*courseCount > 0)
+	{
+		PrintCourseList(course, courseCount);
+		scanf("%d", &index);
+		getchar();
 
-	ManagementMenu(&((*course)[index]));
+		ManagementMenu(&((*course)[index]));
+	}
+	else
+	{
+		printf("There is no course to select.\n");
+		printf("It will return to course menu 3 seconds later\n");
+		Sleep(3000);
+	}
 
 }
 
-void RegisterCourse(COURSE **course, int *subjectNumber)
+void RegisterCourse(COURSE **course, int *courseCount)
 {
 	int i;
 	char courseName[40];
 
 	printf("please insert name of new subject\n");
-	gets(courseName);
+	fgets(courseName, sizeof(courseName), stdin);
+	courseName[strlen(courseName) - 1] = '\0';
 
-	if (*subjectNumber == 0)
+	if (*courseCount == 0)
 	{
 		*course = (COURSE*)malloc(sizeof(COURSE));
 	}
 	else
 	{
-		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*subjectNumber + 1));
+		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*courseCount + 1));
 
-		for (i = 0; i < *subjectNumber; i++)
+		for (i = 0; i < *courseCount; i++)
 		{
 			temp[i] = (*course)[i];
 		}
@@ -366,21 +377,21 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	}
 
 
-	(*course)[*subjectNumber].studentCount = 0;
+	(*course)[*courseCount].studentCount = 0;
 
-	initAssignment(&((*course)[*subjectNumber]));
-	initNotice(&((*course)[*subjectNumber]));
+	InitAssignment(&((*course)[*courseCount]));
+	InitNotice(&((*course)[*courseCount]));
 	 
 
-	strcpy((*course)[*subjectNumber].name, courseName);
-	*subjectNumber += 1;
+	strcpy((*course)[*courseCount].name, courseName);
+	*courseCount += 1;
 
-	printf("[ %s ] course is successfully registed!\n\n", (*course)[*subjectNumber - 1].name);
+	printf("[ %s ] course is successfully registed!\n\n", (*course)[*courseCount - 1].name);
 	printf("It will return to course menu 3 seconds later\n");
 	Sleep(3000);
 }
 
-void initAssignment(COURSE *course)
+void InitAssignment(COURSE *course)
 {
 	int i;
 
@@ -390,7 +401,7 @@ void initAssignment(COURSE *course)
 	}
 }
 
-void initNotice(COURSE *course)
+void InitNotice(COURSE *course)
 {
 	int i;
 	for (i = 0; i < 10; i++)
@@ -399,46 +410,57 @@ void initNotice(COURSE *course)
 	}
 }
 
-void ModifyCourse(COURSE **course, int *subjectNumber)
+void ModifyCourse(COURSE **course, int *courseCount)
 {
 	int index;
 	char newName[20];
 
-	PrintCourseList(course, subjectNumber);
-	printf("please insert number what you want to modify\n");
-	scanf("%d", &index);
-	getchar();
-	printf("please enter the new name of course\n");
-	gets(newName);
+	if (*courseCount > 0)
+	{
+		PrintCourseList(course, courseCount);
 
-	strcpy((*course)[index].name, newName);
+		printf("please insert number what you want to modify\n");
+		scanf("%d", &index);
+		getchar();
 
-	printf("course is successfully modified!\n");
+		printf("please enter the new name of course\n");
+		fgets(newName, sizeof(newName), stdin);
+		newName[strlen(newName) - 1] = '\0';
+
+
+		strcpy((*course)[index].name, newName);
+		printf("course is successfully modified!\n");
+	}
+	else
+	{
+		printf("There is nothing to modify.\n");
+	}
+
 	printf("It will return to course menu 3 seconds later\n");
 	Sleep(3000);
 }
 
-void DeleteCourse(COURSE **course, int *subjectNumber)
+void DeleteCourse(COURSE **course, int *courseCount)
 {
 	int i, j;
 	int index;
 	int newIndex;
 
-	if (*subjectNumber == 0)
+	if (*courseCount == 0)
 	{
 		printf("There is nothing to delete\n");
 	}
 	else
 	{
-		PrintCourseList(course, subjectNumber);
+		PrintCourseList(course, courseCount);
 		printf("please insert number what you want to delete\n");
 		scanf("%d", &index);
 
-		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*subjectNumber - 1));
+		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*courseCount - 1));
 
 		newIndex = 0;
 
-		for (i = 0; i < *subjectNumber; i++)
+		for (i = 0; i < *courseCount; i++)
 		{
 			if (i != index)
 			{
@@ -450,7 +472,7 @@ void DeleteCourse(COURSE **course, int *subjectNumber)
 		free(*course);
 		*course = temp;
 
-		*subjectNumber -= 1;
+		*courseCount -= 1;
 		printf("course is successfully deleted!\n\n");
 	}
 
@@ -820,7 +842,9 @@ void RegisterAssignment(COURSE *course)
 	char assignmentComment[50];
 
 	printf("please insert comments of a new assignment\n");
-	gets(assignmentComment);
+	fgets(assignmentComment, sizeof(assignmentComment), stdin);
+	assignmentComment[strlen(assignmentComment) - 1] = '\0';
+
 
 	for (i = 0; i < 5; i++) {
 		if (strlen(course->assignment[i]) == 0) {
@@ -845,8 +869,10 @@ void ModifyAssignment(COURSE *course)
 	scanf("%d", &assignmentNumber);
 	getchar();
 	assignmentNumber--;
+
 	printf("\n\nplease insert comments about an assignment that you want to modify\n");
-	gets(assignmentComment);
+	fgets(assignmentComment, sizeof(assignmentComment), stdin);
+	assignmentComment[strlen(assignmentComment) - 1] = '\0';
 
 	for (i = 0; i < 5; i++) {
 		if (i == assignmentNumber) {
@@ -1129,7 +1155,8 @@ void RegisterNotice(COURSE *course)
 	char newNotice[50];
 
 	printf("Enter notice\n");
-	gets(newNotice);
+	fgets(newNotice, sizeof(newNotice), stdin);
+	newNotice[strlen(newNotice) - 1] = '\0';
 
 	for (i = 0; i < 10; i++) {
 		if (strlen(course->notice[i]) == 0) {
@@ -1184,7 +1211,8 @@ void ModifyNotice(COURSE *course)
 	getchar();
 
 	printf("Enter notice\n");
-	gets(newNotice);
+	fgets(newNotice, sizeof(newNotice), stdin);
+	newNotice[strlen(newNotice) - 1] = '\0';
 
 	strcpy((*course).notice[index], newNotice);
 

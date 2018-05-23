@@ -23,7 +23,6 @@ typedef struct course
 	int studentCount;
 }COURSE;
 
-
 int CompareID(const void *elem1, const void *elem2);
 int SearchID(COURSE* course);
 void SystemSet();
@@ -36,14 +35,14 @@ void PrintScoreMenu();
 void PrintAssignmentMenu();
 void PrintStudentMenu();
 void PrintNoticeMenu();
-void initAssignment(COURSE *course);
-void initNotice(COURSE *course);
-void PrintCourseList(COURSE **course, int *subjectNumber);
-void CourseMenu(COURSE **course, int *subjectNumber);
-void RegisterCourse(COURSE **course, int *subjectNumber);
-void ModifyCourse(COURSE **course, int *subjectNumber);
-void DeleteCourse(COURSE **course, int *subjectNumber);
-void SelectCourse(COURSE **course, int *subjectNumber);
+void InitAssignment(COURSE *course);
+void InitNotice(COURSE *course);
+void PrintCourseList(COURSE **course, int *courseCount);
+void CourseMenu(COURSE **course, int *courseCount);
+void RegisterCourse(COURSE **course, int *courseCount);
+void ModifyCourse(COURSE **course, int *courseCount);
+void DeleteCourse(COURSE **course, int *courseCount);
+void SelectCourse(COURSE **course, int *courseCount);
 void ManagementMenu(COURSE *course);
 void ScoreMenu(COURSE *course);
 void RegisterScore(COURSE *course);
