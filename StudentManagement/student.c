@@ -39,7 +39,7 @@ int SearchID(COURSE* course)
 	printf("Enter ID of student to select : ");
 	scanf("%s", selectID);
 
-	for (int i = 0; i < course->studentNumber; i++)
+	for (int i = 0; i < course->studentCount; i++)
 	{
 		if (strcmp(course->student[i].id, selectID) == 0)
 		{
@@ -66,9 +66,9 @@ void WriteFile(COURSE *course)
 	} // "sample_course.txt" doesnt' exist
 	else
 	{
-		fprintf(file, "%d\n", (*course).studentNumber);  
+		fprintf(file, "%d\n", (*course).studentCount);  
 														
-		for (i = 0; i <  (*course).studentNumber; i++)
+		for (i = 0; i <  (*course).studentCount; i++)
 		{
 			fprintf(file, "%s %s ", (*course).student[i].id, (*course).student[i].name);
 
@@ -150,7 +150,7 @@ void ReadFile(COURSE *course)
 		fscanf(file, "\n");
 
 		// Read all information of student array on the next row.
-		for (i = course->studentNumber; i < course->studentNumber+studentCount; i++)
+		for (i = course->studentCount; i < course->studentCount+studentCount; i++)
 		{
 			fscanf(file, "%s%s%",(*course).student[i].id, (*course).student[i].name);
 			fscanf(file, "%lf%lf", (*course).student[i].examScore, (*course).student[i].examScore+1);		
@@ -162,7 +162,7 @@ void ReadFile(COURSE *course)
 			fscanf(file, "\n");
 		}
 
-		(*course).studentNumber += studentCount;
+		(*course).studentCount += studentCount;
 
 		fscanf(file, "%d", &newNoticeCount);
 		fscanf(file, "\n");
@@ -366,7 +366,7 @@ void RegisterCourse(COURSE **course, int *subjectNumber)
 	}
 
 
-	(*course)[*subjectNumber].studentNumber = 0;
+	(*course)[*subjectNumber].studentCount = 0;
 
 	initAssignment(&((*course)[*subjectNumber]));
 	initNotice(&((*course)[*subjectNumber]));
@@ -550,8 +550,8 @@ void RegisterScore(COURSE *course)
 	scanf("%s", studentID);
 	printf("\n");
 
-	//studentNumber means number of students in selected course
-	for (int i = 0; i < course->studentNumber; i++)
+	//studentCount means number of students in selected course
+	for (int i = 0; i < course->studentCount; i++)
 	{
 		if (strcmp(course->student[i].id, studentID) == 0)
 		{
@@ -597,7 +597,7 @@ void ModifyScore(COURSE *course)
 	getchar();
 	printf("\n");
 
-	for (int i = 0; i < course->studentNumber; i++)
+	for (int i = 0; i < course->studentCount; i++)
 	{
 		if (strcmp(course->student[i].id, studentID) == 0)
 		{
@@ -650,7 +650,7 @@ void DeleteScore(COURSE *course)
 	getchar();
 	printf("\n");
 
-	for (int i = 0; i < course->studentNumber; i++)
+	for (int i = 0; i < course->studentCount; i++)
 	{
 		if (strcmp(course->student[i].id, studentID) == 0)
 		{
@@ -711,7 +711,7 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 			Sleep(3000);
 			return;
 		}
-		for (i = 0; i < course->studentNumber; i++)
+		for (i = 0; i < course->studentCount; i++)
 		{
 			printf("%s %s\n", course->student[i].id, course->student[i].name);
 			printf("Midterm Exam : %.2lf / Final Exam : %.2lf\n\n", course->student[i].examScore[0], course->student[i].examScore[1]);
@@ -747,7 +747,7 @@ void AverageCourseScore(COURSE *course)
 	double average_midterm = 0;
 	double average_final = 0;
 
-	for (i = 0; i < course->studentNumber; i++)
+	for (i = 0; i < course->studentCount; i++)
 	{
 		if (course->student[i].examScore[0] > 100) 
 		{
@@ -765,8 +765,8 @@ void AverageCourseScore(COURSE *course)
 	midtermSum = midtermSum - 300 * midterm_delete_count;
 	finalSum = finalSum - 300 * final_delete_count;
 
-	average_midterm = midtermSum / (course->studentNumber - midterm_delete_count);
-	average_final = finalSum / (course->studentNumber - final_delete_count);
+	average_midterm = midtermSum / (course->studentCount - midterm_delete_count);
+	average_final = finalSum / (course->studentCount - final_delete_count);
 
 	printf("Average score of midterm for %s course is %.2lf\n", course->name, average_midterm);
 	printf("Average score of final for %s course is %.2lf\n\n", course->name, average_final);
@@ -948,7 +948,7 @@ void RegisterStudent(COURSE *course)
 	printf("ID of new student : ");
 	scanf("%s", addID);
 
-	for (int i = 0; i < course->studentNumber; i++) 
+	for (int i = 0; i < course->studentCount; i++) 
 	{ 
 		if (strcmp(course->student[i].id, addID) == 0)
 		{
@@ -966,10 +966,10 @@ void RegisterStudent(COURSE *course)
 		printf("Name of new student : ");
 		scanf("%s", addName);
 
-		currentStudentCnt = course->studentNumber;
+		currentStudentCnt = course->studentCount;
 		strcpy(course->student[currentStudentCnt].id, addID);
 		strcpy(course->student[currentStudentCnt].name, addName);
-		course->studentNumber++;
+		course->studentCount++;
 
 		printf("\n** Student has successfully been registered! **");
 	}
@@ -1034,11 +1034,11 @@ void DeleteStudent(COURSE *course)
 
 		if (checkDelete == 'y' || checkDelete == 'Y')
 		{
-			for (int i = 0; i < course->studentNumber - 1; i++)
+			for (int i = 0; i < course->studentCount - 1; i++)
 			{
 				course->student[i] = course->student[i + 1];
 			}
-			course->studentNumber--;
+			course->studentCount--;
 
 			printf("\n** Student has successfully been deleted! **\n");
 		}
@@ -1060,13 +1060,13 @@ void DeleteStudent(COURSE *course)
 
 	qsort() - This function arranges the list of students in ascending order by student ID 
 	1) course->student : Point of start the target array
-	2) course->studentNumber : Array size for the element
+	2) course->studentCount : Array size for the element
 	3) sizeof(STUDENT) : Element size in bytes
 	4) CompareID : Pointer to a function that compares two elements. This function is called repeatedly by qsort to compare two elements
 *****************************************************************************************************/
 void PrintStudent(COURSE *course)
 {
-	if (course->studentNumber == 0)
+	if (course->studentCount == 0)
 	{
 		printf("\nThere are no students in this class..\n");
 	}
@@ -1076,9 +1076,9 @@ void PrintStudent(COURSE *course)
 		printf("\t  ID		Name		\n");
 		printf("	===================================\n");
 	             	
-		qsort(course->student, course->studentNumber, sizeof(STUDENT), CompareID);
+		qsort(course->student, course->studentCount, sizeof(STUDENT), CompareID);
 
-		for (int i = 0; i < course->studentNumber; i++)
+		for (int i = 0; i < course->studentCount; i++)
 		{
 			printf("	  %s	%s	\n", course->student[i].id, course->student[i].name);
 		}

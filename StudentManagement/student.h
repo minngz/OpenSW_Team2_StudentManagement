@@ -20,26 +20,13 @@ typedef struct course
 	STUDENT student[100];
 	char notice[10][50];
 	char assignment[5][50];
-	int studentNumber;
+	int studentCount;
 }COURSE;
 
-//º¯ÊýÉùÃ÷²¿·Ö
-void readDate(STUDENT *student,int *studentNumber,int *subjectNumber);
-void returnUserFace();
-void sumAndAveSubjectSore(STUDENT *student,int *studenNumber,int *subjectNumber);
-void sumAndAveStudentSore(STUDENT *student,int *studenNumber,int *subjectNumber);
-int orderBig(const void *a,const void *b);
-int orderSmall(const void *a,const void *b);
-void Print(STUDENT *student,int *studenNumber,int *subjectNumber);
+
 int CompareID(const void *elem1, const void *elem2);
-int orderName(const void *a,const void *b);
-void nameSearch(STUDENT *student,int *studentNumber,int *subjectNumber);
 int SearchID(COURSE* course);
-void SortScore(STUDENT *student,int *studentNumber,int *subjectNumber);
-void Print2(STUDENT *student,int *studentNumber,int *subjectNumber);
-void sumAndAveStudentSore2(STUDENT *student,int *studenNumber,int *subjectNumber);
 void SystemSet();
-int ScanfSet();
 void WriteFile(COURSE *course);
 void ReadFile(COURSE *course);
 void SystemSet();
@@ -75,9 +62,9 @@ void ModifyStudent(COURSE *course);
 void DeleteStudent(COURSE *course);
 void PrintStudent(COURSE *course);
 void NoticeMenu(COURSE *course);
-void RegisterNotice();
-void ModifyNotice();
-void DeleteNotice();
+void RegisterNotice(COURSE *course);
+void ModifyNotice(COURSE *course);
+void DeleteNotice(COURSE *course);
 void PrintNotice(COURSE *course);
 
 #endif // STUDENT_H_INCLUDED
