@@ -23,23 +23,9 @@ typedef struct course
 	int studentNumber;
 }COURSE;
 
-//º¯ÊýÉùÃ÷²¿·Ö
-void readDate(STUDENT *student,int *studentNumber,int *subjectNumber);
-void returnUserFace();
-void sumAndAveSubjectSore(STUDENT *student,int *studenNumber,int *subjectNumber);
-void sumAndAveStudentSore(STUDENT *student,int *studenNumber,int *subjectNumber);
-int orderBig(const void *a,const void *b);
-int orderSmall(const void *a,const void *b);
-void Print(STUDENT *student,int *studenNumber,int *subjectNumber);
 int CompareID(const void *elem1, const void *elem2);
-int orderName(const void *a,const void *b);
-void nameSearch(STUDENT *student,int *studentNumber,int *subjectNumber);
 int SearchID(COURSE* course);
-void SortScore(STUDENT *student,int *studentNumber,int *subjectNumber);
-void Print2(STUDENT *student,int *studentNumber,int *subjectNumber);
-void sumAndAveStudentSore2(STUDENT *student,int *studenNumber,int *subjectNumber);
 void SystemSet();
-int ScanfSet();
 void WriteFile(COURSE *course);
 void ReadFile(COURSE *course);
 void SystemSet();
