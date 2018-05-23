@@ -337,6 +337,7 @@ void SelectCourse(COURSE **course, int *courseCount)
 	{
 		PrintCourseList(course, courseCount);
 		scanf("%d", &index);
+		getchar();
 
 		ManagementMenu(&((*course)[index]));
 	}
@@ -355,7 +356,8 @@ void RegisterCourse(COURSE **course, int *courseCount)
 	char courseName[40];
 
 	printf("please insert name of new subject\n");
-	gets(courseName);
+	fgets(courseName, sizeof(courseName), stdin);
+	courseName[strlen(courseName) - 1] = '\0';
 
 	if (*courseCount == 0)
 	{
@@ -422,7 +424,9 @@ void ModifyCourse(COURSE **course, int *courseCount)
 		getchar();
 
 		printf("please enter the new name of course\n");
-		gets(newName);
+		fgets(newName, sizeof(newName), stdin);
+		newName[strlen(newName) - 1] = '\0';
+
 
 		strcpy((*course)[index].name, newName);
 		printf("course is successfully modified!\n");
@@ -838,7 +842,9 @@ void RegisterAssignment(COURSE *course)
 	char assignmentComment[50];
 
 	printf("please insert comments of a new assignment\n");
-	gets(assignmentComment);
+	fgets(assignmentComment, sizeof(assignmentComment), stdin);
+	assignmentComment[strlen(assignmentComment) - 1] = '\0';
+
 
 	for (i = 0; i < 5; i++) {
 		if (strlen(course->assignment[i]) == 0) {
@@ -863,8 +869,10 @@ void ModifyAssignment(COURSE *course)
 	scanf("%d", &assignmentNumber);
 	getchar();
 	assignmentNumber--;
+
 	printf("\n\nplease insert comments about an assignment that you want to modify\n");
-	gets(assignmentComment);
+	fgets(assignmentComment, sizeof(assignmentComment), stdin);
+	assignmentComment[strlen(assignmentComment) - 1] = '\0';
 
 	for (i = 0; i < 5; i++) {
 		if (i == assignmentNumber) {
@@ -1147,7 +1155,8 @@ void RegisterNotice(COURSE *course)
 	char newNotice[50];
 
 	printf("Enter notice\n");
-	gets(newNotice);
+	fgets(newNotice, sizeof(newNotice), stdin);
+	newNotice[strlen(newNotice) - 1] = '\0';
 
 	for (i = 0; i < 10; i++) {
 		if (strlen(course->notice[i]) == 0) {
@@ -1195,7 +1204,8 @@ void ModifyNotice(COURSE *course)
 	getchar();
 
 	printf("Enter notice\n");
-	gets(newNotice);
+	fgets(newNotice, sizeof(newNotice), stdin);
+	newNotice[strlen(newNotice) - 1] = '\0';
 
 	strcpy((*course).notice[index], newNotice);
 
