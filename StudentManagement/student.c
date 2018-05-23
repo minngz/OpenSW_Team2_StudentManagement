@@ -743,6 +743,17 @@ void ScoreMenu(COURSE *course)
 	}
 }
 
+/***************************************************************************************************************************************************
+	If user wants to register score of student, this RegisterScore function will be performed.
+
+	1) Getting input studentID from user
+	2-1) If studentID doesn't exists, it will be returned to score menu after 3 seconds automatically.
+	2-2) If studentId exists, user has to input midterm-score and final-score to register.
+	3) Informations about scores will be stored in 'examScore' array which index of 0 means midterm-score and index of 1 means final-score.
+		(You have to input score from 0 to 100. Because deleted score will be treated as 300)
+	4)After this process, the score will be registered in student's examScore variable who user input.
+***************************************************************************************************************************************************/
+
 void RegisterScore(COURSE *course)
 {
 	
@@ -790,6 +801,16 @@ void RegisterScore(COURSE *course)
 	Sleep(3000);
 }
 
+/***************************************************************************************************************************************************
+	If user wants to modify score of student, this ModifyScore function will be performed.
+
+	1) Getting input studentID from user
+	2-1) If studentID doesn't exists, it will be returned to score menu after 3 seconds automatically.
+	2-2) If studentId exists, user has to input midterm-score and final-score to modify.
+	3) Informations about scores will be stored in 'examScore' array which index of 0 means midterm-score and index of 1 means final-score.
+		(You have to input score from 0 to 100. Because deleted score will be treated as 300)
+	4)After this process, the score will be modified in student's examScore variable who user input.
+***************************************************************************************************************************************************/
 void ModifyScore(COURSE *course)
 {
 	char studentID[10];
@@ -845,6 +866,16 @@ void ModifyScore(COURSE *course)
 	Sleep(3000);
 }
 
+/***************************************************************************************************************************************************
+	If user wants to delete score of student, this DeleteScore function will be performed.
+	
+	1) Getting input studentID from user
+	2-1) If studentID doesn't exists, it will be returned to score menu after 3 seconds automatically.
+	2-2) If score was deleted, it will be returned to score menu after 3 seconds automatically.
+	3) Ask to user really want to delete score of input student's
+	4-1) If confirm is yes, the score will be deleted(modify score to 300)
+	4-2) if confrim is no, it will be returned to score menu after 3 secons autmatically.
+***************************************************************************************************************************************************/
 void DeleteScore(COURSE *course)
 {
 	char studentID[10];
@@ -872,7 +903,7 @@ void DeleteScore(COURSE *course)
 		return;
 	}
 
-	//deleted score is handled as a 300 so if score exceed 100, it is classifid as a deleted score.
+	//deleted score is treated as a 300 so if score exceed 100, it is classifid as a deleted score.
 	if (course->student[studentIndex].examScore[0] > 100 && course->student[studentIndex].examScore[1] > 100)
 	{
 		printf("It is already deleted score.\n");
@@ -906,6 +937,13 @@ void DeleteScore(COURSE *course)
 	}
 }
 
+/***************************************************************************************************************************************************
+	If user wants to print score of student or every scores of students and average score of this course, this PrintScore function will be performed.
+
+	1) Classify Print type.
+	2-1) If print type is ALL, prints all of students' scores and average score in a course.
+	2-2) If print type is editing or deleting, prints a score of one student's who user input.
+***************************************************************************************************************************************************/
 void PrintScore(COURSE *course, int printType, int studentIndex)
 {
 	int i, j;
@@ -913,9 +951,10 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 	int isDeleted;
 	int deleteCount = 0;
 
+	// Case every students' scores in this course.
 	if (printType == PRINTTYPE_ALL)
 	{
-		if (course->studentNumber == 0)
+		if (course->studentNumber == 0) // Case which a course doesn't have any students.
 		{
 			printf("No Data Error!\n");
 			printf("It will be returned to Score Menu after 3 seconds\n");
@@ -925,7 +964,8 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 
 		for (i = 0; i < course->studentNumber; i++)
 		{
-			if (0 <= course->student[i].examScore[0] && course->student[i].examScore[1] <= 100)
+			// The reason why classifed specific section is under 0 score means unregistered and over 100(300) means deleted score.
+			if (0 <= course->student[i].examScore[0] && course->student[i].examScore[1] <= 100) 
 			{
 				printf("%s %s\n", course->student[i].id, course->student[i].name);
 				printf("Midterm Exam : %.2lf / Final Exam : %.2lf\n\n", course->student[i].examScore[0], course->student[i].examScore[1]);
@@ -938,6 +978,7 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 		return;
 	}
 
+	//When only editing and deleting function activated, only a person's score who had been input displayed.
 	if (printType == PRINTTYPE_EDIT || printType == PRINTTYPE_DELETE)
 	{
 		if (course->student[studentIndex].examScore[0] > 100 && course->student[studentIndex].examScore[1] > 100)
@@ -953,7 +994,13 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 	}
 }
 
+/***************************************************************************************************************************************************
+	If print-type was PRINTTYPE_ALL in PrintScore function, this method is called. 
 
+	1) Classify Print type.
+	2) Using for loop, every scores of midterm-score add to midtermSum and every scores of final-score add to finalSum.
+	3) _register_count is counting only registered score of registered students.
+***************************************************************************************************************************************************/
 void AverageCourseScore(COURSE *course)
 {
 	int i;
