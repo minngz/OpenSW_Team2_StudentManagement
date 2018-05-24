@@ -1725,8 +1725,7 @@ void DeleteStudent(COURSE *course)
 	else
 	{
 		PrintStudentToDelete();
-		//scanf("%c", &checkDelete);
-		//getchar();
+
 		checkDelete = getche();
 
 		if (checkDelete == 'y' || checkDelete == 'Y')
@@ -1753,16 +1752,6 @@ void DeleteStudent(COURSE *course)
 	printf("\n   It will return to course menu 3 seconds later");
 	Sleep(3000);
 }
-
-/****************************************************************************************************
-	If a student exists in this course, the print function will be performed.
-
-	qsort() - This function arranges the list of students in ascending order by student ID
-	1) course->student : Point of start the target array
-	2) course->studentCount : Array size for the element
-	3) sizeof(STUDENT) : Element size in bytes
-	4) CompareID : Pointer to a function that compares two elements. This function is called repeatedly by qsort to compare two elements
-*****************************************************************************************************/
 
 // "Delete the student [y/n] : "  printed in PrintStudentToDelete function
 void PrintStudentToDelete() {
