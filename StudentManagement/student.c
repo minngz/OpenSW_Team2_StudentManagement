@@ -1620,6 +1620,7 @@ void PrintStudent(COURSE *course)
 	}
 }
 
+/* 4.Manage -> 4.Notice Management */
 void NoticeMenu(COURSE *course)
 {
 	char menuInput;
@@ -1655,6 +1656,15 @@ void NoticeMenu(COURSE *course)
 		}
 	}
 }
+
+/****************************************************************************************************
+If user wants to register notice of course, this RegisterNotice function will be performed
+
+int check : Check whether the notice array is full
+
+If notice array is not full (check = 1), enter the notice of the course you want to add.
+Print registered notice and return to the notice menu function().
+******************************************************************************************************/
 
 void RegisterNotice(COURSE *course)
 {
@@ -1706,6 +1716,16 @@ void PrintNoticeToRegister() {
 	printf("\033[11;13H:  ");
 }
 
+/****************************************************************************************************
+If user wants to modify notice of course, this ModifyNotice function will be performed
+
+int check : Check whether the notice array is empty
+
+If notice array is not empty (check = 1), print registered notices and user will select notice that they want to modify. 
+If the notice you select is not registered ( strlen(course->notice[index]) == 0 ), inform you about this.
+else enter the notice of the course you want to modify and return to the notice menu function().
+******************************************************************************************************/
+
 void ModifyNotice(COURSE *course)
 {
 	int i, j, index, check=0;
@@ -1750,6 +1770,16 @@ void ModifyNotice(COURSE *course)
 
 }
 
+/****************************************************************************************************
+If user wants to delete notice of course, this DeleteNotice function will be performed
+
+int check : Check whether the notice array is empty
+
+If notice array is not empty (check = 1), print registered notices and user will select notice that they want to delete.
+If the notice you select is not registered ( strlen(course->notice[index]) == 0 ), inform you about this.
+else delete the notice of the course you want to delete and return to the notice menu function().
+******************************************************************************************************/
+
 void DeleteNotice(COURSE *course)
 {
 	int i, j, index, check=0;
@@ -1787,6 +1817,15 @@ void DeleteNotice(COURSE *course)
 	printf("Notice [%d] is successfully deleted!", index);
 	Sleep(1500);
 }
+
+/****************************************************************************************************
+If user wants to see the notice of course, this PrintNotice function will be performed
+
+int check : Check whether the notice array is empty
+
+If notice array is not empty (check = 1), print registered notices
+else print("There are no notices to display") and  return to the notice menu function().
+******************************************************************************************************/
 
 void PrintNotice(COURSE *course)
 {
