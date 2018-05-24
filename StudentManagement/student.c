@@ -270,9 +270,7 @@ void ReadFile(COURSE *course)
 }
 
 
-/******************************************
-   Console print(UI) of Course menu
- ******************************************/
+// Course Menu printed in PrintCourseMenu function
 void PrintCourseMenu()
 {
 	system("cls");
@@ -292,9 +290,7 @@ void PrintCourseMenu()
 
 }
 
-/******************************************
-   Console print(UI) of Management menu
-*******************************************/
+// Management Menu printed in PrintManagementMenu function
 void PrintManagementMenu()
 {
 	system("cls");
@@ -315,9 +311,7 @@ void PrintManagementMenu()
 	printf("                               Select number to execute : ");
 }
 
-/******************************************
-   Console print(UI) of score menu
-*******************************************/
+// Score Menu printed in PrintScoreMenu function
 void PrintScoreMenu()
 {
 	system("cls");
@@ -336,9 +330,7 @@ void PrintScoreMenu()
 	printf("                               Select number to execute : ");
 }
 
-/******************************************
-   Console print(UI) of assignment menu
-*******************************************/
+// Assignment Menu printed in PrintAssignmentMenu function
 void PrintAssignmentMenu()
 {
 	system("cls");
@@ -357,9 +349,7 @@ void PrintAssignmentMenu()
 	printf("                               Select number to execute : ");
 }
 
-/******************************************
-   Console print(UI) of student menu
- *******************************************/
+// Student Menu printed in PrintStudentMenu function
 void PrintStudentMenu()
 {
 	system("cls");
@@ -378,9 +368,7 @@ void PrintStudentMenu()
 	printf("                               Select number to execute : ");
 }
 
-/*******************************************
-   Console print(UI) of notice menu
- *******************************************/
+// Notice Menu printed in PrintNoticeMenu function
 void PrintNoticeMenu()
 {
 	system("cls");
@@ -398,7 +386,6 @@ void PrintNoticeMenu()
 	printf("  戌式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式戎\n");
 	printf("                               Select number to execute : ");
 }
-
 
 /***********************************************************************
    COURSE **course - the array of structure which want to print 
@@ -495,6 +482,7 @@ void SelectCourse(COURSE **course, int *courseCount)
 	}
 }
 
+// "Please select number of a course to manage" printed in PrintSelectCourse function
 void PrintSelectCourse() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -587,6 +575,7 @@ void InitCourse(COURSE *course)
 	(*course).studentCount = 0;
 }
 
+// "Please insert name of new subject" printed 
 void PrintToRegisterCourse() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -650,6 +639,7 @@ void ModifyCourse(COURSE **course, int *courseCount)
 	Sleep(3000);
 }
 
+// "Please insert number what you want to modify" printed 
 void PrintToModifyCourse() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -668,6 +658,7 @@ void PrintToModifyCourse() {
 	printf("\033[11;13H:  ");
 }
 
+// "Please enter the new name of course" printed 
 void PrintToModifyNameOfCourse() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -749,6 +740,7 @@ void DeleteCourse(COURSE **course, int *courseCount)
 
 }
 
+// "Please insert number what you want to delete" printed 
 void PrintToDeleteCourse() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -912,16 +904,7 @@ void RegisterScore(COURSE *course)
 	Sleep(3000);
 }
 
-/***************************************************************************************************************************************************
-	If user wants to modify score of student, this ModifyScore function will be performed.
-
-	1) Getting input studentID from user
-	2-1) If studentID doesn't exists, it will be returned to score menu after 3 seconds automatically.
-	2-2) If studentId exists, user has to input midterm-score and final-score to modify.
-	3) Informations about scores will be stored in 'examScore' array which index of 0 means midterm-score and index of 1 means final-score.
-		(You have to input score from 0 to 100. Because deleted score will be treated as 300)
-	4)After this process, the score will be modified in student's examScore variable who user input.
-***************************************************************************************************************************************************/
+// "Please insert number what you want to delete" printed 
 void PrintIDToRegisterScore() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -940,6 +923,7 @@ void PrintIDToRegisterScore() {
 	printf("\033[11;13H:  ");
 }
 
+// "Input midterm score" printed in PrintMidtermScoreToRegisterScore function
 void PrintMidtermScoreToRegisterScore() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -958,6 +942,7 @@ void PrintMidtermScoreToRegisterScore() {
 	printf("\033[11;13H:  ");
 }
 
+// "Input final score" printed in PrintFinalScoreToRegisterScore function
 void PrintFinalScoreToRegisterScore() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -976,6 +961,16 @@ void PrintFinalScoreToRegisterScore() {
 	printf("\033[11;13H:  ");
 }
 
+/***************************************************************************************************************************************************
+If user wants to modify score of student, this ModifyScore function will be performed.
+
+1) Getting input studentID from user
+2-1) If studentID doesn't exists, it will be returned to score menu after 3 seconds automatically.
+2-2) If studentId exists, user has to input midterm-score and final-score to modify.
+3) Informations about scores will be stored in 'examScore' array which index of 0 means midterm-score and index of 1 means final-score.
+(You have to input score from 0 to 100. Because deleted score will be treated as 300)
+4)After this process, the score will be modified in student's examScore variable who user input.
+***************************************************************************************************************************************************/
 void ModifyScore(COURSE *course)
 {
 	char studentID[10];
@@ -1031,16 +1026,7 @@ void ModifyScore(COURSE *course)
 	Sleep(3000);
 }
 
-/***************************************************************************************************************************************************
-	If user wants to delete score of student, this DeleteScore function will be performed.
-	
-	1) Getting input studentID from user
-	2-1) If studentID doesn't exists, it will be returned to score menu after 3 seconds automatically.
-	2-2) If score was deleted, it will be returned to score menu after 3 seconds automatically.
-	3) Ask to user really want to delete score of input student's
-	4-1) If confirm is yes, the score will be deleted(modify score to 300)
-	4-2) if confrim is no, it will be returned to score menu after 3 secons autmatically.
-***************************************************************************************************************************************************/
+// "Input student ID to modify score" printed in PrintIDToModifyScore function
 void PrintIDToModifyScore() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1059,6 +1045,7 @@ void PrintIDToModifyScore() {
 	printf("\033[11;13H:  ");
 }
 
+// "Input midterm score to modify" printed in PrintMidtermScoreToModifyScore function
 void PrintMidtermScoreToModifyScore() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1077,6 +1064,7 @@ void PrintMidtermScoreToModifyScore() {
 	printf("\033[11;13H:  ");
 }
 
+// "Input final score to modify" printed in PrintFinalScoreToModifyScore function
 void PrintFinalScoreToModifyScore() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1095,6 +1083,16 @@ void PrintFinalScoreToModifyScore() {
 	printf("\033[11;13H:  ");
 }
 
+/***************************************************************************************************************************************************
+If user wants to delete score of student, this DeleteScore function will be performed.
+
+1) Getting input studentID from user
+2-1) If studentID doesn't exists, it will be returned to score menu after 3 seconds automatically.
+2-2) If score was deleted, it will be returned to score menu after 3 seconds automatically.
+3) Ask to user really want to delete score of input student's
+4-1) If confirm is yes, the score will be deleted(modify score to 300)
+4-2) if confrim is no, it will be returned to score menu after 3 secons autmatically.
+***************************************************************************************************************************************************/
 void DeleteScore(COURSE *course)
 {
 	char studentID[10];
@@ -1217,6 +1215,8 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 }
 
 	// Case every students' scores in this course.
+
+	// "Input student ID to Delete Score" printed in PrintIDToDeleteScore function
 void PrintIDToDeleteScore() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1286,6 +1286,14 @@ void WriteScoreFile()
 
 }
 
+/***************************************************************************************************************************************************
+In AssignmentMenu, you can execute functions below.
+
+1) Register assignment
+2) Modify assignment
+3) Delete assignment
+4) Print assignment
+***************************************************************************************************************************************************/
 void AssignmentMenu(COURSE *course)
 {
 	char menuInput;
@@ -1322,6 +1330,12 @@ void AssignmentMenu(COURSE *course)
 	}
 }
 
+/***************************************************************************************************************************************************
+If user wants to register assignment of course, this RegisterAssignment function will be performed.
+
+1) Getting input comments of an assignment from user
+2) Comments of an assignment will be stored in 'assignment' array in course structure
+***************************************************************************************************************************************************/
 void RegisterAssignment(COURSE *course)
 {
 	int i;
@@ -1343,6 +1357,7 @@ void RegisterAssignment(COURSE *course)
 	Sleep(3000);
 }
 
+// "Please insert comments of a new assignment" printed in PrintAssignmentToRegister function
 void PrintAssignmentToRegister() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1361,6 +1376,13 @@ void PrintAssignmentToRegister() {
 	printf("\033[11;13H:  ");
 }
 
+/***************************************************************************************************************************************************
+If user wants to modify assignment of course, this ModifyAssignment function will be performed.
+
+1) Getting input number of an assignment which wants to modify from user
+2) Getting input comments of assignment to modify.
+3) New comments of an assignment will be stored in 'assignment' array in course structure
+***************************************************************************************************************************************************/
 void ModifyAssignment(COURSE *course)
 {
 	int assignmentNumber = 0;
@@ -1391,6 +1413,7 @@ void ModifyAssignment(COURSE *course)
 	Sleep(3000);
 }
 
+// "Which assignment do you want to modify?" printed in PrintAssignmentToModify function
 void PrintAssignmentToModify() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1409,6 +1432,7 @@ void PrintAssignmentToModify() {
 	printf("\033[11;13H:  ");
 }
 
+// "Please insert comments about an assignment" printed in PrintCommentsOfAssignmentToModify function
 void PrintCommentsOfAssignmentToModify() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1427,6 +1451,12 @@ void PrintCommentsOfAssignmentToModify() {
 	printf("\033[11;13H:  ");
 }
 
+/***************************************************************************************************************************************************
+If user wants to delete assignment of course, this DeleteAssignment function will be performed.
+
+1) Getting input number of an assignment which wants to delete from user
+2) Comments of an assignment will be deleted in 'assignment' array in course structure
+***************************************************************************************************************************************************/
 void DeleteAssignment(COURSE *course)
 {
 	int i = 0, j = 0;
@@ -1460,6 +1490,7 @@ void DeleteAssignment(COURSE *course)
 	Sleep(3000);
 }
 
+// "Which assignment do you want to delete?"  printed 
 void PrintAssignmentToDelete() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1478,6 +1509,10 @@ void PrintAssignmentToDelete() {
 	printf("\033[11;13H:  ");
 }
 
+/***************************************************************************************************************************************************
+If user wants to print assignment of course, this PrintAssignment function will be performed.
+Print a list of assignments for 3 seconds.
+***************************************************************************************************************************************************/
 void PrintAssignment(COURSE *course)
 {
 	int i = 0;
@@ -1578,11 +1613,7 @@ void RegisterStudent(COURSE *course)
 	Sleep(3000);
 }
 
-/****************************************************************************************************
-	int searchStudent : index of the student you want to modify. (return value of SearchID function)
-
-	If the student you want to modify is in student array (searchStudent!=1), you can change name of the student (newName).
-*****************************************************************************************************/
+// "ID of new student : "  printed in PrintStudentToRegister function
 void PrintStudentToRegister() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1601,6 +1632,7 @@ void PrintStudentToRegister() {
 	printf("\033[11;13H:  ");
 }
 
+// "Name of new student : "  printed in PrintNameOfStudentToRegister function
 void PrintNameOfStudentToRegister() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1619,6 +1651,11 @@ void PrintNameOfStudentToRegister() {
 	printf("\033[11;13H:  ");
 }
 
+/****************************************************************************************************
+int searchStudent : index of the student you want to modify. (return value of SearchID function)
+
+If the student you want to modify is in student array (searchStudent!=1), you can change name of the student (newName).
+*****************************************************************************************************/
 void ModifyStudent(COURSE *course)
 {
 	int searchStudent; //index
@@ -1646,14 +1683,7 @@ void ModifyStudent(COURSE *course)
 	Sleep(3000);
 }
 
-/****************************************************************************************************
-	char checkDelete : a variable used to input whether to delete or not.
-
-	Find students to delete by using SearchID function.
-	If the checkDelete is 'y'/'Y', the next student of student to delete will be covered with data, and the array is pulling forwards.
-	Also, thhe number of students in this course decreases.
-*****************************************************************************************************/
-
+// "New name of the student : "  printed in PrintNameOfStudentToModify function
 void PrintNameOfStudentToModify() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1672,6 +1702,13 @@ void PrintNameOfStudentToModify() {
 	printf("\033[11;13H:  ");
 }
 
+/****************************************************************************************************
+char checkDelete : a variable used to input whether to delete or not.
+
+Find students to delete by using SearchID function.
+If the checkDelete is 'y'/'Y', the next student of student to delete will be covered with data, and the array is pulling forwards.
+Also, thhe number of students in this course decreases.
+*****************************************************************************************************/
 void DeleteStudent(COURSE *course)
 {
 	int searchStudent;
@@ -1727,6 +1764,7 @@ void DeleteStudent(COURSE *course)
 	4) CompareID : Pointer to a function that compares two elements. This function is called repeatedly by qsort to compare two elements
 *****************************************************************************************************/
 
+// "Delete the student [y/n] : "  printed in PrintStudentToDelete function
 void PrintStudentToDelete() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1745,6 +1783,15 @@ void PrintStudentToDelete() {
 	printf("\033[11;13H:  ");
 }
 
+/****************************************************************************************************
+If a student exists in this course, the print function will be performed.
+
+qsort() - This function arranges the list of students in ascending order by student ID
+1) course->student : Point of start the target array
+2) course->studentCount : Array size for the element
+3) sizeof(STUDENT) : Element size in bytes
+4) CompareID : Pointer to a function that compares two elements. This function is called repeatedly by qsort to compare two elements
+*****************************************************************************************************/
 void PrintStudent(COURSE *course)
 {
 	if (course->studentCount == 0)
@@ -1767,10 +1814,10 @@ void PrintStudent(COURSE *course)
 	}
 }
 
+/* 4.Manage -> 4.Notice Management */
 void NoticeMenu(COURSE *course)
 {
 	char menuInput;
-	getchar();
 
 	for(;;)
 	{
@@ -1804,6 +1851,15 @@ void NoticeMenu(COURSE *course)
 	}
 }
 
+/****************************************************************************************************
+If user wants to register notice of course, this RegisterNotice function will be performed
+
+int check : Check whether the notice array is full
+
+If notice array is not full (check = 1), enter the notice of the course you want to add.
+Print registered notice and return to the notice menu function().
+******************************************************************************************************/
+
 void RegisterNotice(COURSE *course)
 {
 	int i, check = 0;
@@ -1836,6 +1892,7 @@ void RegisterNotice(COURSE *course)
 
 }
 
+// "Enter notice : "  printed in PrintNoticeToRegister function
 void PrintNoticeToRegister() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
@@ -1853,6 +1910,16 @@ void PrintNoticeToRegister() {
 	printf("\033[9;13HEnter notice");
 	printf("\033[11;13H:  ");
 }
+
+/****************************************************************************************************
+If user wants to modify notice of course, this ModifyNotice function will be performed
+
+int check : Check whether the notice array is empty
+
+If notice array is not empty (check = 1), print registered notices and user will select notice that they want to modify. 
+If the notice you select is not registered ( strlen(course->notice[index]) == 0 ), inform you about this.
+else enter the notice of the course you want to modify and return to the notice menu function().
+******************************************************************************************************/
 
 void ModifyNotice(COURSE *course)
 {
@@ -1898,6 +1965,16 @@ void ModifyNotice(COURSE *course)
 
 }
 
+/****************************************************************************************************
+If user wants to delete notice of course, this DeleteNotice function will be performed
+
+int check : Check whether the notice array is empty
+
+If notice array is not empty (check = 1), print registered notices and user will select notice that they want to delete.
+If the notice you select is not registered ( strlen(course->notice[index]) == 0 ), inform you about this.
+else delete the notice of the course you want to delete and return to the notice menu function().
+******************************************************************************************************/
+
 void DeleteNotice(COURSE *course)
 {
 	int i, j, index, check=0;
@@ -1933,9 +2010,18 @@ void DeleteNotice(COURSE *course)
 	for (i = index; i < 9; i++)
 		strcpy(course->notice[i], course->notice[i + 1]);
 
-	printf("Notice [%d] is successfully deleted!", j);
+	printf("Notice [%d] is successfully deleted!", index);
 	Sleep(1500);
 }
+
+/****************************************************************************************************
+If user wants to see the notice of course, this PrintNotice function will be performed
+
+int check : Check whether the notice array is empty
+
+If notice array is not empty (check = 1), print registered notices
+else print("There are no notices to display") and  return to the notice menu function().
+******************************************************************************************************/
 
 void PrintNotice(COURSE *course)
 {
