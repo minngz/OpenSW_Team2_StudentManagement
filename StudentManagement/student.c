@@ -5,6 +5,8 @@
 #define PRINTTYPE_EDIT 1
 #define PRINTTYPE_DELETE 2
 #define PRINTTYPE_ALL 3
+#define MAX_ASSIGNMENT 5
+#define MAX_NOTICE 10
 
 void SystemSet()
 {
@@ -27,7 +29,7 @@ int CompareID(const void *elem1, const void *elem2)
 }
 
 /*********************************************************************************
-	This function searchs for a student by student ID 
+	This function searchs for a student by student ID
 	return valuse(searchStudent) : index of the student selected in student array.
 								   It is found through repetitive statement.
 **********************************************************************************/
@@ -50,6 +52,27 @@ int SearchID(COURSE* course)
 	return searchStudent;
 }
 
+/*****************************************************************************************************
+   COURSE *course - the component of course that user want to add data to file.
+   int noticeCount - the number of existing notice by using strlen.
+   int assignmentCount - the number of existing assignment by using strlen.
+   
+   sample_course.txt - WriteFile function uses file which name is "sample_course.txt".
+   So if you have "sample_course.txt" and it contains important information, 
+   you should change your file name to another.
+   
+   1-1) If the file exists,
+   it writes the total number of students(studentCount) in the first row.
+   Then, it writes information of student(STUDNET array) one row by one.
+   The information contains student ID, name, exam score and assignment score.
+   Next, it writes the total number of assignment notice and details about assignment on next line.
+   Finally, it writes the number of notice and details same as assignment.
+   
+   1-2) If the file doens't exist,
+   Print the "Cannot open the file" on console windows and exit program.
+   
+   2) Finally, it closes the file and print success message.
+******************************************************************************************************/
 void WriteFile(COURSE *course)
 {
 	FILE *file;        // file variables to open, write, and close the txt file
@@ -57,7 +80,7 @@ void WriteFile(COURSE *course)
 	int noticeCount;
 	int assignmentCount;
 
-	file = fopen("sample_course.txt", "w");									 
+	file = fopen("sample_course.txt", "w");
 
 	if (file == NULL)
 	{
@@ -66,9 +89,9 @@ void WriteFile(COURSE *course)
 	} // "sample_course.txt" doesnt' exist
 	else
 	{
-		fprintf(file, "%d\n", (*course).studentCount);  
-														
-		for (i = 0; i <  (*course).studentCount; i++)
+		fprintf(file, "%d\n", (*course).studentCount);
+
+		for (i = 0; i < (*course).studentCount; i++)
 		{
 			fprintf(file, "%s %s ", (*course).student[i].id, (*course).student[i].name);
 
@@ -77,17 +100,16 @@ void WriteFile(COURSE *course)
 				fprintf(file, "%-8.2f", (*course).student[i].examScore[j]);
 			}
 
-			for (j = 0; j < 5; j++)
+			for (j = 0; j < MAX_ASSIGNMENT; j++)
 			{
 				fprintf(file, "%-8.2f", (*course).student[i].assignmentScore[j]);
 			}
-
 			fprintf(file, "\n");
 		}
 
 		noticeCount = 0;
 
-		for (i = 0; i < 10; i++)
+		for (i = 0; i < MAX_NOTICE; i++)
 		{
 			if (strlen((*course).notice[i]) != 0)
 			{
@@ -104,7 +126,7 @@ void WriteFile(COURSE *course)
 
 		assignmentCount = 0;
 
-		for (i = 0; i < 5; i++)
+		for (i = 0; i < MAX_ASSIGNMENT; i++)
 		{
 			if (strlen((*course).assignment[i]) != 0)
 			{
@@ -114,7 +136,7 @@ void WriteFile(COURSE *course)
 
 		fprintf(file, "%d\n", assignmentCount);
 
-		for (i = 0; i <assignmentCount; i++)
+		for (i = 0; i < assignmentCount; i++)
 		{
 			fprintf(file, "%s\n", (*course).assignment[i]);
 		}
@@ -127,9 +149,44 @@ void WriteFile(COURSE *course)
 	Sleep(3000);
 }
 
+/*****************************************************************************************************
+   COURSE *course - the component of course that user want to add data from file.
+   int studentCount - the number of student would be stored in this variable from text file.
+   int existNoticeCount - the number of existing notice by using strlen.
+   int existAssignmentCount -  the number of existing assignment by using strlen.
+   int newNoticeCount - the integer that read from file and means the number of notice in file.
+   int newAssignmentCount - the integer that read from file and means the number of notice in file.
+   
+   sample_course.txt - ReadFile function uses file which name is "sample_course.txt".
+   if you want to read information from your file, you should change your file name to 
+   "sample_course.txt" and the information format should be like this.
+   
+   -------------------------------------------------------------------------------------------
+   5
+   122172 suckho 80.0 90.0 7.0 10.0 6.0 10.0 7.0
+   122211 youngho 95.0 95.0 7.0 10.0 8.0 10.0 0.0
+   13011045 jongwon 70.0 50.0  0.0 10.0 0.0 10.0 0.0
+   15010982 minji 90.0 95.0 10.0 10.0 10.0 10.0 8.0
+   15011046 haeun 95.0 90.0 10.0 10.0 7.0 10.0 5.0
+   3
+   There is no lecture on 6, June.
+   Final exam will be on 18, June.
+   The last assignment should be done with your team member and submit report until friday.
+   3
+   Review of open source video
+   OSS survey and presentation
+   Development plan
+   --------------------------------------------------------------------------------------------
+   
+   First line is number of students and 2~6 line is 
+   [ studentID | name | midterm-score | finalExam-score | assignment score 0~4 ]
+   Next integer is number of notice, after then you just write what you want to notify.
+   The last Integer is number of assignment. you can add explain about assignment on next line.
+   
+******************************************************************************************************/
 void ReadFile(COURSE *course)
 {
-	int i, j;        
+	int i, j;
 	int studentCount;
 	int existNoticeCount;
 	int existAssignmentCount;
@@ -146,18 +203,18 @@ void ReadFile(COURSE *course)
 	} // "sample_course.txt" doesnt' exist
 	else
 	{
-		fscanf(file, "%d", &studentCount);   
+		fscanf(file, "%d", &studentCount);
 		fscanf(file, "\n");
 
 		// Read all information of student array on the next row.
-		for (i = course->studentCount; i < course->studentCount+studentCount; i++)
+		for (i = course->studentCount; i < course->studentCount + studentCount; i++)
 		{
-			fscanf(file, "%s%s%",(*course).student[i].id, (*course).student[i].name);
-			fscanf(file, "%lf%lf", (*course).student[i].examScore, (*course).student[i].examScore+1);		
+			fscanf(file, "%s%s%", (*course).student[i].id, (*course).student[i].name);
+			fscanf(file, "%lf%lf", (*course).student[i].examScore, (*course).student[i].examScore + 1);
 
-			for (j = 0; j < 5; j++)
+			for (j = 0; j < MAX_ASSIGNMENT; j++)
 			{
-				fscanf(file, "%lf", (*course).student[i].assignmentScore+j);
+				fscanf(file, "%lf", (*course).student[i].assignmentScore + j);
 			}
 			fscanf(file, "\n");
 		}
@@ -169,7 +226,8 @@ void ReadFile(COURSE *course)
 
 		existNoticeCount = 0;
 
-		for (i = 0; i < 10; i++)
+		// If notice is null string, we can use it for new notice from text file.
+		for (i = 0; i < MAX_NOTICE; i++)
 		{
 			if (strlen((*course).notice[i]) != 0)
 			{
@@ -179,7 +237,7 @@ void ReadFile(COURSE *course)
 
 		for (i = 0; i < newNoticeCount; i++)
 		{
-			fgets((*course).notice[existNoticeCount + i], sizeof((*course).notice[existNoticeCount + i]),file);
+			fgets((*course).notice[existNoticeCount + i], sizeof((*course).notice[existNoticeCount + i]), file);
 			(*course).notice[existNoticeCount + i][strlen((*course).notice[existNoticeCount + i]) - 1] = '\0';
 		}
 
@@ -188,7 +246,7 @@ void ReadFile(COURSE *course)
 
 		existAssignmentCount = 0;
 
-		for (i = 0; i < 5; i++)
+		for (i = 0; i < MAX_ASSIGNMENT; i++)
 		{
 			if (strlen((*course).assignment[i]) != 0)
 			{
@@ -212,6 +270,9 @@ void ReadFile(COURSE *course)
 }
 
 
+/******************************************
+   Console print(UI) of Course menu
+ ******************************************/
 void PrintCourseMenu()
 {
 	system("cls");
@@ -223,6 +284,9 @@ void PrintCourseMenu()
 	printf(" 5.      Exit \n\n");
 }
 
+/******************************************
+   Console print(UI) of Management menu
+*******************************************/
 void PrintManagementMenu()
 {
 	system("cls");
@@ -236,6 +300,9 @@ void PrintManagementMenu()
 	printf("ESC.           Back \n\n");
 }
 
+/******************************************
+   Console print(UI) of score menu
+*******************************************/
 void PrintScoreMenu()
 {
 	system("cls");
@@ -247,6 +314,9 @@ void PrintScoreMenu()
 	printf("ESC.     Back \n\n");
 }
 
+/******************************************
+   Console print(UI) of assignment menu
+*******************************************/
 void PrintAssignmentMenu()
 {
 	system("cls");
@@ -258,6 +328,9 @@ void PrintAssignmentMenu()
 	printf("ESC.     Back \n\n");
 }
 
+/******************************************
+   Console print(UI) of student menu
+ *******************************************/
 void PrintStudentMenu()
 {
 	system("cls");
@@ -269,6 +342,9 @@ void PrintStudentMenu()
 	printf("ESC.    Back \n\n");
 }
 
+/*******************************************
+   Console print(UI) of notice menu
+ *******************************************/
 void PrintNoticeMenu()
 {
 	system("cls");
@@ -280,6 +356,13 @@ void PrintNoticeMenu()
 	printf("ESC.     Back \n\n");
 }
 
+
+/***********************************************************************
+   COURSE **course - the array of structure which want to print 
+   int *coursecount - the number of course
+
+   PrintCourseList prints the name list of COURSE structure array
+************************************************************************/
 void PrintCourseList(COURSE **course, int *courseCount)
 {
 	int i;
@@ -292,11 +375,18 @@ void PrintCourseList(COURSE **course, int *courseCount)
 	}
 }
 
+/***********************************************************************************************
+   COURSE **course - the array of structure which want to manage in course menu.
+   int *coursecount - the number of course
+   char menuinput - the input of user that is used for selecting function
+
+   CourseMenu receive one character from user and use it to select the menu of course.
+*************************************************************************************************/
 void CourseMenu(COURSE **course, int *courseCount)
 {
 	char menuInput;
 
-	while (1)
+	for(;;)
 	{
 		PrintCourseMenu();
 		menuInput = getch();
@@ -329,10 +419,19 @@ void CourseMenu(COURSE **course, int *courseCount)
 	}
 }
 
+/************************************************************************************************
+   COURSE **course - the array of structure that user want to select.
+   int *coursecount - the number of course
+   int index - the input of user that is used for selecting function.
+   
+   SelectCourse prints the list of course and receives input(inex) from the user. Then it calls 
+   management menu with the one component of COURSE array that user selected.
+*************************************************************************************************/
 void SelectCourse(COURSE **course, int *courseCount)
 {
 	int index;
 
+	// If there is no course, It doesn't work.
 	if (*courseCount > 0)
 	{
 		PrintCourseList(course, courseCount);
@@ -347,9 +446,23 @@ void SelectCourse(COURSE **course, int *courseCount)
 		printf("It will return to course menu 3 seconds later\n");
 		Sleep(3000);
 	}
-
 }
 
+/*****************************************************************************************************
+   COURSE **course - the array of structure that new course would be addded.
+   int *coursecount - the number of course
+   int courseName[40] - the temporary variable which receive the string of course name from user.
+   
+   1) RegisterCourse receive the name of new course from user. 
+   
+   2-1) If there is no component in COURSE array, 
+   it allocate the array dynamically which size is one COURSE.
+   
+   2-2) If there are components in COURSE array, 
+   it allocate new array dynamically which size is courseCount+1.
+   It copy the existing array to new array and copy the receiving name to new component of array.
+   Then, add this new component to new array. Finally, it free the existing array.
+******************************************************************************************************/
 void RegisterCourse(COURSE **course, int *courseCount)
 {
 	int i;
@@ -376,12 +489,8 @@ void RegisterCourse(COURSE **course, int *courseCount)
 		*course = temp;
 	}
 
+	InitCourse(&((*course)[*courseCount]));
 
-	(*course)[*courseCount].studentCount = 0;
-
-	InitAssignment(&((*course)[*courseCount]));
-	InitNotice(&((*course)[*courseCount]));
-	 
 
 	strcpy((*course)[*courseCount].name, courseName);
 	*courseCount += 1;
@@ -391,29 +500,44 @@ void RegisterCourse(COURSE **course, int *courseCount)
 	Sleep(3000);
 }
 
-void InitAssignment(COURSE *course)
+/***************************************************************************************
+   COURSE *course - the component of array of COURSE structre which want to initialize
+   
+   InitCourse function initialize data of COURSE structure as null string.
+   The data are assignment(char[]), notice(char[]), studentCount(int)
+***************************************************************************************/
+void InitCourse(COURSE *course)
 {
 	int i;
 
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < MAX_ASSIGNMENT; i++)
 	{
 		strcpy((*course).assignment[i], "");
 	}
-}
 
-void InitNotice(COURSE *course)
-{
-	int i;
-	for (i = 0; i < 10; i++)
+	for (i = 0; i < MAX_NOTICE; i++)
 	{
 		strcpy((*course).notice[i], "");
 	}
+
+	(*course).studentCount = 0;
 }
 
+/*******************************************************************************************************
+   COURSE **course - the array of structure that user would change.
+   int *coursecount - the number of course
+   int newName[40] - the temporary variable which receive the string of course name from user.
+   
+   1) If there is course in **course, it prints the list of course. Then It receives the index of what
+   the user want to modify and also receives the new name of course. Finally, it changes the course's 
+   name that user selected.
+   
+   2) If not, it notify user that there is no course and would not modify anything.
+********************************************************************************************************/
 void ModifyCourse(COURSE **course, int *courseCount)
 {
 	int index;
-	char newName[20];
+	char newName[40];
 
 	if (*courseCount > 0)
 	{
@@ -421,12 +545,11 @@ void ModifyCourse(COURSE **course, int *courseCount)
 
 		printf("please insert number what you want to modify\n");
 		scanf("%d", &index);
-		getchar();
+		getchar(); // Using getchar() for excluding enter key when using fgets below.
 
 		printf("please enter the new name of course\n");
 		fgets(newName, sizeof(newName), stdin);
-		newName[strlen(newName) - 1] = '\0';
-
+		newName[strlen(newName) - 1] = '\0'; // Because fgets receive \n(Enter), it needs to exclude it.
 
 		strcpy((*course)[index].name, newName);
 		printf("course is successfully modified!\n");
@@ -440,11 +563,27 @@ void ModifyCourse(COURSE **course, int *courseCount)
 	Sleep(3000);
 }
 
+/*****************************************************************************************************
+   COURSE **course - the array of structure that user would delete.
+   int *coursecount - the number of course
+   int deleteIndex - the index of components in COURSE array which user want to delete.
+   int countIndex - this variable is used for counting index of new array because it should copy 
+   existing array excluding selected index to new array.
+   
+   1-1) If there is course in **course, it prints the list of course. Then It receives the index 
+   of what the user want to delete.
+   1-2) Then, it allocates new array dynamically which size is (existing array size -1 ) because 
+   this function delete on component in array.
+   1-3) And it copies existing array to new array excluding selected components.
+   1-4) Finally, it free existing array of COURSE structure.
+   
+   2) If not, it notify user that there is no course and would not delete anything.
+******************************************************************************************************/
 void DeleteCourse(COURSE **course, int *courseCount)
 {
 	int i, j;
-	int index;
-	int newIndex;
+	int deleteIndex;
+	int countIndex;
 
 	if (*courseCount == 0)
 	{
@@ -454,18 +593,18 @@ void DeleteCourse(COURSE **course, int *courseCount)
 	{
 		PrintCourseList(course, courseCount);
 		printf("please insert number what you want to delete\n");
-		scanf("%d", &index);
+		scanf("%d", &deleteIndex);
 
 		COURSE *temp = (COURSE*)malloc(sizeof(COURSE)*(*courseCount - 1));
 
-		newIndex = 0;
+		countIndex = 0;
 
 		for (i = 0; i < *courseCount; i++)
 		{
-			if (i != index)
+			if (i != deleteIndex)
 			{
-				temp[newIndex] = (*course)[i];
-				newIndex++;
+				temp[countIndex] = (*course)[i];
+				countIndex++;
 			}
 		}
 
@@ -481,11 +620,18 @@ void DeleteCourse(COURSE **course, int *courseCount)
 
 }
 
+/*****************************************************************************************************
+ COURSE *course - the course that user want to manage in array of course.
+ int *coursecount - the number of course
+ char menuinput - the input of user that is used for selecting function
+
+ ManagementMenu receive one character from user and use it to select the function of management.
+******************************************************************************************************/
 void ManagementMenu(COURSE *course)
 {
 	char menuInput;
 
-	while (1)
+	for(;;)
 	{
 		PrintManagementMenu();
 		menuInput = getch();
@@ -507,7 +653,7 @@ void ManagementMenu(COURSE *course)
 		case '4':
 			NoticeMenu(course);
 			break;
-		
+
 		case '5':
 			ReadFile(course);
 			break;
@@ -529,7 +675,7 @@ void ScoreMenu(COURSE *course)
 {
 	char menuInput;
 
-	while (1)
+	for(;;)
 	{
 		PrintScoreMenu();
 		menuInput = getch();
@@ -771,7 +917,7 @@ void AverageCourseScore(COURSE *course)
 
 	for (i = 0; i < course->studentCount; i++)
 	{
-		if (course->student[i].examScore[0] > 100) 
+		if (course->student[i].examScore[0] > 100)
 		{
 			midterm_delete_count = midterm_delete_count + 1;
 		}
@@ -804,7 +950,7 @@ void AssignmentMenu(COURSE *course)
 {
 	char menuInput;
 	getchar();
-	while (1)
+	for(;;)
 	{
 		PrintAssignmentMenu();
 		menuInput = getch();
@@ -909,7 +1055,7 @@ void PrintAssignment(COURSE *course)
 {
 	int i = 0;
 	int assignmentNumber = 0;
-	for (i = 0; i < 5; i++) 
+	for (i = 0; i < 5; i++)
 	{
 		assignmentNumber = i + 1;
 		printf("%d %s\n", assignmentNumber, (*course).assignment[i]);
@@ -923,7 +1069,7 @@ void StudentMenu(COURSE *course)
 {
 	char menuInput;
 
-	while (1)
+	for(;;)
 	{
 		PrintStudentMenu();
 		menuInput = getch();
@@ -961,12 +1107,12 @@ void StudentMenu(COURSE *course)
 	int checkRegister :  check if registration is possible to avoid duplicate student ID in a course
 
 	If ID of new student is not duplicated (checkRegister!=0), enter the name of the student you want to add.
-	The name and ID entered (addID, addName) are inserted into current index of the student array, 
+	The name and ID entered (addID, addName) are inserted into current index of the student array,
 	and the number of students in this course increases.
 ******************************************************************************************************/
 void RegisterStudent(COURSE *course)
 {
-	int currentStudentCnt; 
+	int currentStudentCnt;
 	int checkRegister;
 	char addID[10];
 	char addName[20];
@@ -974,8 +1120,8 @@ void RegisterStudent(COURSE *course)
 	printf("ID of new student : ");
 	scanf("%s", addID);
 
-	for (int i = 0; i < course->studentCount; i++) 
-	{ 
+	for (int i = 0; i < course->studentCount; i++)
+	{
 		if (strcmp(course->student[i].id, addID) == 0)
 		{
 			checkRegister = 0;
@@ -999,7 +1145,7 @@ void RegisterStudent(COURSE *course)
 
 		printf("\n** Student has successfully been registered! **");
 	}
-	
+
 	printf("\nIt will return to course menu 3 seconds later\n");
 	Sleep(3000);
 }
@@ -1084,7 +1230,7 @@ void DeleteStudent(COURSE *course)
 /****************************************************************************************************
 	If a student exists in this course, the print function will be performed.
 
-	qsort() - This function arranges the list of students in ascending order by student ID 
+	qsort() - This function arranges the list of students in ascending order by student ID
 	1) course->student : Point of start the target array
 	2) course->studentCount : Array size for the element
 	3) sizeof(STUDENT) : Element size in bytes
@@ -1101,7 +1247,7 @@ void PrintStudent(COURSE *course)
 		printf("\n\t\t<< Student List >> \n\n");
 		printf("\t  ID		Name		\n");
 		printf("	===================================\n");
-	             	
+
 		qsort(course->student, course->studentCount, sizeof(STUDENT), CompareID);
 
 		for (int i = 0; i < course->studentCount; i++)
@@ -1117,7 +1263,7 @@ void NoticeMenu(COURSE *course)
 	char menuInput;
 	getchar();
 
-	while (1)
+	for(;;)
 	{
 		PrintNoticeMenu();
 		menuInput = getch();
@@ -1151,7 +1297,7 @@ void NoticeMenu(COURSE *course)
 
 void RegisterNotice(COURSE *course)
 {
-	int i,check=0;
+	int i, check = 0;
 	char newNotice[50];
 
 	printf("Enter notice\n");
@@ -1179,7 +1325,7 @@ void RegisterNotice(COURSE *course)
 
 void ModifyNotice(COURSE *course)
 {
-	int i, j, index, check=0;
+	int i, j, index, check = 0;
 	char newNotice[50];
 
 	//display notice
@@ -1223,7 +1369,7 @@ void ModifyNotice(COURSE *course)
 
 void DeleteNotice(COURSE *course)
 {
-	int i, j, index, check=0;
+	int i, j, index, check = 0;
 
 	//display notice
 	for (i = 0; i < 10; i++) {
@@ -1253,7 +1399,7 @@ void DeleteNotice(COURSE *course)
 	getchar();
 
 	for (i = index; i < 9; i++)
-		strcpy(course->notice[i], course->notice[i+1]);
+		strcpy(course->notice[i], course->notice[i + 1]);
 
 	printf("Notice [%d] is successfully deleted!\n", index);
 	Sleep(1500);
