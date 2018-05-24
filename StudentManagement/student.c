@@ -520,7 +520,7 @@ void RegisterCourse(COURSE **course, int *courseCount)
 	int i;
 	char courseName[40];
 
-	PrintToRegisterCourse();
+	PrintRegisterCourse();
 	fgets(courseName, sizeof(courseName), stdin);
 	courseName[strlen(courseName) - 1] = '\0';
 
@@ -575,8 +575,8 @@ void InitCourse(COURSE *course)
 	(*course).studentCount = 0;
 }
 
-// "Please insert name of new subject" printed 
-void PrintToRegisterCourse() {
+// "Please insert name of new subject" printed in PrintRegisterCourse function
+void PrintRegisterCourse() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -612,7 +612,7 @@ void ModifyCourse(COURSE **course, int *courseCount)
 
 	if (*courseCount > 0)
 	{
-		PrintToModifyCourse();
+		PrintModifyCourse();
 		PrintCourseList(course, courseCount);
 		printf("\033[11;13H:  ");
 		scanf("%d", &index);
@@ -620,7 +620,7 @@ void ModifyCourse(COURSE **course, int *courseCount)
 		index--;
 		getchar(); // Using getchar() for excluding enter key when using fgets below.
 
-		PrintToModifyNameOfCourse();
+		PrintModifyCourseName();
 		fgets(newName, sizeof(newName), stdin);
 		newName[strlen(newName) - 1] = '\0'; // Because fgets receive \n(Enter), it needs to exclude it.
 
@@ -639,8 +639,8 @@ void ModifyCourse(COURSE **course, int *courseCount)
 	Sleep(3000);
 }
 
-// "Please insert number what you want to modify" printed 
-void PrintToModifyCourse() {
+// "Please insert number what you want to modify" printed in PrintModifyCourse function
+void PrintModifyCourse() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -659,7 +659,7 @@ void PrintToModifyCourse() {
 }
 
 // "Please enter the new name of course" printed 
-void PrintToModifyNameOfCourse() {
+void PrintModifyCourseName() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -706,7 +706,7 @@ void DeleteCourse(COURSE **course, int *courseCount)
 	}
 	else
 	{
-		PrintToDeleteCourse();
+		PrintDeleteCourse();
 		PrintCourseList(course, courseCount);
 		printf("\033[11;13H:  ");
 		scanf("%d", &deleteIndex);
@@ -741,7 +741,7 @@ void DeleteCourse(COURSE **course, int *courseCount)
 }
 
 // "Please insert number what you want to delete" printed 
-void PrintToDeleteCourse() {
+void PrintDeleteCourse() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -863,7 +863,7 @@ void RegisterScore(COURSE *course)
 	double midtermScore;
 	double finalScore;
 	int studentIndex = -1;
-	void PrintIDToRegisterScore();
+	PrintRegisterScoreID();
 	scanf("%s", studentID);
 	printf("\n");
 
@@ -886,11 +886,11 @@ void RegisterScore(COURSE *course)
 		return;
 	}
 
-	PrintMidtermScoreToRegisterScore();
+	PrintRegisterMidtermScore();
 	scanf("%lf", &midtermScore);
 	printf("\n");
 
-	PrintFinalScoreToRegisterScore();
+	PrintRegisterFinalScore();
 	scanf("%lf", &finalScore);
 	printf("\n");
 
@@ -905,7 +905,7 @@ void RegisterScore(COURSE *course)
 }
 
 // "Please insert number what you want to delete" printed 
-void PrintIDToRegisterScore() {
+void PrintRegisterScoreID() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -923,8 +923,8 @@ void PrintIDToRegisterScore() {
 	printf("\033[11;13H:  ");
 }
 
-// "Input midterm score" printed in PrintMidtermScoreToRegisterScore function
-void PrintMidtermScoreToRegisterScore() {
+// "Input midterm score" printed in PrintRegisterMidtermScore function
+void PrintRegisterMidtermScore() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -942,8 +942,8 @@ void PrintMidtermScoreToRegisterScore() {
 	printf("\033[11;13H:  ");
 }
 
-// "Input final score" printed in PrintFinalScoreToRegisterScore function
-void PrintFinalScoreToRegisterScore() {
+// "Input final score" printed in PrintRegisterFinalScore function
+void PrintRegisterFinalScore() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -978,7 +978,7 @@ void ModifyScore(COURSE *course)
 	double finalScore;
 	int studentIndex = -1;
 
-	PrintIDToModifyScore();
+	PrintModifyScoreID();
 	scanf("%s", studentID);
 	getchar();
 	printf("\n");
@@ -1001,11 +1001,11 @@ void ModifyScore(COURSE *course)
 		return;
 	}
 
-	PrintMidtermScoreToModifyScore();
+	PrintModifyMidtermScore();
 	scanf("%lf", &midtermScore);
 	getchar();
 
-	PrintFinalScoreToRegisterScore();
+	PrintModifyFinalScore();
 	scanf("%lf", &finalScore);
 	getchar();
 
@@ -1026,8 +1026,8 @@ void ModifyScore(COURSE *course)
 	Sleep(3000);
 }
 
-// "Input student ID to modify score" printed in PrintIDToModifyScore function
-void PrintIDToModifyScore() {
+// "Input student ID to modify score" printed in PrintModifyScoreID function
+void PrintModifyScoreID() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1045,8 +1045,8 @@ void PrintIDToModifyScore() {
 	printf("\033[11;13H:  ");
 }
 
-// "Input midterm score to modify" printed in PrintMidtermScoreToModifyScore function
-void PrintMidtermScoreToModifyScore() {
+// "Input midterm score to modify" printed in PrintModifyMidtermScore function
+void PrintModifyMidtermScore() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1064,8 +1064,8 @@ void PrintMidtermScoreToModifyScore() {
 	printf("\033[11;13H:  ");
 }
 
-// "Input final score to modify" printed in PrintFinalScoreToModifyScore function
-void PrintFinalScoreToModifyScore() {
+// "Input final score to modify" printed in PrintModifyFinalScore function
+void PrintModifyFinalScore() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1098,8 +1098,7 @@ void DeleteScore(COURSE *course)
 	char studentID[10];
 	int studentIndex = -1;
 	char confirm = ' ';
-
-	PrintIDToDeleteScore();
+	PrintDeleteScoreID();
 	scanf("%s", studentID);
 	getchar();
 	printf("\n");
@@ -1216,8 +1215,8 @@ void PrintScore(COURSE *course, int printType, int studentIndex)
 
 	// Case every students' scores in this course.
 
-	// "Input student ID to Delete Score" printed in PrintIDToDeleteScore function
-void PrintIDToDeleteScore() {
+	// "Input student ID to Delete Score" printed in PrintDeleteScoreID function
+void PrintDeleteScoreID() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1341,7 +1340,7 @@ void RegisterAssignment(COURSE *course)
 	int i;
 	char assignmentComment[50];
 
-	PrintAssignmentToRegister();
+	PrintRegisterAssignment();
 	fgets(assignmentComment, sizeof(assignmentComment), stdin);
 	assignmentComment[strlen(assignmentComment) - 1] = '\0';
 
@@ -1357,8 +1356,8 @@ void RegisterAssignment(COURSE *course)
 	Sleep(3000);
 }
 
-// "Please insert comments of a new assignment" printed in PrintAssignmentToRegister function
-void PrintAssignmentToRegister() {
+// "Please insert comments of a new assignment" printed in PrintRegisterAssignment function
+void PrintRegisterAssignment() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1391,14 +1390,14 @@ void ModifyAssignment(COURSE *course)
 
 	PrintAssignment(course);
 	printf("\n\n\n\n\n\n\n\n");
-	PrintAssignmentToModify();
+	PrintModifyAssignment();
 	printf("\033[11;13H:  ");
 	
 	scanf("%d", &assignmentNumber);
 	getchar();
 	assignmentNumber--;
 
-	PrintCommentsOfAssignmentToModify();
+	PrintModifyAssignmentComments();
 	fgets(assignmentComment, sizeof(assignmentComment), stdin);
 	assignmentComment[strlen(assignmentComment) - 1] = '\0';
 
@@ -1413,8 +1412,8 @@ void ModifyAssignment(COURSE *course)
 	Sleep(3000);
 }
 
-// "Which assignment do you want to modify?" printed in PrintAssignmentToModify function
-void PrintAssignmentToModify() {
+// "Which assignment do you want to modify?" printed in PrintModifyAssignment function
+void PrintModifyAssignment() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1432,8 +1431,8 @@ void PrintAssignmentToModify() {
 	printf("\033[11;13H:  ");
 }
 
-// "Please insert comments about an assignment" printed in PrintCommentsOfAssignmentToModify function
-void PrintCommentsOfAssignmentToModify() {
+// "Please insert comments about an assignment" printed in PrintModifyAssignmentComments function
+void PrintModifyAssignmentComments() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1476,7 +1475,7 @@ void DeleteAssignment(COURSE *course)
 	PrintAssignment(course);
 	int assignmentNumber = 0;
 	
-	PrintAssignmentToDelete();
+	PrintDeleteAssignment();
 	scanf("%d", &assignmentNumber);
 	assignmentNumber--;
 	for (i = 0; i < 5; i++) {
@@ -1490,8 +1489,8 @@ void DeleteAssignment(COURSE *course)
 	Sleep(3000);
 }
 
-// "Which assignment do you want to delete?"  printed 
-void PrintAssignmentToDelete() {
+// "Which assignment do you want to delete?"  printed in PrintDeleteAssignment function
+void PrintDeleteAssignment() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1579,7 +1578,7 @@ void RegisterStudent(COURSE *course)
 	char addID[10];
 	char addName[20];
 
-	PrintStudentToRegister();
+	PrintRegisterStudent();
 	scanf("%s", addID);
 
 	for (int i = 0; i < course->studentCount; i++)
@@ -1598,7 +1597,7 @@ void RegisterStudent(COURSE *course)
 	}
 	else
 	{
-		PrintNameOfStudentToRegister();
+		PrintRegisterStudentName();
 		scanf("%s", addName);
 
 		currentStudentCnt = course->studentCount;
@@ -1613,8 +1612,8 @@ void RegisterStudent(COURSE *course)
 	Sleep(3000);
 }
 
-// "ID of new student : "  printed in PrintStudentToRegister function
-void PrintStudentToRegister() {
+// "ID of new student : "  printed in PrintRegisterStudent function
+void PrintRegisterStudent() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1632,8 +1631,8 @@ void PrintStudentToRegister() {
 	printf("\033[11;13H:  ");
 }
 
-// "Name of new student : "  printed in PrintNameOfStudentToRegister function
-void PrintNameOfStudentToRegister() {
+// "Name of new student : "  printed in PrintRegisterStudentName function
+void PrintRegisterStudentName() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1671,7 +1670,7 @@ void ModifyStudent(COURSE *course)
 	}
 	else
 	{
-		PrintNameOfStudentToModify();
+		PrintModifyStudentName();
 		scanf("%s", newName);
 
 		strcpy(course->student[searchStudent].name, newName);
@@ -1683,8 +1682,8 @@ void ModifyStudent(COURSE *course)
 	Sleep(3000);
 }
 
-// "New name of the student : "  printed in PrintNameOfStudentToModify function
-void PrintNameOfStudentToModify() {
+// "New name of the student : "  printed in PrintModifyStudentName function
+void PrintModifyStudentName() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1724,7 +1723,7 @@ void DeleteStudent(COURSE *course)
 	}
 	else
 	{
-		PrintStudentToDelete();
+		PrintDeleteStudent();
 
 		checkDelete = getche();
 
@@ -1753,8 +1752,8 @@ void DeleteStudent(COURSE *course)
 	Sleep(3000);
 }
 
-// "Delete the student [y/n] : "  printed in PrintStudentToDelete function
-void PrintStudentToDelete() {
+// "Delete the student [y/n] : "  printed in PrintDeleteStudent function
+void PrintDeleteStudent() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
@@ -1854,7 +1853,7 @@ void RegisterNotice(COURSE *course)
 	int i, check = 0;
 	char newNotice[50];
 
-	PrintNoticeToRegister();	
+	PrintRegisterNotice();
 	fgets(newNotice, sizeof(newNotice), stdin);
 	newNotice[strlen(newNotice) - 1] = '\0';
 
@@ -1882,7 +1881,7 @@ void RegisterNotice(COURSE *course)
 }
 
 // "Enter notice : "  printed in PrintNoticeToRegister function
-void PrintNoticeToRegister() {
+void PrintRegisterNotice() {
 	system("cls");
 	printf("\n\n\n  忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n");
 	printf("  弛                                                        弛\n");
