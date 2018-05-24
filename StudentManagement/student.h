@@ -64,5 +64,27 @@ void RegisterNotice(COURSE *course);
 void ModifyNotice(COURSE *course);
 void DeleteNotice(COURSE *course);
 void PrintNotice(COURSE *course);
+void PrintToRegisterCourse();
+void PrintToModifyCourse();
+void PrintToModifyNameOfCourse();
+void PrintToDeleteCourse();
+void PrintSelectCourse();
+void PrintIDToRegisterScore();
+void PrintMidtermScoreToRegisterScore();
+void PrintFinalScoreToRegisterScore();
+void PrintIDToModifyScore();
+void PrintMidtermScoreToModifyScore();
+void PrintFinalScoreToModifyScore();
+void PrintIDToDeleteScore();
+void PrintAssignmentToRegister();
+void PrintAssignmentToModify();
+void PrintCommentsOfAssignmentToModify();
+void PrintAssignmentToDelete();
+void PrintStudentToRegister();
+void PrintStudentToRegister();
+void PrintNameOfStudentToRegister();
+void PrintNameOfStudentToModify();
+void PrintStudentToDelete();
+void PrintNoticeToRegister();
 
 #endif // STUDENT_H_INCLUDED
