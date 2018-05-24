@@ -24,7 +24,7 @@ int SearchID(COURSE* course)
 	int searchStudent = -1;
 	char selectID[10];
 
-	printf("Enter ID of student to select : ");
+	printf("\n   Enter ID of student to select : ");
 	scanf("%s", selectID);
 
 	for (int i = 0; i < course->studentNumber; i++)
@@ -44,12 +44,12 @@ void WriteFile(COURSE *course)
 	int i, j;           // int variables for "for statement"
 	int noticeCount;
 	int assignmentCount;
-
+	system("cls");
 	file = fopen("sample_course.txt", "w");									 
 
 	if (file == NULL)
 	{
-		printf("Cannot open the file\n");
+		printf("\n\n   Cannot open the file\n");
 		exit(0);
 	} // "sample_course.txt" doesnt' exist
 	else
@@ -110,8 +110,8 @@ void WriteFile(COURSE *course)
 	} // "sample_course.txt" exist
 
 	fclose(file);   // close the file
-	printf("Write data is successfully done!\n\n");
-	printf("It will return to course menu 3 seconds later\n");
+	printf("\n\n   Write data is successfully done!\n\n");
+	printf("   It will return to course menu 3 seconds later");
 	Sleep(3000);
 }
 
@@ -123,13 +123,13 @@ void ReadFile(COURSE *course)
 	int existAssignmentCount;
 	int newNoticeCount;
 	int newAssignmentCount;
-
+	system("cls");
 	FILE *file;         // file variables to open, write, and close the txt file
 	file = fopen("sample_course.txt", "r"); // open "sample_course.txt" file by "read" mode. 
 
 	if (file == NULL)
 	{
-		printf("Cannot open the file\n");
+		printf("\n\n   Cannot open the file\n");
 		exit(0);
 	} // "sample_course.txt" doesnt' exist
 	else
@@ -190,8 +190,8 @@ void ReadFile(COURSE *course)
 			(*course).assignment[existAssignmentCount + i][strlen((*course).assignment[existAssignmentCount + i]) - 1] = '\0';
 		}
 
-		printf("File data is successfully loaded!\n\n");
-		printf("It will return to course menu 3 seconds later\n");
+		printf("\n\n   File data is successfully loaded!\n\n");
+		printf("\n   It will return to course menu 3 seconds later");
 		Sleep(3000);
 
 	} // "sample_course.txt" exist
@@ -1028,8 +1028,8 @@ void AverageCourseScore(COURSE *course)
 	average_midterm = midtermSum / (course->studentNumber - midterm_delete_count);
 	average_final = finalSum / (course->studentNumber - final_delete_count);
 
-	printf("Average score of midterm for %s course is %.2lf\n", course->name, average_midterm);
-	printf("Average score of final for %s course is %.2lf\n\n", course->name, average_final);
+	printf("\n\n   Average score of midterm for %s course is %.2lf\n", course->name, average_midterm);
+	printf("   Average score of final for %s course is %.2lf\n\n", course->name, average_final);
 	Sleep(3000);
 }
 
@@ -1136,7 +1136,7 @@ void ModifyAssignment(COURSE *course)
 	}
 	system("cls");
 	printf("\n\n   comments about an assignment is successfully modified!\n\n");
-	printf("   It will return to assignment menu 3 seconds later\n");
+	printf("   It will return to assignment menu 3 seconds later");
 	Sleep(3000);
 }
 
@@ -1178,10 +1178,23 @@ void PrintCommentsOfAssignmentToModify() {
 
 void DeleteAssignment(COURSE *course)
 {
+	int i = 0, j = 0;
+	for (j = 0; j < 5; j++) {
+		if (!(strlen(course->assignment[j]) == 0)) {
+			break;
+		}
+		else if (j == 4 && strlen(course->assignment[j]) == 0) {
+			system("cls");
+			printf("\n\n   There is no assignments. Please register an assignment first.\n\n");
+			printf("   It will return to assignment menu 3 seconds later");
+			Sleep(3000);
+			return;
+		}
+	}
+
 	PrintAssignment(course);
 	int assignmentNumber = 0;
-	int i = 0;
-
+	
 	PrintAssignmentToDelete();
 	scanf("%d", &assignmentNumber);
 	assignmentNumber--;
@@ -1190,9 +1203,9 @@ void DeleteAssignment(COURSE *course)
 			strcpy((*course).assignment[i], "");
 		}
 	}
-
-	printf("comments about an assignment is successfully deleted!\n\n");
-	printf("It will return to assignment menu 3 seconds later\n");
+	system("cls");
+	printf("\n\n   comments about an assignment is successfully deleted!\n\n");
+	printf("   It will return to assignment menu 3 seconds later");
 	Sleep(3000);
 }
 
@@ -1301,7 +1314,7 @@ void RegisterStudent(COURSE *course)
 		printf("\n\n   ** Student has successfully been registered! **");
 	}
 	
-	printf("\n   It will return to course menu 3 seconds later\n");
+	printf("\n   It will return to course menu 3 seconds later");
 	Sleep(3000);
 }
 
@@ -1364,7 +1377,7 @@ void ModifyStudent(COURSE *course)
 		printf("\n\n   ** Student has successfully been modified! **\n");
 	}
 
-	printf("\n   It will return to course menu 3 seconds later\n");
+	printf("\n   It will return to course menu 3 seconds later");
 	Sleep(3000);
 }
 
@@ -1413,7 +1426,7 @@ void DeleteStudent(COURSE *course)
 
 			course->studentNumber--;
 			system("cls");
-			printf("\n\n   ** Student has successfully been deleted! **\n");
+			printf("\n\n   ** Student has successfully been deleted! **");
 		}
 		else if (checkDelete == 'n' || checkDelete == 'N')
 		{
@@ -1426,7 +1439,7 @@ void DeleteStudent(COURSE *course)
 		}
 	}
 
-	printf("\n   It will return to course menu 3 seconds later\n");
+	printf("\n   It will return to course menu 3 seconds later");
 	Sleep(3000);
 }
 
@@ -1452,7 +1465,7 @@ void PrintStudent(COURSE *course)
 {
 	if (course->studentNumber == 0)
 	{
-		printf("\nThere are no students in this class..\n");
+		printf("\n\n   There are no students in this class..\n");
 	}
 	else
 	{
@@ -1534,7 +1547,7 @@ void RegisterNotice(COURSE *course)
 		system("cls");
 	}
 
-	printf("   Notice [%d] is successfully registered!\n", i);
+	printf("   Notice [%d] is successfully registered!", i);
 	Sleep(3000);
 
 }
@@ -1561,7 +1574,7 @@ void ModifyNotice(COURSE *course)
 {
 	int i, j, index, check=0;
 	char newNotice[50];
-
+	system("cls");
 	//display notice
 	for (i = 0; i < 10; i++) {
 		if (strlen(course->notice[i]) == 0) {
@@ -1588,7 +1601,7 @@ void ModifyNotice(COURSE *course)
 
 	strcpy((*course).notice[index], newNotice);
 
-	printf("Notice [%d] is successfully modified!\n", index);
+	printf("Notice [%d] is successfully modified!", index);
 	Sleep(1500);
 
 }
@@ -1596,7 +1609,7 @@ void ModifyNotice(COURSE *course)
 void DeleteNotice(COURSE *course)
 {
 	int i, j, check=0;
-
+	system("cls");
 	//display notice
 	for (i = 0; i < 10; i++) {
 		if (strlen(course->notice[i]) == 0) {
@@ -1619,12 +1632,13 @@ void DeleteNotice(COURSE *course)
 	for (i = j; i < 9; i++)
 		strcpy(course->notice[i], course->notice[i+1]);
 
-	printf("Notice [%d] is successfully deleted!\n", j);
+	printf("Notice [%d] is successfully deleted!", j);
 	Sleep(1500);
 }
 
 void PrintNotice(COURSE *course)
 {
+	system("cls");
 	int i, j, check = 0;
 
 	//display notice
