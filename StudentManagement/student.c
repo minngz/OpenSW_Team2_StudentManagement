@@ -1623,7 +1623,6 @@ void PrintStudent(COURSE *course)
 void NoticeMenu(COURSE *course)
 {
 	char menuInput;
-	getchar();
 
 	while (1)
 	{
@@ -1785,7 +1784,7 @@ void DeleteNotice(COURSE *course)
 	for (i = index; i < 9; i++)
 		strcpy(course->notice[i], course->notice[i+1]);
 
-	printf("Notice [%d] is successfully deleted!", j);
+	printf("Notice [%d] is successfully deleted!", index);
 	Sleep(1500);
 }
 
