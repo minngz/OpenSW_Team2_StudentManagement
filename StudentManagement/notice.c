@@ -16,7 +16,9 @@ void RegisterNotice(COURSE *course)
 	int i, check = 0;
 	char newNotice[50];
 
-	PrintRegisterNotice();
+	PrintInputBox();
+	printf("\033[9;13HEnter notice");
+	printf("\033[11;13H:  ");
 
 	fgets(newNotice, sizeof(newNotice), stdin);
 	newNotice[strlen(newNotice) - 1] = '\0';
