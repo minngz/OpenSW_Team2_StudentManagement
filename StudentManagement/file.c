@@ -162,7 +162,7 @@ void ReadFile(COURSE *course)
 		// Read all information of student array on the next row.
 		for (i = course->studentCount; i < course->studentCount + studentCount; i++)
 		{
-			fscanf(file, "%s%s%", (*course).student[i].id, (*course).student[i].name);
+			fscanf(file, "%s%s", (*course).student[i].id, (*course).student[i].name);
 			fscanf(file, "%lf%lf", (*course).student[i].examScore, (*course).student[i].examScore + 1);
 
 			for (j = 0; j < MAX_ASSIGNMENT; j++)
@@ -211,8 +211,6 @@ void ReadFile(COURSE *course)
 		{
 			fgets((*course).assignment[existAssignmentCount + i], sizeof((*course).assignment[existAssignmentCount + i]), file);
 			(*course).assignment[existAssignmentCount + i][strlen((*course).assignment[existAssignmentCount + i]) - 1] = '\0';
-			printf("%s\n", (*course).assignment[existAssignmentCount + i]);
-
 		}
 
 		printf("\n\n   File data is successfully loaded!\n\n");
