@@ -6,6 +6,10 @@
 #include<stdio.h>
 #include<string.h>
 
+/*
+*	examScore : scores of midterm and final exam
+*	assignmentScore : assign five times
+*/
 typedef struct student
 {
 	char id[10];
@@ -14,13 +18,17 @@ typedef struct student
 	double assignmentScore[5];
 }STUDENT;
 
+/*
+*	student : array of students in a course
+*	studentCount : the number of students in a course
+*/
 typedef struct course
 {
-	char name[40];
 	STUDENT student[100];
+	int studentCount;
+	char name[40];
 	char notice[10][50];
 	char assignment[5][50];
-	int studentCount;
 }COURSE;
 
 int CompareID(const void *elem1, const void *elem2);
