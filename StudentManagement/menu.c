@@ -11,7 +11,7 @@ void SystemSet()
 
 /*
 *   COURSE **course - the array of structure which want to manage in course menu.
-*   int *coursecount - the number of course
+*   int *courseCount - the number of course
 *   char menuinput - the input of user that is used for selecting function
 *
 *   CourseMenu receive one character from user and use it to select the menu of course.
@@ -55,7 +55,6 @@ void CourseMenu(COURSE **course, int *courseCount)
 
 /*
 *	COURSE *course - the course that user want to manage in array of course.
-*	int *coursecount - the number of course
 *	char menuinput - the input of user that is used for selecting function
 *
 *	ManagementMenu receive one character from user and use it to select the function of management.

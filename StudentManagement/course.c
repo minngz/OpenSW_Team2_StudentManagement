@@ -23,8 +23,6 @@ void PrintCourseList(COURSE **course, int *courseCount)
 	}
 }
 
-
-
 /*
 *   COURSE **course - the array of structure that user want to select.
 *   int *coursecount - the number of course
@@ -59,6 +57,28 @@ void SelectCourse(COURSE **course, int *courseCount)
 	}
 }
 
+/*
+*   COURSE *course - the component of array of COURSE structre which want to initialize
+*
+*   InitCourse function initialize data of COURSE structure as null string.
+*   The data are assignment(char[]), notice(char[]), studentCount(int)
+*/
+void InitCourse(COURSE *course)
+{
+	int i;
+
+	for (i = 0; i < MAX_ASSIGNMENT; i++)
+	{
+		strcpy((*course).assignment[i], "");
+	}
+
+	for (i = 0; i < MAX_NOTICE; i++)
+	{
+		strcpy((*course).notice[i], "");
+	}
+
+	(*course).studentCount = 0;
+}
 
 /*
 *   COURSE **course - the array of structure that new course would be addded.
@@ -113,31 +133,6 @@ void RegisterCourse(COURSE **course, int *courseCount)
 }
 
 /*
-*   COURSE *course - the component of array of COURSE structre which want to initialize
-*
-*   InitCourse function initialize data of COURSE structure as null string.
-*   The data are assignment(char[]), notice(char[]), studentCount(int)
-*/
-void InitCourse(COURSE *course)
-{
-	int i;
-
-	for (i = 0; i < MAX_ASSIGNMENT; i++)
-	{
-		strcpy((*course).assignment[i], "");
-	}
-
-	for (i = 0; i < MAX_NOTICE; i++)
-	{
-		strcpy((*course).notice[i], "");
-	}
-
-	(*course).studentCount = 0;
-}
-
-
-
-/*
 *   COURSE **course - the array of structure that user would change.
 *   int *coursecount - the number of course
 *   int newName[40] - the temporary variable which receive the string of course name from user.
@@ -181,8 +176,6 @@ void ModifyCourse(COURSE **course, int *courseCount)
 	printf("   It will return to course menu 3 seconds later");
 	Sleep(3000);
 }
-
-
 
 /*
 *	COURSE **course - the array of structure that user would delete.
@@ -247,13 +240,3 @@ void DeleteCourse(COURSE **course, int *courseCount)
 
 }
 
-
-
-/*
-*	int currentStudentCnt : current the number of student in this course
-*	int checkRegister : check if registration is possible to avoid duplicate student ID in a course
-*
-*	If ID of new student is not duplicated (checkRegister!=0), enter the name of the student you want to add.
-*	The name and ID entered (addID, addName) are inserted into current index of the student array,
-*	and the number of students in this course increases.
-*/

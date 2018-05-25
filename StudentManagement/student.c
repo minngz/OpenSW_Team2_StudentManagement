@@ -41,6 +41,14 @@ int SearchID(COURSE* course)
 	return searchStudent;
 }
 
+/*
+*	int currentStudentCnt : current the number of student in this course
+*	int checkRegister : check if registration is possible to avoid duplicate student ID in a course
+*
+*	If ID of new student is not duplicated (checkRegister!=0), enter the name of the student you want to add.
+*	The name and ID entered (addID, addName) are inserted into current index of the student array,
+*	and the number of students in this course increases.
+*/
 void RegisterStudent(COURSE *course)
 {
 	int currentStudentCnt;

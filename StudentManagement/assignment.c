@@ -33,8 +33,6 @@ void RegisterAssignment(COURSE *course)
 	Sleep(3000);
 }
 
-
-
 /*
 *	If user wants to modify assignment of course, this ModifyAssignment function will be performed.
 *
@@ -75,8 +73,6 @@ void ModifyAssignment(COURSE *course)
 	printf("   It will return to assignment menu 3 seconds later");
 	Sleep(3000);
 }
-
-
 
 /*
 *	If user wants to delete assignment of course, this DeleteAssignment function will be performed.

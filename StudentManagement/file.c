@@ -7,104 +7,6 @@
 #define MAX_NOTICE 10
 
 /*
-*   COURSE *course - the component of course that user want to add data to file.
-*	File *file - file variables to open, write, and close the txt file.
-*   int noticeCount - the number of existing notice by using strlen.
-*   int assignmentCount - the number of existing assignment by using strlen.
-*
-*   sample_course.txt - WriteFile function uses file which name is "sample_course.txt".
-*   So if you have "sample_course.txt" and it contains important information,
-*   you should change your file name to another.
-*
-*   1-1) If the file exists,
-*   it writes the total number of students(studentCount) in the first row.
-*   Then, it writes information of student(STUDNET array) one row by one.
-*   The information contains student ID, name, exam score and assignment score.
-*   Next, it writes the total number of assignment notice and details about assignment on next line.
-*   Finally, it writes the number of notice and details same as assignment.
-*
-*   1-2) If the file doens't exist,
-*   Print the "Cannot open the file" on console windows and exit program.
-*
-*   2) Finally, it closes the file and print success message.
-*/
-void WriteFile(COURSE *course)
-{
-	FILE *file;
-	int i, j;
-	int noticeCount;
-	int assignmentCount;
-
-	file = fopen("sample_course.txt", "w");
-
-	if (file == NULL)
-	{
-		printf("\n\n   Cannot open the file\n");
-		exit(0);
-	}
-	else
-	{
-		fprintf(file, "%d\n", (*course).studentCount);
-
-		for (i = 0; i < (*course).studentCount; i++)
-		{
-			fprintf(file, "%s %s ", (*course).student[i].id, (*course).student[i].name);
-
-			for (j = 0; j < 2; j++)
-			{
-				fprintf(file, "%-8.2f", (*course).student[i].examScore[j]);
-			}
-
-			for (j = 0; j < MAX_ASSIGNMENT; j++)
-			{
-				fprintf(file, "%-8.2f", (*course).student[i].assignmentScore[j]);
-			}
-			fprintf(file, "\n");
-		}
-
-		noticeCount = 0;
-
-		for (i = 0; i < MAX_NOTICE; i++)
-		{
-			if (strlen((*course).notice[i]) != 0)
-			{
-				noticeCount++;
-			}
-		}
-
-		fprintf(file, "%d\n", noticeCount);
-
-		for (i = 0; i < noticeCount; i++)
-		{
-			fprintf(file, "%s\n", (*course).notice[i]);
-		}
-
-		assignmentCount = 0;
-
-		for (i = 0; i < MAX_ASSIGNMENT; i++)
-		{
-			if (strlen((*course).assignment[i]) != 0)
-			{
-				assignmentCount++;
-			}
-		}
-
-		fprintf(file, "%d\n", assignmentCount);
-
-		for (i = 0; i < assignmentCount; i++)
-		{
-			fprintf(file, "%s\n", (*course).assignment[i]);
-		}
-
-	} // "sample_course.txt" exist
-
-	fclose(file);
-	printf("\n\n   Write data is successfully done!\n\n");
-	printf("   It will return to course menu 3 seconds later");
-	Sleep(3000);
-}
-
-/*
 *   COURSE *course - the component of course that user want to add data from file.
 *   int studentCount - the number of student would be stored in this variable from text file.
 *   int existNoticeCount - the number of existing notice by using strlen.
@@ -219,4 +121,97 @@ void ReadFile(COURSE *course)
 	} // "sample_course.txt" exist
 
 	fclose(file);
+}
+
+/*
+*   COURSE *course - the component of course that user want to add data to file.
+*	File *file - file variables to open, write, and close the txt file.
+*   int noticeCount - the number of existing notice by using strlen.
+*   int assignmentCount - the number of existing assignment by using strlen.
+*
+*   sample_course.txt - WriteFile function uses file which name is "sample_course.txt".
+*   So if you have "sample_course.txt" and it contains important information,
+*   you should change your file name to another.
+*
+*   1-1) If the file exists,
+*   it writes the total number of students(studentCount) in the first row.
+*   Then, it writes information of student(STUDNET array) one row by one.
+*   The information contains student ID, name, exam score and assignment score.
+*   Next, it writes the total number of assignment notice and details about assignment on next line.
+*   Finally, it writes the number of notice and details same as assignment.
+*
+*   1-2) If the file doens't exist,
+*   Print the "Cannot open the file" on console windows and exit program.
+*
+*   2) Finally, it closes the file and print success message.
+*/
+void WriteFile(COURSE *course)
+{
+	FILE *file;
+	int i, j;
+	int noticeCount;
+	int assignmentCount;
+
+	file = fopen("sample_course.txt", "w");
+
+	if (file == NULL)
+	{
+		printf("\n\n   Cannot open the file\n");
+		exit(0);
+	}
+	else
+	{
+		fprintf(file, "%d\n", (*course).studentCount);
+		for (i = 0; i < (*course).studentCount; i++)
+		{
+			fprintf(file, "%s %s ", (*course).student[i].id, (*course).student[i].name);
+
+			for (j = 0; j < 2; j++)
+			{
+				fprintf(file, "%-8.2f", (*course).student[i].examScore[j]);
+			}
+
+			for (j = 0; j < MAX_ASSIGNMENT; j++)
+			{
+				fprintf(file, "%-8.2f", (*course).student[i].assignmentScore[j]);
+			}
+			fprintf(file, "\n");
+		}
+
+		noticeCount = 0;
+		for (i = 0; i < MAX_NOTICE; i++)
+		{
+			if (strlen((*course).notice[i]) != 0)
+			{
+				noticeCount++;
+			}
+		}
+
+		fprintf(file, "%d\n", noticeCount);
+		for (i = 0; i < noticeCount; i++)
+		{
+			fprintf(file, "%s\n", (*course).notice[i]);
+		}
+
+		assignmentCount = 0;
+		for (i = 0; i < MAX_ASSIGNMENT; i++)
+		{
+			if (strlen((*course).assignment[i]) != 0)
+			{
+				assignmentCount++;
+			}
+		}
+
+		fprintf(file, "%d\n", assignmentCount);
+		for (i = 0; i < assignmentCount; i++)
+		{
+			fprintf(file, "%s\n", (*course).assignment[i]);
+		}
+
+	} // "sample_course.txt" exist
+
+	fclose(file);
+	printf("\n\n   Write data is successfully done!\n\n");
+	printf("   It will return to course menu 3 seconds later");
+	Sleep(3000);
 }

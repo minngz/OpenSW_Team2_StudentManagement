@@ -2,6 +2,7 @@
 #include <stdlib.h>
 //#include "management.h"
 #include "notice.h"
+
 /*
 *	If user wants to register notice of course, this RegisterNotice function will be performed
 *
@@ -10,7 +11,6 @@
 *	If notice array is not full (check = 1), enter the notice of the course you want to add.
 *	Print registered notice and return to the notice menu function().
 */
-
 void RegisterNotice(COURSE *course)
 {
 	int i, check = 0;
