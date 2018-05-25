@@ -1,5 +1,5 @@
-#ifndef STUDENT_H_INCLUDED
-#define STUDENT_H_INCLUDED
+#ifndef MENU_H_INCLUDED
+#define MENU_H_INCLUDED
 #define ESC 27
 
 #include <stdlib.h>
@@ -31,12 +31,13 @@ typedef struct course
 	char assignment[5][50];
 }COURSE;
 
-int CompareID(const void *elem1, const void *elem2);
-int SearchID(COURSE* course);
-void RegisterStudent(COURSE *course);
-void ModifyStudent(COURSE *course);
-void DeleteStudent(COURSE *course);
-void PrintStudent(COURSE *course);
+void SystemSet();
+void CourseMenu(COURSE **course, int *courseCount);
+void ManagementMenu(COURSE *course);
+void ScoreMenu(COURSE *course);
+void AssignmentMenu(COURSE *course);
+void StudentMenu(COURSE *course);
+void NoticeMenu(COURSE *course);
 
 
 #endif // STUDENT_H_INCLUDED

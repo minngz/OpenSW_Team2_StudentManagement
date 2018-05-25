@@ -19,11 +19,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\assignment.c" />
+    <ClCompile Include="..\course.c" />
+    <ClCompile Include="..\file.c" />
     <ClCompile Include="..\main.c" />
+    <ClCompile Include="..\menu.c" />
+    <ClCompile Include="..\notice.c" />
+    <ClCompile Include="..\score.c" />
     <ClCompile Include="..\student.c" />
+    <ClCompile Include="..\ui.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\assignment.h" />
+    <ClInclude Include="..\course.h" />
+    <ClInclude Include="..\file.h" />
+    <ClInclude Include="..\menu.h" />
+    <ClInclude Include="..\notice.h" />
+    <ClInclude Include="..\score.h" />
     <ClInclude Include="..\student.h" />
+    <ClInclude Include="..\ui.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
