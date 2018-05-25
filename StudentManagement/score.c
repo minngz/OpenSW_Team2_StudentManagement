@@ -24,7 +24,9 @@ void RegisterScore(COURSE *course)
 	double finalScore;
 	int studentIndex = -1;
 
-	PrintRegisterScoreID();
+	PrintInputBox();
+	printf("\033[9;13HInput student ID to register score");
+	printf("\033[11;13H:  ");
 
 	scanf("%s", studentID);
 	printf("\n");
@@ -47,11 +49,15 @@ void RegisterScore(COURSE *course)
 		return;
 	}
 
-	PrintRegisterMidtermScore();
+	PrintInputBox();
+	printf("\033[9;13HInput midterm score");
+	printf("\033[11;13H:  ");
 	scanf("%lf", &midtermScore);
 	printf("\n");
 
-	PrintRegisterFinalScore();
+	PrintInputBox();
+	printf("\033[9;13HInput final score");
+	printf("\033[11;13H:  ");
 	scanf("%lf", &finalScore);
 	printf("\n");
 
@@ -60,7 +66,7 @@ void RegisterScore(COURSE *course)
 
 	system("cls");
 	printf("\n\n   Registration is Succeed!\n");
-	printf("(   It will be returned to Score Menu after 3 seconds automatically)");
+	printf("   It will be returned to Score Menu after 3 seconds automatically");
 	Sleep(3000);
 }
 
@@ -81,7 +87,9 @@ void ModifyScore(COURSE *course)
 	double finalScore;
 	int studentIndex = -1;
 
-	PrintModifyScoreID();
+	PrintInputBox();
+	printf("\033[9;13HInput student ID to modify score");
+	printf("\033[11;13H:  ");
 	scanf("%s", studentID);
 	getchar();
 	printf("\n");
@@ -104,11 +112,17 @@ void ModifyScore(COURSE *course)
 		return;
 	}
 
-	PrintModifyMidtermScore();
+	PrintInputBox();
+	printf("\033[9;13HInput midterm score to modify");
+	printf("\033[11;13H:  ");
+
 	scanf("%lf", &midtermScore);
 	getchar();
 
-	PrintModifyFinalScore();
+	PrintInputBox();
+	printf("\033[9;13HInput final score to modify");
+	printf("\033[11;13H:  ");
+
 	scanf("%lf", &finalScore);
 	getchar();
 
@@ -144,7 +158,9 @@ void DeleteScore(COURSE *course)
 	int studentIndex = -1;
 	char confirm = ' ';
 
-	PrintDeleteScoreID();
+	PrintInputBox();
+	printf("\033[9;13HInput student ID to Delete Score");
+	printf("\033[11;13H:  ");
 
 	scanf("%s", studentID);
 	getchar();
@@ -176,7 +192,7 @@ void DeleteScore(COURSE *course)
 		return;
 	}
 
-	printf("----------------Scores of you found one's-------------------------\n");
+	printf("\n");
 	PrintScore(course, PRINTTYPE_DELETE, studentIndex);
 
 	printf("\nAre you sure of removing it? (Y/N) : ");

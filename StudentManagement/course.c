@@ -38,7 +38,8 @@ void SelectCourse(COURSE **course, int *courseCount)
 	// If there is no course, It doesn't work.
 	if (*courseCount > 0)
 	{
-		PrintSelectCourse();
+		PrintInputBox();
+		printf("\033[9;13HPlease select number of a course to manage");
 		PrintCourseList(course, courseCount);
 		printf("\033[11;13H:  ");
 
@@ -100,7 +101,10 @@ void RegisterCourse(COURSE **course, int *courseCount)
 	int i;
 	char courseName[40];
 
-	PrintRegisterCourse();
+	PrintInputBox();
+	printf("\033[9;13HPlease insert name of new subject");
+	printf("\033[11;13H:  ");
+
 	fgets(courseName, sizeof(courseName), stdin);
 	courseName[strlen(courseName) - 1] = '\0';
 
@@ -150,7 +154,9 @@ void ModifyCourse(COURSE **course, int *courseCount)
 
 	if (*courseCount > 0)
 	{
-		PrintModifyCourse();
+		PrintInputBox();
+		printf("\033[9;13HPlease insert number what you want to modify");
+		printf("\033[11;13H:  ");
 		PrintCourseList(course, courseCount);
 		printf("\033[11;13H:  ");
 		scanf("%d", &index);
@@ -158,7 +164,9 @@ void ModifyCourse(COURSE **course, int *courseCount)
 		index--;
 		getchar(); // Using getchar() for excluding enter key when using fgets below.
 
-		PrintModifyCourseName();
+		PrintInputBox();
+		printf("\033[9;13HPlease enter the new name of course");
+		printf("\033[11;13H:  ");
 		fgets(newName, sizeof(newName), stdin);
 		newName[strlen(newName) - 1] = '\0'; // Because fgets receive \n(Enter), it needs to exclude it.
 
@@ -206,7 +214,9 @@ void DeleteCourse(COURSE **course, int *courseCount)
 	}
 	else
 	{
-		PrintDeleteCourse();
+		PrintInputBox();
+		printf("\033[9;13HPlease insert number what you want to delete");
+		printf("\033[11;13H:  ");
 		PrintCourseList(course, courseCount);
 		printf("\033[11;13H:  ");
 		scanf("%d", &deleteIndex);

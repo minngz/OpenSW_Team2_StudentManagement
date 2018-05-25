@@ -56,7 +56,9 @@ void RegisterStudent(COURSE *course)
 	char addID[10];
 	char addName[20];
 
-	PrintRegisterStudent();
+	PrintInputBox();
+	printf("\033[9;13HID of new student");
+	printf("\033[11;13H:  ");
 	scanf("%s", addID);
 
 	for (int i = 0; i < course->studentCount; i++)
@@ -75,7 +77,9 @@ void RegisterStudent(COURSE *course)
 	}
 	else
 	{
-		PrintRegisterStudentName();
+		PrintInputBox();
+		printf("\033[9;13HName of new student");
+		printf("\033[11;13H:  ");
 		scanf("%s", addName);
 
 		currentStudentCnt = course->studentCount;
@@ -112,7 +116,9 @@ void ModifyStudent(COURSE *course)
 	}
 	else
 	{
-		PrintModifyStudentName();
+		PrintInputBox();
+		printf("\033[9;13HNew name of the student");
+		printf("\033[11;13H:  ");
 		scanf("%s", newName);
 
 		strcpy(course->student[searchStudent].name, newName);
@@ -148,7 +154,9 @@ void DeleteStudent(COURSE *course)
 	}
 	else
 	{
-		PrintDeleteStudent();
+		PrintInputBox();
+		printf("\033[9;13HDelete the student [y/n]");
+		printf("\033[11;13H:  ");
 
 		checkDelete = getche();
 

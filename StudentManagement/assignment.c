@@ -14,7 +14,9 @@ void RegisterAssignment(COURSE *course)
 	int i;
 	char assignmentComment[50];
 
-	PrintRegisterAssignment();
+	PrintInputBox();
+	printf("\033[9;13HPlease insert comments of a new assignment");
+	printf("\033[11;13H:  ");
 
 	fgets(assignmentComment, sizeof(assignmentComment), stdin);
 	assignmentComment[strlen(assignmentComment) - 1] = '\0';
@@ -48,7 +50,10 @@ void ModifyAssignment(COURSE *course)
 
 	PrintAssignment(course);
 	printf("\n\n\n\n\n\n\n\n");
-	PrintModifyAssignment();
+
+	PrintInputBox();
+	printf("\033[9;13HWhich assignment do you want to modify?");
+	printf("\033[11;13H:  ");
 	printf("\033[11;13H:  ");
 
 	scanf("%d", &assignmentNumber);
@@ -56,7 +61,9 @@ void ModifyAssignment(COURSE *course)
 
 	assignmentNumber--;
 
-	PrintModifyAssignmentComments();
+	PrintInputBox();
+	printf("\033[9;13HPlease insert comments about an assignment");
+	printf("\033[11;13H:  ");
 
 	fgets(assignmentComment, sizeof(assignmentComment), stdin);
 	assignmentComment[strlen(assignmentComment) - 1] = '\0';
@@ -102,7 +109,9 @@ void DeleteAssignment(COURSE *course)
 	}
 
 	PrintAssignment(course);
-	PrintDeleteAssignment();
+	PrintInputBox();
+	printf("\033[9;13HWhich assignment do you want to delete?");
+	printf("\033[11;13H:  ");
 
 	scanf("%d", &assignmentNumber);
 	assignmentNumber--;
@@ -131,9 +140,11 @@ void PrintAssignment(COURSE *course)
 
 	for (i = 0; i < 5; i++)
 	{
-		assignmentNumber = i + 1;
-		printf("\n\n   %d %s\n", assignmentNumber, (*course).assignment[i]);
+		if (strlen((*course).assignment[i])!=0)
+		{
+			assignmentNumber = i + 1;
+			printf("\n\n   %d %s\n", assignmentNumber, (*course).assignment[i]);
+		}
 	}
-	printf("\n\n   It will return to assignment menu 3 seconds later\n");
 	Sleep(3000);
 }
