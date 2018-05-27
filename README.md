@@ -32,7 +32,7 @@ A code of conduct defines standards for how to engage in a community. see the [C
 
 ## Contributing
 
-We welcome contributions from other developers to help us make the software even better. Before you contribute there are a number of things that you should know please see [contributing.md](contributing.md) for details.
+We welcome contributions from other developers to help us make the software even better. Before you contribute there are a number of things that you should know please see [contributing.md](CONTRIBUTING.md) for details.
 
 ## Versioning
 
